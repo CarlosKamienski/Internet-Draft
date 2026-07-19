@@ -30,14 +30,14 @@ date:
 consensus: true
 v: 3
 area: AREA
-workgroup: WG Working Group
+workgroup: RG Research Group
 keyword:
  - Internet of Things (IoT)
  - Computing Continuum
  - Service Deployment
 venue:
-  group: WG
-  type: Working Group
+  group: RG
+  type: Research Group
   mail: WG@example.com
   arch: https://example.com/WG
   github: USER/REPO
