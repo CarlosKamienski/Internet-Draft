@@ -94,13 +94,16 @@ Table of Contents
      8.1.  Smart Irrigation in Precision Agriculture
      8.2.  Drone-Based Delivery in Urban Environments
      8.3.  Discussion
-   9.  Relationship to Ongoing Research and Standardization
-   10. Research Directions
-   11. Security Considerations
-   12. IANA Considerations
-   13. Acknowledgments
-   14. Informative References
-   15. References
+   9.  The Role of AI Agents in Application Deployment
+     9.1.  Agents as Enablers of the Deployment Process
+     9.2.  Deployment of the Agents Themselves
+   10. Relationship to Ongoing Research and Standardization
+   11. Research Directions
+   12. Security Considerations
+   13. IANA Considerations
+   14. Acknowledgments
+   15. Informative References
+   16. References
    Authors' Addresses
 
 1.  Introduction
@@ -644,7 +647,110 @@ Table of Contents
    heterogeneous stages, reinforcing the need for application-centric
    perspectives on deployment and lifecycle management.
 
-9.  Relationship to Ongoing Research and Standardization
+9.  The Role of AI Agents in Application Deployment
+
+   The conceptual deployment model discussed earlier treats placement,
+   coordination, and lifecycle management as interrelated and inherently
+   dynamic concerns.  As the scale, heterogeneity, and dynamism of the
+   IoT computing continuum increase, capturing these concerns through
+   static policies or manual procedures becomes progressively less
+   tractable, particularly when application workloads exhibit
+   heterogeneous, context-sensitive behavior.  AI agents, understood
+   here as autonomous software entities capable of perceiving their
+   environment, reasoning about goals, and acting upon deployment
+   infrastructure, offer a promising approach to managing this
+   complexity.  Foundational work on multi-agent systems [WOOLDRIDGE-
+   AGENTS] provides established abstractions for reasoning about agent
+   behavior.  This section examines the role of such agents from an
+   application-centric perspective, without prescribing specific agent
+   architectures, frameworks, or protocols.
+
+   AI agents relate to application deployment in two complementary ways.
+   First, agents can act as enablers of the deployment process itself,
+   assisting in or automating decisions about the placement,
+   coordination, adaptation, and lifecycle management of application
+   functions.  Second, agents are themselves software components that
+   must execute somewhere in the continuum; consequently, the deployment
+   of agents becomes a concern in its own right, subject to the same
+   placement considerations that apply to application functions.  These
+   two roles are examined in turn.
+
+9.1.  Agents as Enablers of the Deployment Process
+
+   In their first role, AI agents support the deployment of the services
+   that compose a smart application across the IoT computing continuum.
+   Given a logical application graph and a set of available execution
+   environments, agents can evaluate candidate mappings of functions to
+   continuum stages, taking into account application-level requirements
+   such as latency, resilience, energy consumption, and data locality,
+   as well as runtime observations of infrastructure conditions.  Beyond
+   initial placement, agents can drive lifecycle operations, including
+   reconfiguration, scaling, migration, and partial redeployment, in
+   response to workload variations, mobility, connectivity disruptions,
+   or evolving physical contexts.
+
+   A concrete example arises in the deployment of inference workloads
+   based on large language models, where placement decisions must
+   balance latency, cost, and resilience to connectivity disruptions.
+   Preliminary work by the authors suggests that adaptive placement
+   strategies driven by agents can outperform static configurations,
+   particularly under variable demand or intermittent wide-area
+   connectivity.
+
+   Agent-assisted deployment does not presuppose a particular
+   coordination style.  A single agent with global visibility may
+   coordinate deployment decisions in an orchestration style, while
+   multiple agents interacting through shared rules may realize
+   deployment coordination in a choreography style.  Recent proposals
+   illustrate early attempts to standardize agent interaction semantics
+   along these two styles: the Model Context Protocol [MCP] emphasizes
+   orchestration-style interactions between an agent and the tools or
+   services it invokes, while agent-to-agent interaction frameworks
+   [A2A] emphasize choreography-style interactions among peer agents
+   coordinating without a central controller.  In practice, agents
+   distributed across the continuum communicate with one another at all
+   stages to coordinate the deployment process, exchanging information
+   about local resource availability, observed conditions, and pending
+   deployment actions.  This inter-agent communication allows deployment
+   decisions to reflect both local knowledge, available only close to
+   constrained devices, and global objectives, maintained at cloud
+   platforms, and suggests that hybrid combinations of orchestration and
+   choreography may emerge naturally in agent-based deployment.
+
+9.2.  Deployment of the Agents Themselves
+
+   In their second role, agents appear as deployable entities.  Because
+   agents are software components, they require execution environments
+   with sufficient computational, memory, and connectivity resources.
+   In principle, agents can execute at any stage of the IoT computing
+   continuum, from gateways and edge nodes to cloudlets and cloud
+   platforms, with the choice of stage influencing the timeliness of
+   their decisions, their visibility into local conditions, and their
+   resilience to connectivity disruptions.
+
+   Constrained devices deserve particular attention in this respect.
+   Many such devices lack the resources to host a full agent runtime,
+   yet deployment decisions may still need to account for, and act upon,
+   conditions observed at the device level.  A proxy-based approach can
+   address this asymmetry: a lightweight proxy executing on the
+   constrained device represents it toward an agent running at a nearby
+   stage, such as a gateway or an edge node, which performs reasoning on
+   the device's behalf.  This pattern preserves the reach of agent-based
+   deployment down to the most constrained stages of the continuum while
+   respecting the resource limitations discussed in [I-D.ietf-iotops-
+   7228bis].
+
+   The deployment of agents thus exhibits a recursive character: the
+   mechanisms that agents provide for deploying application functions
+   apply, in principle, to the agents themselves.  Placement, migration,
+   and lifecycle management of agents raise questions similar to those
+   discussed for application components, compounded by additional
+   concerns regarding trust, accountability, and control when agents
+   operate autonomously across administrative domains.  Open research
+   questions arising from this dual role are outlined in the Research
+   Directions section.
+
+10.  Relationship to Ongoing Research and Standardization
 
    The issues discussed in this document build on existing research and
    standardization efforts related to edge computing and the computing
@@ -678,7 +784,7 @@ Table of Contents
    complements these efforts by adopting an application-centric
    perspective on deployment and lifecycle management.
 
-10.  Research Directions
+11.  Research Directions
 
    The challenges and conceptual considerations discussed in this
    document point to several open research directions for smart
@@ -739,41 +845,22 @@ Table of Contents
    limited resources, intermittent connectivity, and decentralized
    control across administrative domains.
 
-   An additional research direction concerns the role of software agents
-   in managing the deployment of smart applications across the IoT
-   computing continuum.  Placement, coordination, adaptation, and
-   lifecycle management involve decisions that are increasingly
-   difficult to capture with static policies, particularly when
-   application workloads exhibit heterogeneous, context-sensitive
-   behavior.  A concrete example arises in the deployment of inference
-   workloads based on large language models, where placement decisions
-   must balance latency, cost, and resilience to connectivity
-   disruptions.  Preliminary work by the authors suggests that adaptive
-   placement strategies driven by agents can outperform static
-   configurations, particularly under variable demand or intermittent
-   wide-area connectivity.
-
-   Beyond individual applications, the broader question of how agents
-   interact across administrative domains and heterogeneous environments
-   poses interoperability and control challenges relevant to Internet
-   architecture.  Foundational work on multi-agent systems [WOOLDRIDGE-
-   AGENTS] provides established abstractions for reasoning about agent
-   behavior.  More recent proposals illustrate early attempts to
-   standardize agent interaction semantics along the two coordination
-   styles discussed earlier in this document: the Model Context Protocol
-   [MCP] emphasizes orchestration-style interactions between an agent
-   and the tools or services it invokes, while agent-to-agent
-   interaction frameworks [A2A] emphasize choreography-style
-   interactions among peer agents coordinating without a central
-   controller.  These efforts remain evolving, but they highlight open
-   questions regarding how agent responsibilities should be distributed
-   between application-level and infrastructure-level concerns, how
-   agent interactions can be made secure, auditable, and aligned with
-   Internet architectural principles, and how orchestration and
-   choreography styles may be combined dynamically in deployed systems.
-   Further research is needed to explore how agent-based mechanisms can
-   complement application-centric deployment models in the IoT computing
-   continuum.
+   An additional research direction builds on the dual role of AI agents
+   in deployment discussed earlier in this document.  That discussion
+   raises open questions that remain largely unresolved: how agent
+   responsibilities should be distributed between application-level and
+   infrastructure-level concerns; how inter-agent interactions can be
+   made secure, auditable, and aligned with Internet architectural
+   principles, particularly when agents interact across administrative
+   domains and heterogeneous environments; how orchestration and
+   choreography styles may be combined dynamically in agent-based
+   deployment; and how the placement and lifecycle of the agents
+   themselves, including proxy-based representation of constrained
+   devices, can be managed without introducing new points of fragility
+   or centralization.  Emerging interaction frameworks such as [MCP] and
+   [A2A] remain evolving, and further research is needed to assess how
+   agent-based mechanisms can complement application-centric deployment
+   models in the IoT computing continuum.
 
    Finally, there is a broader need for shared terminology and
    conceptual frameworks that facilitate comparison across research
@@ -788,7 +875,7 @@ Table of Contents
    standardization efforts within the IRTF or the IETF may be
    beneficial.
 
-11.  Security Considerations
+12.  Security Considerations
 
    This document does not specify protocols, mechanisms, or
    architectures and therefore does not introduce new security
@@ -825,20 +912,20 @@ Table of Contents
    security considerations into research and standardization efforts
    related to application-centric deployment and lifecycle management.
 
-12.  IANA Considerations
+13.  IANA Considerations
 
    This document has no IANA actions.
 
-13.  Acknowledgments
+14.  Acknowledgments
 
    The authors would like to acknowledge CGI.br (Brazilian Internet
    Steering Committee) for its support through the IETF/IRTF
    participation program, which enabled engagement in research and
    discussions within the Internet Research Task Force (IRTF).
 
-14.  Informative References
+15.  Informative References
 
-15.  References
+16.  References
 
    *[A2A]* A2A Project, "Agent2Agent (A2A) Protocol", 2024,
    https://a2aproject.github.io/A2A/ (https://a2aproject.github.io/
