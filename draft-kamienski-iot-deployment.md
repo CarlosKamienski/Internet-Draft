@@ -4,7 +4,7 @@ title: "Application-Centric Considerations for Deployment over the IoT Computing
 abbrev: "IoTinummDeploy"
 category: info
 
-docname: draft-kamienski-iot-deployment
+docname: draft-kamienski-iot-deployment-latest
 submissiontype: IRTF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
