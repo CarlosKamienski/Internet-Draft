@@ -107,6 +107,12 @@ In particular, the following items are explicitly outside the scope of this docu
 
 By clearly delineating its scope and non-goals, this document seeks to complement existing and ongoing efforts in the computing continuum, including work on communication, edge functions, and operational aspects, while maintaining a technology-agnostic and application-centric perspective.
 
+# Terminology
+
+This document uses the following terms with the meanings indicated below. The definitions are intended to clarify usage in this document and are not meant to redefine existing terminology used elsewhere.
+
+\textbf{Internet of Things (IoT):}
+A system paradigm involving interconnected physical objects equipped with sensing, actuation, processing, and communication capabilities, operating under resource constraints, as discussed in [RFC7452].
 
 # Conventions and Definitions
 
