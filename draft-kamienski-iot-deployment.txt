@@ -194,10 +194,34 @@ Table of Contents
    document and are not meant to redefine existing terminology used
    elsewhere.
 
-   Internet of Things (IoT): A system paradigm involving interconnected
-   physical objects equipped with sensing, actuation, processing, and
-   communication capabilities, operating under resource constraints, as
-   discussed in [RFC7452].
+   *Internet of Things (IoT):* A system paradigm involving
+   interconnected physical objects equipped with sensing, actuation,
+   processing, and communication capabilities, operating under resource
+   constraints, as discussed in [RFC7452].
+
+   *Constrained Devices:* Devices with limited processing power, memory,
+   energy availability, or communication capabilities.  The use of the
+   term _constrained_ in this document follows the terminology defined
+   in [I-D.ietf-iotops-7228bis].
+
+   *IoT Computing Continuum:* A distributed computing environment
+   spanning constrained IoT devices, edge nodes, and cloud platforms,
+   where application components may execute at different stages
+   depending on requirements and context.  The shorthand term _IoTinuum_
+   has been used in related work to denote this same concept [IOTINUUM].
+   This document uses the expanded form throughout for clarity and
+   alignment with terminology used in related standardization efforts.
+
+   *Edge Node:* An intermediate computing node located between
+   constrained devices and centralized cloud infrastructures, providing
+   computation, storage, and networking capabilities closer to data
+   sources, as described in [RFC9556].
+
+   *Orchestration and Choreography:* Two coordination styles for
+   distributed applications.  Orchestration refers to coordination
+   driven by explicit control logic, while choreography relies on
+   decentralized interactions among components without a central
+   coordinator.
 
 4.  Conventions and Definitions
 
