@@ -103,7 +103,6 @@ Table of Contents
    13. IANA Considerations
    14. Acknowledgments
    15. Informative References
-   16. References
    Authors' Addresses
 
 1.  Introduction
@@ -924,8 +923,6 @@ Table of Contents
    discussions within the Internet Research Task Force (IRTF).
 
 15.  Informative References
-
-16.  References
 
    *[A2A]* A2A Project, "Agent2Agent (A2A) Protocol", 2024,
    https://a2aproject.github.io/A2A/ (https://a2aproject.github.io/
