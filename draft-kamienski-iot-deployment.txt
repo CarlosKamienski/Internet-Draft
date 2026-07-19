@@ -2,7 +2,7 @@
 
 
 
-WG Working Group                                         C. A. Kamienski
+RG Research Group                                        C. A. Kamienski
 Internet-Draft                         Federal University of ABC (UFABC)
 Intended status: Informational                                 M. Santos
 Expires: 20 January 2027          Federal Institute of Sertão (IFSertão)
@@ -42,7 +42,7 @@ About This Document
    https://example.com/LATEST.  Status information for this document may
    be found at https://datatracker.ietf.org/doc/draft-kamienski-iot/.
 
-   Discussion of this document takes place on the WG Working Group
+   Discussion of this document takes place on the RG Research Group
    mailing list (mailto:WG@example.com), which is archived at
    https://example.com/WG.
 
