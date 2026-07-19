@@ -1,3 +1,4 @@
+---
 title: "Application-Centric Considerations for Deployment over the IoT Computing Continuum"
 abbrev: "IoTinummDeploy"
 category: info
