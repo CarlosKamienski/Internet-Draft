@@ -111,7 +111,7 @@ By clearly delineating its scope and non-goals, this document seeks to complemen
 
 This document uses the following terms with the meanings indicated below. The definitions are intended to clarify usage in this document and are not meant to redefine existing terminology used elsewhere.
 
-\textbf{Internet of Things (IoT):}
+Internet of Things (IoT):
 A system paradigm involving interconnected physical objects equipped with sensing, actuation, processing, and communication capabilities, operating under resource constraints, as discussed in [RFC7452].
 
 # Conventions and Definitions
