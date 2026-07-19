@@ -32,9 +32,9 @@ v: 3
 area: AREA
 workgroup: WG Working Group
 keyword:
- - next generation
- - unicorn
- - AI-native
+ - Internet of Things (IoT)
+ - Computing Continuum
+ - Service Deployment
 venue:
   group: WG
   type: Working Group
