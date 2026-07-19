@@ -287,122 +287,26 @@ This document has no IANA actions.
 
 The authors would like to acknowledge CGI.br (Brazilian Internet Steering Committee) for its support through the IETF/IRTF participation program, which enabled engagement in research and discussions within the Internet Research Task Force (IRTF).
 
+# Informative References
+
 # References
-{:numbered="false"}
 
+**[A2A]** A2A Project, "Agent2Agent (A2A) Protocol", 2024, <https://a2aproject.github.io/A2A/>.
 
- ---
-title: "Smart Application Deployment over the IoT Computing Continuum"
-abbrev: "IoT Continuum Deployment"
-docname: draft-kamienski-iot-deployment-latest
-category: info
-ipr: trust200902
-area: Internet
-workgroup: T2TRG
-keyword:
-  - Internet of Things
-  - computing continuum
-  - application deployment
+**[CONTINUUM-SURVEY]** Bittencourt, L. F., Rodrigues-Filho, R., Spillner, J., Turck, F. D., Santos, J., Fonseca, N. L. S. da, Rana, O., Parashar, M., and I. Foster, "The Computing Continuum: Past, Present, and Future", *Computer Science Review*, Elsevier, Vol. 58, Article 100782, DOI 10.1016/j.cosrev.2025.100782, 2025, <https://doi.org/10.1016/j.cosrev.2025.100782>.
 
-author:
-  - ins: C. A. Kamienski
-    name: Carlos A. Kamienski
-    org: Federal University of ABC
-    country: Brazil
-    email: carlos.kamienski@ufabc.edu.br
+**[I-D.ietf-iotops-7228bis]** Bormann, C., Ersue, M., Keränen, A., and C. Gomez, "Terminology for Constrained-Node Networks", Work in Progress, Internet-Draft, draft-ietf-iotops-7228bis-07, 23 April 2026, <https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-07>.
 
-informative:
-  RFC9556:
-  RFC7452:
-  I-D.ietf-iotops-7228bis:
+**[IOTDEPLOY]** Oliveira, F. B., Felice, M. D., and C. Kamienski, "IoTDeploy: Deployment of IoT Smart Applications over the Computing Continuum", *Internet of Things*, Elsevier, Vol. 28, Article 101348, DOI 10.1016/j.iot.2024.101348, 2024, <https://doi.org/10.1016/j.iot.2024.101348>.
 
-  IOTINUUM:
-    title: "IoTinuum: The IoT Computing Continuum"
-    author:
-      - ins: C. Kamienski
-        name: Carlos Kamienski
-      - ins: I. Zyrianoff
-        name: Ivan Zyrianoff
-      - ins: L. F. Bittencourt
-        name: Luiz F. Bittencourt
-      - ins: M. Di Felice
-        name: Marco Di Felice
-    date: 2024
-    seriesinfo:
-      IEEE: "Proceedings of the 20th International Conference on Distributed Computing in Smart Systems and the Internet of Things (DCOSS-IoT), pp. 732-739"
+**[IOTINUUM]** Kamienski, C., Zyrianoff, I., Bittencourt, L. F., and M. D. Felice, "IoTinuum: The IoT Computing Continuum", *Proceedings of the 20th International Conference on Distributed Computing in Smart Systems and the Internet of Things (DCOSS-IoT)*, IEEE, pp. 732-739, DOI 10.1109/DCOSS-IoT61029.2024.00114, 2024, <https://doi.org/10.1109/DCOSS-IoT61029.2024.00114>.
 
-  IOTDEPLOY:
-    title: "IoTDeploy: Deployment of IoT Smart Applications over the Computing Continuum"
-    author:
-      - ins: F. B. Oliveira
-        name: Felipe B. Oliveira
-      - ins: M. Di Felice
-        name: Marco Di Felice
-      - ins: C. Kamienski
-        name: Carlos Kamienski
-    date: 2024
-    seriesinfo:
-      Internet of Things: "Vol. 28, Article 101348"
-    target: "https://doi.org/10.1016/j.iot.2024.101348"
+**[MCP]** Anthropic, "Model Context Protocol Specification", 2024, <https://modelcontextprotocol.io/>.
 
-  WPIETF2025:
-    title: "Smart Application Deployment over the IoT Computing Continuum"
-    author:
-      - ins: C. A. Kamienski
-        name: Carlos A. Kamienski
-      - ins: M. A. B. Santos
-        name: M. A. B. Santos
-    date: 2025
-    seriesinfo:
-      WPIETF: "Workshop Pre-IETF"
-    target: "https://sol.sbc.org.br/"
+**[RFC7452]** Tschofenig, H., Arkko, J., Thaler, D., and D. McPherson, "Architectural Considerations in Smart Object Networking", RFC 7452, DOI 10.17487/RFC7452, March 2015, <https://www.rfc-editor.org/rfc/rfc7452>.
 
-  CONTINUUM-SURVEY:
-    title: "The Computing Continuum: Past, Present, and Future"
-    author:
-      - ins: L. F. Bittencourt
-        name: Luiz F. Bittencourt
-      - ins: R. Rodrigues-Filho
-        name: R. Rodrigues-Filho
-      - ins: J. Spillner
-        name: Josef Spillner
-      - ins: F. De Turck
-        name: Filip De Turck
-      - ins: J. Santos
-        name: José Santos
-      - ins: N. L. S. da Fonseca
-        name: Nelson L. S. da Fonseca
-      - ins: O. Rana
-        name: Omer Rana
-      - ins: M. Parashar
-        name: Manish Parashar
-      - ins: I. Foster
-        name: Ian Foster
-    date: 2025
-    seriesinfo:
-      Computer Science Review: "Vol. 58, Article 100782"
-    target: "https://doi.org/10.1016/j.cosrev.2025.100782"
+**[RFC9556]** Hong, J., Hong, Y., de Foy, X., Kovatsch, M., Schooler, E., and D. Kutscher, "Internet of Things (IoT) Edge Challenges and Functions", RFC 9556, DOI 10.17487/RFC9556, April 2024, <https://www.rfc-editor.org/rfc/rfc9556>.
 
-  WOOLDRIDGE-AGENTS:
-    title: "An Introduction to MultiAgent Systems"
-    author:
-      - ins: M. Wooldridge
-        name: Michael Wooldridge
-    date: 2009
-    seriesinfo:
-      Wiley: "2nd Edition"
+**[WOOLDRIDGE-AGENTS]** Wooldridge, M., *An Introduction to MultiAgent Systems*, 2nd Edition, John Wiley and Sons, 2009.
 
-  MCP:
-    title: "Model Context Protocol Specification"
-    author:
-      - org: Anthropic
-    date: 2026
-    target: "https://modelcontextprotocol.io/"
-
-  A2A:
-    title: "Agent2Agent (A2A) Protocol"
-    date: 2026
-    target: "https://a2aproject.github.io/A2A/"
-
---- back
-
+**[WPIETF2025]** Kamienski, C. A. and M. A. B. Santos, "Smart Application Deployment over the IoT Computing Continuum", *Workshop de Pesquisa em Internet do Futuro (WPIETF)*, Sociedade Brasileira de Computacao (SBC), 2025. Available via SBC Open Library (SOL).
