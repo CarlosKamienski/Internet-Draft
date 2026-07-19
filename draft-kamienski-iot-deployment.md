@@ -167,6 +167,31 @@ In centralized systems, application deployment is often treated as a one-time ev
 Managing this lifecycle is particularly challenging in IoT environments due to device heterogeneity, intermittent connectivity, and the coexistence of multiple administrative domains. An application-centric perspective emphasizes that lifecycle management must be considered holistically, encompassing not only software updates but also the ongoing coordination of distributed application components. Understanding these lifecycle aspects is essential for identifying common challenges and research questions related to deployment and operation in the IoT computing continuum.
 
 
+# Challenges in Smart Application Development and Deployment
+
+The IoT computing continuum introduces challenges that fundamentally affect both the development and deployment of smart applications. Unlike centralized environments, where development and deployment can often be treated as loosely coupled phases, the heterogeneity, distribution, and dynamism of the continuum create strong interdependencies between application design choices, deployment decisions, and runtime behavior. As a consequence, development and deployment concerns cannot be effectively addressed in isolation.
+
+A primary challenge stems from the bidirectional influence between application development and deployment constraints. Decisions made during development, such as functional decomposition, communication patterns, and state management, directly impact deployment feasibility across constrained devices, edge nodes, and cloud platforms.
+
+At the same time, deployment realities related to resource availability, network conditions, latency requirements, and energy constraints frequently impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.
+
+Heterogeneity across the continuum further amplifies this challenge. Execution environments differ widely in terms of hardware capabilities, operating systems, runtime support, and management interfaces. Developers must therefore anticipate deployment diversity early in the development process, while deployment mechanisms must accommodate application abstractions that span multiple platforms.
+
+Without integrated development and deployment considerations, solutions tend to become brittle, tightly coupled to specific environments, and difficult to evolve.
+
+Another challenge arises from the dynamic nature of deployment in the IoT computing continuum. Smart applications often need to adapt to changing conditions, such as workload variations, mobility, intermittent connectivity, or evolving physical contexts. Supporting such adaptation requires continuous feedback between runtime behavior and development-time assumptions.
+
+Static deployment models and rigid application designs limit the ability to respond to these dynamics, underscoring the need for approaches that treat deployment as an ongoing process rather than a one-time event.
+
+These challenges align with principles commonly associated with DevOps practices, which emphasize continuous integration, continuous deployment, and feedback loops between development and operations. However, transferring DevOps concepts to the IoT computing continuum is non-trivial. Conventional DevOps pipelines are typically designed for cloud-centric environments and assume homogeneous infrastructure, reliable connectivity, and centralized control.
+
+In contrast, IoT scenarios involve constrained devices, distributed execution across multiple continuum stages, and, in many cases, multiple administrative domains, which complicates the application of traditional DevOps assumptions.
+
+Finally, the absence of shared abstractions and terminology for reasoning about development and deployment in the continuum makes it difficult to compare approaches and to identify common requirements. When the interplay between development and deployment is not made explicit, solutions often remain ad hoc and platform-specific.
+
+Addressing this gap requires an application-centric perspective that explicitly acknowledges development--deployment interdependencies and treats them as first-class concerns. Such a perspective is essential for advancing research on smart application deployment and for informing future standardization efforts related to the IoT computing continuum.
+
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
