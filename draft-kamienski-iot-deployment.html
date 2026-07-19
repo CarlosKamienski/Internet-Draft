@@ -1183,22 +1183,25 @@ svg {
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-challenges-in-smart-applica" class="internal xref">Challenges in Smart Application Development and Deployment</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-normative-references" class="internal xref">Normative References</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
-            <p id="section-toc.1-1.11.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1320,37 +1323,55 @@ Two coordination styles for distributed applications. Orchestration refers to co
 </div>
 </section>
 </div>
-<div id="conventions-and-definitions">
+<div id="challenges-in-smart-application-development-and-deployment">
 <section id="section-6">
-      <h2 id="name-conventions-and-definitions">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      <h2 id="name-challenges-in-smart-applica">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-challenges-in-smart-applica" class="section-name selfRef">Challenges in Smart Application Development and Deployment</a>
       </h2>
-<p id="section-6-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-6-1">The IoT computing continuum introduces challenges that fundamentally affect both the development and deployment of smart applications. Unlike centralized environments, where development and deployment can often be treated as loosely coupled phases, the heterogeneity, distribution, and dynamism of the continuum create strong interdependencies between application design choices, deployment decisions, and runtime behavior. As a consequence, development and deployment concerns cannot be effectively addressed in isolation.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">A primary challenge stems from the bidirectional influence between application development and deployment constraints. Decisions made during development, such as functional decomposition, communication patterns, and state management, directly impact deployment feasibility across constrained devices, edge nodes, and cloud platforms.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">At the same time, deployment realities related to resource availability, network conditions, latency requirements, and energy constraints frequently impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">Heterogeneity across the continuum further amplifies this challenge. Execution environments differ widely in terms of hardware capabilities, operating systems, runtime support, and management interfaces. Developers must therefore anticipate deployment diversity early in the development process, while deployment mechanisms must accommodate application abstractions that span multiple platforms.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-5">Without integrated development and deployment considerations, solutions tend to become brittle, tightly coupled to specific environments, and difficult to evolve.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-6">Another challenge arises from the dynamic nature of deployment in the IoT computing continuum. Smart applications often need to adapt to changing conditions, such as workload variations, mobility, intermittent connectivity, or evolving physical contexts. Supporting such adaptation requires continuous feedback between runtime behavior and development-time assumptions.<a href="#section-6-6" class="pilcrow">¶</a></p>
+<p id="section-6-7">Static deployment models and rigid application designs limit the ability to respond to these dynamics, underscoring the need for approaches that treat deployment as an ongoing process rather than a one-time event.<a href="#section-6-7" class="pilcrow">¶</a></p>
+<p id="section-6-8">These challenges align with principles commonly associated with DevOps practices, which emphasize continuous integration, continuous deployment, and feedback loops between development and operations. However, transferring DevOps concepts to the IoT computing continuum is non-trivial. Conventional DevOps pipelines are typically designed for cloud-centric environments and assume homogeneous infrastructure, reliable connectivity, and centralized control.<a href="#section-6-8" class="pilcrow">¶</a></p>
+<p id="section-6-9">In contrast, IoT scenarios involve constrained devices, distributed execution across multiple continuum stages, and, in many cases, multiple administrative domains, which complicates the application of traditional DevOps assumptions.<a href="#section-6-9" class="pilcrow">¶</a></p>
+<p id="section-6-10">Finally, the absence of shared abstractions and terminology for reasoning about development and deployment in the continuum makes it difficult to compare approaches and to identify common requirements. When the interplay between development and deployment is not made explicit, solutions often remain ad hoc and platform-specific.<a href="#section-6-10" class="pilcrow">¶</a></p>
+<p id="section-6-11">Addressing this gap requires an application-centric perspective that explicitly acknowledges development--deployment interdependencies and treats them as first-class concerns. Such a perspective is essential for advancing research on smart application deployment and for informing future standardization efforts related to the IoT computing continuum.<a href="#section-6-11" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conventions-and-definitions">
+<section id="section-7">
+      <h2 id="name-conventions-and-definitions">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+      </h2>
+<p id="section-7-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-6-1" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-7">
+<section id="section-8">
       <h2 id="name-security-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">TODO Security<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">TODO Security<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-8">
+<section id="section-9">
       <h2 id="name-iana-considerations">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-8-1">This document has no IANA actions.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">This document has no IANA actions.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-normative-references">
-<section id="section-9">
+<section id="section-10">
       <h2 id="name-normative-references">
-<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
       </h2>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
