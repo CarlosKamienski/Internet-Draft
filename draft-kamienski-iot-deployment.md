@@ -10,19 +10,19 @@ number:
 date:
 consensus: true
 v: 3
-area: AREA
-workgroup: RG Research Group
+# area: AREA
+# workgroup: RG Research Group
 keyword:
  - Internet of Things (IoT)
  - Computing Continuum
  - Service Deployment
 venue:
-  group: RG
-  type: Research Group
-  mail: WG@example.com
-  arch: https://example.com/WG
-  github: USER/REPO
-  latest: https://example.com/LATEST
+#  group: RG
+#  type: Research Group
+#  mail: WG@example.com
+#  arch: https://example.com/WG
+  github: "CarlosKamienski/Internet-Draft"
+  latest: "https://CarlosKamienski.github.io/Internet-Draft/draft-kamienski-iot-deployment.html"
 
 author:
  -
