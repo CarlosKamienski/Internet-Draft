@@ -1,0 +1,99 @@
+---
+###
+# Internet-Draft Markdown Template
+#
+# Rename this file from draft-todo-yourname-protocol.md to get started.
+# Draft name format is "draft-<yourname>-<workgroup>-<name>.md".
+#
+# For initial setup, you only need to edit the first block of fields.
+# Only "title" needs to be changed; delete "abbrev" if your title is short.
+# Any other content can be edited, but be careful not to introduce errors.
+# Some fields will be set automatically during setup if they are unchanged.
+#
+# Don't include "-00" or "-latest" in the filename.
+# Labels in the form draft-<yourname>-<workgroup>-<name>-latest are used by
+# the tools to refer to the current version; see "docname" for example.
+#
+# This template uses kramdown-rfc: https://github.com/cabo/kramdown-rfc
+# You can replace the entire file if you prefer a different format.
+# Change the file extension to match the format (.xml for XML, etc...)
+#
+###
+title: "Application-Centric Considerations for Deployment over the IoT Computing Continuum"
+abbrev: "IoTinummDeploy"
+category: info
+
+docname: draft-kamienski-iot-deployment
+submissiontype: IRTF  # also: "independent", "editorial", "IAB", or "IRTF"
+number:
+date:
+consensus: true
+v: 3
+area: AREA
+workgroup: WG Working Group
+keyword:
+ - next generation
+ - unicorn
+ - AI-native
+venue:
+  group: WG
+  type: Working Group
+  mail: WG@example.com
+  arch: https://example.com/WG
+  github: USER/REPO
+  latest: https://example.com/LATEST
+
+author:
+ -
+    fullname: Carlos Alberto Kamienski
+    organization: Federal University of ABC (UFABC)
+    email: carlos.kamienski@ufabc.edu.br
+ -
+    fullname: Marco Santos
+    organization: Federal Institute of Sertão (IFSertão)
+    email: marcelo.santos@ifsertao-pe.edu.br
+
+ -
+    fullname: Marco Di Felice
+    organization: University of Bologna
+    email: marco.difelice3@unibo.it
+
+
+normative:
+
+informative:
+
+...
+
+--- abstract
+
+Smart applications increasingly depend on the Internet of Things (IoT) and on distributed computing environments that span constrained devices, edge nodes, cloudlets, and cloud infrastructures, collectively referred to as the edge–cloud or computing continuum. This document uses the term IoT computing continuum to highlight the importance of IoT-specific constraints and requirements within this broader context. Although prior work has addressed communication aspects and edge functions in these environments, as noted in RFC 9556 and comprehensive surveys of the computing continuum, there has been comparatively less focus on application-centric issues such as deployment, placement, and lifecycle management. This document identifies key challenges and conceptual considerations for deploying smart applications across the IoT computing continuum, aiming to provide a unified architectural perspective and vocabulary to guide ongoing research within the IRTF and inform future standardization initiatives.
+
+--- middle
+
+# Introduction
+
+TODO Introduction
+
+
+# Conventions and Definitions
+
+{::boilerplate bcp14-tagged}
+
+
+# Security Considerations
+
+TODO Security
+
+
+# IANA Considerations
+
+This document has no IANA actions.
+
+
+--- back
+
+# Acknowledgments
+{:numbered="false"}
+
+TODO acknowledge.
