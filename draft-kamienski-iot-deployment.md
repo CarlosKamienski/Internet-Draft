@@ -290,96 +290,119 @@ The authors would like to acknowledge CGI.br (Brazilian Internet Steering Commit
 # References
 {:numbered="false"}
 
-informative:
-RFC9556:
-RFC7452:
-I-D.ietf-iotops-7228bis:
 
-IOTINUUM:
-title: "IoTinuum: The IoT Computing Continuum"
-author:
-- ins: C. Kamienski
-name: Carlos Kamienski
-- ins: I. Zyrianoff
-name: Ivan Zyrianoff
-- ins: L. F. Bittencourt
-name: Luiz F. Bittencourt
-- ins: M. Di Felice
-name: Marco Di Felice
-date: 2024
-seriesinfo:
-IEEE: "Proceedings of the 20th International Conference on Distributed Computing in Smart Systems and the Internet of Things (DCOSS-IoT), pp. 732-739"
-
-IOTDEPLOY:
-title: "IoTDeploy: Deployment of IoT Smart Applications over the Computing Continuum"
-author:
-- ins: F. B. Oliveira
-name: Felipe B. Oliveira
-- ins: M. Di Felice
-name: Marco Di Felice
-- ins: C. Kamienski
-name: Carlos Kamienski
-date: 2024
-seriesinfo:
-Internet of Things: "Vol. 28, Article 101348"
-target: "https://doi.org/10.1016/j.iot.2024.101348"
-
-WPIETF2025:
+ ---
 title: "Smart Application Deployment over the IoT Computing Continuum"
-author:
-- ins: C. A. Kamienski
-name: Carlos A. Kamienski
-- ins: M. A. B. Santos
-name: M. A. B. Santos
-date: 2025
-seriesinfo:
-WPIETF: "Workshop Pre-IETF"
-target: "https://sol.sbc.org.br/"
+abbrev: "IoT Continuum Deployment"
+docname: draft-kamienski-iot-deployment-latest
+category: info
+ipr: trust200902
+area: Internet
+workgroup: T2TRG
+keyword:
+  - Internet of Things
+  - computing continuum
+  - application deployment
 
-CONTINUUM-SURVEY:
-title: "The Computing Continuum: Past, Present, and Future"
 author:
-- ins: L. F. Bittencourt
-name: Luiz F. Bittencourt
-- ins: R. Rodrigues-Filho
-name: R. Rodrigues-Filho
-- ins: J. Spillner
-name: Josef Spillner
-- ins: F. De Turck
-name: Filip De Turck
-- ins: J. Santos
-name: José Santos
-- ins: N. L. S. da Fonseca
-name: Nelson L. S. da Fonseca
-- ins: O. Rana
-name: Omer Rana
-- ins: M. Parashar
-name: Manish Parashar
-- ins: I. Foster
-name: Ian Foster
-date: 2025
-seriesinfo:
-Computer Science Review: "Vol. 58, Article 100782"
-target: "https://doi.org/10.1016/j.cosrev.2025.100782"
+  - ins: C. A. Kamienski
+    name: Carlos A. Kamienski
+    org: Federal University of ABC
+    country: Brazil
+    email: carlos.kamienski@ufabc.edu.br
 
-WOOLDRIDGE-AGENTS:
-title: "An Introduction to MultiAgent Systems"
-author:
-- ins: M. Wooldridge
-name: Michael Wooldridge
-date: 2009
-seriesinfo:
-Wiley: "2nd Edition"
+informative:
+  RFC9556:
+  RFC7452:
+  I-D.ietf-iotops-7228bis:
 
-MCP:
-title: "Model Context Protocol Specification"
-author:
-- org: Anthropic
-date: 2026
-target: "https://modelcontextprotocol.io/"
+  IOTINUUM:
+    title: "IoTinuum: The IoT Computing Continuum"
+    author:
+      - ins: C. Kamienski
+        name: Carlos Kamienski
+      - ins: I. Zyrianoff
+        name: Ivan Zyrianoff
+      - ins: L. F. Bittencourt
+        name: Luiz F. Bittencourt
+      - ins: M. Di Felice
+        name: Marco Di Felice
+    date: 2024
+    seriesinfo:
+      IEEE: "Proceedings of the 20th International Conference on Distributed Computing in Smart Systems and the Internet of Things (DCOSS-IoT), pp. 732-739"
 
-A2A:
-title: "Agent2Agent (A2A) Protocol"
-date: 2026
-target: "https://a2aproject.github.io/A2A/"
+  IOTDEPLOY:
+    title: "IoTDeploy: Deployment of IoT Smart Applications over the Computing Continuum"
+    author:
+      - ins: F. B. Oliveira
+        name: Felipe B. Oliveira
+      - ins: M. Di Felice
+        name: Marco Di Felice
+      - ins: C. Kamienski
+        name: Carlos Kamienski
+    date: 2024
+    seriesinfo:
+      Internet of Things: "Vol. 28, Article 101348"
+    target: "https://doi.org/10.1016/j.iot.2024.101348"
+
+  WPIETF2025:
+    title: "Smart Application Deployment over the IoT Computing Continuum"
+    author:
+      - ins: C. A. Kamienski
+        name: Carlos A. Kamienski
+      - ins: M. A. B. Santos
+        name: M. A. B. Santos
+    date: 2025
+    seriesinfo:
+      WPIETF: "Workshop Pre-IETF"
+    target: "https://sol.sbc.org.br/"
+
+  CONTINUUM-SURVEY:
+    title: "The Computing Continuum: Past, Present, and Future"
+    author:
+      - ins: L. F. Bittencourt
+        name: Luiz F. Bittencourt
+      - ins: R. Rodrigues-Filho
+        name: R. Rodrigues-Filho
+      - ins: J. Spillner
+        name: Josef Spillner
+      - ins: F. De Turck
+        name: Filip De Turck
+      - ins: J. Santos
+        name: José Santos
+      - ins: N. L. S. da Fonseca
+        name: Nelson L. S. da Fonseca
+      - ins: O. Rana
+        name: Omer Rana
+      - ins: M. Parashar
+        name: Manish Parashar
+      - ins: I. Foster
+        name: Ian Foster
+    date: 2025
+    seriesinfo:
+      Computer Science Review: "Vol. 58, Article 100782"
+    target: "https://doi.org/10.1016/j.cosrev.2025.100782"
+
+  WOOLDRIDGE-AGENTS:
+    title: "An Introduction to MultiAgent Systems"
+    author:
+      - ins: M. Wooldridge
+        name: Michael Wooldridge
+    date: 2009
+    seriesinfo:
+      Wiley: "2nd Edition"
+
+  MCP:
+    title: "Model Context Protocol Specification"
+    author:
+      - org: Anthropic
+    date: 2026
+    target: "https://modelcontextprotocol.io/"
+
+  A2A:
+    title: "Agent2Agent (A2A) Protocol"
+    date: 2026
+    target: "https://a2aproject.github.io/A2A/"
+
+--- back
 
