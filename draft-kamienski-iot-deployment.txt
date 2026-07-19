@@ -194,10 +194,10 @@ Table of Contents
    document and are not meant to redefine existing terminology used
    elsewhere.
 
-   \textbf{Internet of Things (IoT):} A system paradigm involving
-   interconnected physical objects equipped with sensing, actuation,
-   processing, and communication capabilities, operating under resource
-   constraints, as discussed in [RFC7452].
+   Internet of Things (IoT): A system paradigm involving interconnected
+   physical objects equipped with sensing, actuation, processing, and
+   communication capabilities, operating under resource constraints, as
+   discussed in [RFC7452].
 
 4.  Conventions and Definitions
 
