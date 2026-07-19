@@ -1,0 +1,1536 @@
+<!DOCTYPE html>
+<html lang="en" class="Internet-Draft">
+<head>
+<meta charset="utf-8">
+<meta content="Common,Latin" name="scripts">
+<meta content="initial-scale=1.0" name="viewport">
+<title>Application-Centric Considerations for Deployment over the IoT Computing Continuum</title>
+<meta content="Carlos Alberto Kamienski" name="author">
+<meta content="Marco Santos" name="author">
+<meta content="Marco Di Felice" name="author">
+<meta content="
+       Smart applications increasingly depend on the Internet of Things (IoT) and on distributed computing environments that span constrained devices, edge nodes, cloudlets, and cloud infrastructures, collectively referred to as the edge–cloud or computing continuum. This document uses the term IoT computing continuum to highlight the importance of IoT-specific constraints and requirements within this broader context. Although prior work has addressed communication aspects and edge functions in these environments, as noted in RFC 9556 and comprehensive surveys of the computing continuum, there has been comparatively less focus on application-centric issues such as deployment, placement, and lifecycle management. This document identifies key challenges and conceptual considerations for deploying smart applications across the IoT computing continuum, aiming to provide a unified architectural perspective and vocabulary to guide ongoing research within the IRTF and inform future standardization initiatives. 
+    " name="description">
+<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="Internet of Things (IoT)" name="keyword">
+<meta content="Computing Continuum" name="keyword">
+<meta content="Service Deployment" name="keyword">
+<meta content="draft-kamienski-iot-deployment" name="ietf.draft">
+<!-- Generator version information:
+  xml2rfc 3.34.0
+    Python 3.14.5
+    ConfigArgParse 1.7.5
+    google-i18n-address 3.1.1
+    intervaltree 3.2.1
+    Jinja2 3.1.6
+    lxml 6.1.1
+    natsort 8.4.0
+    platformdirs 4.10.1
+    pycountry 24.6.1
+    PyYAML 6.0.3
+    requests 2.33.1
+    wcwidth 0.8.2
+-->
+<link href="draft-kamienski-iot-deployment.xml" rel="alternate" type="application/rfc+xml">
+<link href="#copyright" rel="license">
+<style type="text/css">@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Italic'), local('Lora-Italic'), url('https://martinthomson.github.io/rfc-css/fonts/lora-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Lora Regular'), local('Lora-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/lora-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-cyrillic.woff2') format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-vietnamese.woff2') format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Lora Bold'), local('Lora-Bold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-bold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Lora';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: local('Lora SemiBold'), local('Lora-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/lora-semibold-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Oxygen Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Oxygen Mono'), local('OxygenMono-Regular'), url('https://martinthomson.github.io/rfc-css/fonts/oxygenmono-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+}
+
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+  --background-color: #fff;
+  --text-color: #222;
+  --title-color: #191919;
+  --link-color: #2a6496;
+  --highlight-color: #f9f9f9;
+  --line-color: #eee;
+  --pilcrow-weak: #ddd;
+  --pilcrow-strong: #bbb;
+  --small-font-size: 14.5px;
+  --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
+  scrollbar-color: #bbb #eee;
+}
+body {
+  max-width: 600px;
+  margin: 75px auto;
+  padding: 0 5px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font: 16px/22px "Lora", serif;
+  scroll-behavior: smooth;
+}
+
+.ears {
+  display: none;
+}
+
+/* headings */
+section {
+  clear: both;
+}
+.section-number {
+  padding-right: 0.5em;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  font-weight: 680;
+  margin: 0.8em 0 0.3em;
+  font-size-adjust: 0.5;
+  color: var(--title-color);
+}
+h1 {
+  &#title {
+    font-size: 32px;
+    line-height: 40px;
+    clear: both;
+    margin: 1.5em 0 0.2em;
+  }
+  &#rfcnum {
+    margin: 1.5em 0 0.2em;
+    & + h1#title {
+      margin: 0.2em 0;
+    }
+  }
+}
+
+h1, h2, h3 {
+  font-size: 22px;
+  line-height: 27px;
+}
+h4, h5, h6 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+/* general structure */
+.author {
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+#abstract+p {
+  font-size: 18px;
+  line-height: 24px;
+  & code, & samp, & tt {
+    font-size: 16px;
+    line-height: 0;
+  }
+}
+
+p {
+  padding: 0;
+  margin: 0.5em 0;
+  text-align: left;
+}
+div {
+  margin: 0;
+}
+.alignRight {
+  margin: 1em 0;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    margin: 0;
+    float: right;
+    clear: both;
+  }
+  & > *:nth-child(2) {
+    clear: both;
+    display: block;
+    border: none;
+  }
+}
+svg {
+  display: block;
+  /* font-family isn't space-separated, but =~ will have to do */
+  &[font-family~="monospace" i], & [font-family~="monospace" i] {
+    font-family: var(--font-mono);
+  }
+}
+.alignCenter {
+  margin: 1em 0;
+  &.art-text {
+    background-color: var(--highlight-color);
+    border: 1px solid var(--line-color);
+    border-radius: 3px;
+    padding: 0.5em 1em 0;
+    margin-bottom: 0.5em;
+    & pre {
+      padding: 0;
+      width: auto;
+    }
+  }
+  & > *:first-child {
+    border: none;
+    /* this isn't optimal, but it's an existence proof.  PrinceXML doesn't
+       support flexbox yet.
+    */
+    display: table;
+    margin: 0 auto;
+  }
+}
+
+/* lists */
+ol, ul {
+  padding: 0;
+  margin: 0 0 0.5em 2em;
+  & :is(ol, ul) {
+    margin-left: 1em;
+  }
+}
+li {
+  margin: 0 0 0.25em 0;
+}
+ul.empty, .ulEmpty {
+  list-style-type: none;
+  & li {
+    margin-top: 0.5em;
+  }
+}
+:is(ul, ol).compact, .ulCompact, .olCompact {
+  margin: 0 0 0 2em;
+  & li {
+    margin: 0;
+    & :first-child { margin-top: 0; }
+    & :last-child { margin-bottom: 0; }
+  }
+}
+
+/* definition lists */
+dl {
+  clear: left;
+  --indent: 3ch;
+  /* --indent: attr(indent ch); not supported in any browser, but we can dream */
+  &.olPercent {
+    --indent: 5ch;
+    & > dt {
+      min-width: calc(var(--indent) - 2ch);
+      float: none;
+    }
+  }
+
+  dl > dd > & {
+    margin-top: 0.5em;
+    margin-bottom: 0;
+  }
+
+  &:not(.dlNewline) > dt {
+    float: left;
+    margin-right: 2ch;
+    min-width: 8ch;
+  }
+  & > dd {
+    margin-bottom: .8em;
+    margin-left: var(--indent) !important; /* stupid element overrides */
+    min-height: 2ex;
+  }
+}
+:is(dl.compact, .dlCompact) > dd {
+  margin-bottom: 0;
+  & > :is(:first-child, .break:first-child + *) {
+    margin-top: 0;
+  }
+  & > :is(:last-child) {
+    margin-bottom: 0;
+  }
+}
+:is(dd, span).break {
+  display: none;
+}
+
+/* links */
+a {
+  text-decoration: none;
+  &[href] {
+    color: var(--link-color);
+    &:hover { text-decoration: underline; }
+    &.selfRef {
+      color: var(--text-color);
+      &:hover {
+        text-decoration: none;
+        background-color: var(--highlight-color);
+      }
+    }
+  }
+}
+.iref + a[href].internal {
+  color: var(--text-color);
+}
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
+  white-space: nowrap;
+}
+
+/* Figures */
+tt, code, pre {
+  background-color: var(--highlight-color);
+  font: 14px/22px var(--font-mono);
+}
+tt, code {
+  /* changing the font for inline elements leads to different ascender
+     and descender heights; as we want to retain baseline alignment,
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
+  line-height: 0;
+}
+:is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
+  font-size: 84%;
+}
+pre {
+  border: 1px solid var(--line-color);
+  font-size: 13.5px;
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  margin: 5px;
+  padding: 5px;
+}
+img {
+  max-width: 100%;
+}
+figure {
+  margin: 0.5em 0;
+  padding: 0;
+  & blockquote {
+    margin: 0.8em 0.4em 0.4em;
+  }
+}
+figcaption, caption {
+  font-style: italic;
+  margin: 0.5em 1.5em;
+  text-align: left;
+  caption-side: bottom;
+}
+@media screen {
+  /* Auto-collapse boilerplate. */
+  :is(#status-of-memo, #copyright) {
+    & p {
+      margin: -2px 0;
+      max-height: 0;
+      transition: max-height 2s ease, margin 0.5s ease 0.5s;
+      overflow: hidden;
+    }
+    &:hover p,
+    & h2:target ~ p {
+      margin: 0.5em 0;
+      max-height: 500px;
+      overflow: auto;
+    }
+  }
+  pre, svg {
+    display: inline-block;
+    /* In the horizontal direction, sometimes people make over-sized figures.
+       Scrollbars for those is therefore necessary: auto adds them as necessary..
+       In the vertical direction, the line-height can combine with the font
+       asender/descender height to produce scrollbars: hidden avoids that. */
+    overflow: auto hidden;
+  }
+  pre {
+    max-width: 100%;
+    width: calc(100% - 22px - 1em);
+  }
+  svg {
+    max-width: calc(100% - 22px - 1em);
+  }
+  figure pre {
+    display: block;
+    width: calc(100% - 25px);
+  }
+  :is(pre, svg) + .pilcrow {
+    display: inline-block;
+    vertical-align: text-bottom;
+    padding-bottom: 8px;
+  }
+}
+
+/* aside, blockquote */
+aside, blockquote {
+  margin-left: 0;
+  padding: 0 2em;
+  font-style: italic;
+}
+blockquote {
+  margin: 1em 0;
+  border-left: 2px var(--pilcrow-strong) solid;
+}
+cite {
+  display: block;
+  text-align: right;
+  font-style: italic;
+}
+
+/* tables */
+table {
+  width: auto;
+  max-width: 100%;
+  margin: 0 0 1em;
+  border-collapse: collapse;
+  &.right { margin-left: auto; }
+  &.center { margin-left: auto; margin-right: auto; }
+  &.left { margin-right: auto; }
+  & .text-left { text-align: left; }
+  & .text-center { text-align: center; }
+  & .text-right { text-align: right; }
+  & caption {
+    margin: 0;
+    padding: 3px 0 3px 1em;
+  }
+  & p { margin: 0; }
+}
+
+thead, tbody {
+  border: 1px solid var(--line-color);
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 5px 10px;
+}
+th {
+  background-color: var(--line-color);
+}
+:is(tr:nth-child(2n), thead+tbody > tr:nth-child(2n+1)) > td {
+  background-color: var(--background-color);
+}
+:is(tr:nth-child(2n+1), thead+tbody > tr:nth-child(2n)) > td {
+  background-color: var(--highlight-color);
+}
+
+/* pilcrow */
+a.pilcrow {
+  margin-left: 3px;
+  opacity: 0.2;
+  user-select: none;
+  &[href] {
+    color: var(--pilcrow-weak);
+    &:hover { text-decoration: none; }
+  }
+  @media not print {
+    :hover > &, &:focus {
+      opacity: 1;
+    }
+    &[href]:hover {
+      color: var(--pilcrow-strong);
+      background-color: transparent;
+    }
+  }
+  @media print {
+    display: none;
+  }
+}
+
+/* misc */
+hr {
+  border: 0;
+  border-top: 1px solid var(--line-color);
+}
+.bcp14 {
+  font-variant: small-caps;
+  font-weight: 600;
+  font-size: var(--small-font-size);
+}
+.role {
+  font-variant: all-small-caps;
+}
+sub, sup {
+  line-height: 1;
+  font-size: 80%;
+}
+
+/* info block */
+#identifiers {
+  margin: 0;
+  font-size: var(--small-font-size);
+  line-height: 18px;
+  --identifier-width: 15ch;
+  & dt {
+    width: var(--identifier-width);
+    min-width: var(--identifier-width);
+    clear: left;
+    float: left;
+    text-align: right;
+    margin-right: 1ch;
+  }
+  & dd {
+    margin: 0;
+    margin-left: calc(1em + var(--identifier-width)) !important;
+    min-width: 5em;
+  }
+  & .authors {
+    & .author {
+      display: inline-block;
+      margin-right: 1.5em;
+    }
+    & .org {
+      font-style: italic;
+    }
+  }
+}
+
+/* The prepared/rendered info at the very bottom of the page */
+.docInfo {
+  color: #999;
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 2em;
+  & .prepared {
+    float: right;
+  }
+}
+
+/* table of contents */
+#toc {
+  padding: 0.75em 0 2em 0;
+  margin-bottom: 1em;
+
+  & nav {
+    & ul {
+      margin: 0 0.5em 0 0;
+      padding: 0;
+      list-style: none;
+    }
+    & li {
+      line-height: 1.3em;
+      margin: 2px 0;
+      padding-left: 1.2em;
+      text-indent: -1.2em;
+    }
+  }
+  & a.xref {
+    white-space: normal;
+  }
+}
+
+.references {
+  & > dt {
+    text-align: right;
+    font-weight: bold;
+    min-width: 10ch;
+    margin-right: 1.5ch;
+    &:target::before {
+      content: "⇒";
+      margin: 0 10px 0 -25px;
+    }
+  }
+  & > dd {
+    margin-left: 12ch !important;
+    overflow: visible;
+    & .refInstance {
+      margin-bottom: 0.8em;
+    }
+    & .ascii {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+#rfc\.index\.index + ul {
+  margin-left: 0;
+}
+
+/* authors */
+address.vcard {
+  font-style: normal;
+  max-width: 20em;
+  margin: 1em auto 1em 0;
+
+  & .nameRole {
+    font-weight: 700;
+    margin-left: 0;
+  }
+  & .label {
+    margin: 0.5em 0;
+  }
+  & .type {
+    display: none;
+  }
+  & .alternative-contact {
+    margin: 0.5em 0 0.25em 0;
+  }
+  & .non-ascii {
+    margin: 0 0 0 2em;
+  }
+  & div.left {
+    text-align: left;
+  }
+  & div.right {
+    text-align: right;
+  }
+}
+
+hr.addr {
+  border-top: 1px dashed;
+  margin: 0;
+  color: #ddd;
+  max-width: calc(100% - 16px);
+}
+@media (min-width: 500px) {
+  #authors-addresses {
+    & > section {
+      column-count: 2;
+      column-gap: 20px;
+    }
+    & > section > h2 {
+      column-span: all;
+    }
+    /* hack for break-inside: avoid-column */
+    & address {
+      display: inline-block;
+      break-inside: avoid-column;
+    }
+  }
+}
+
+/* Comments */
+.rfcEditorRemove {
+  & p:first-of-type {
+    font-style: italic;
+  }
+}
+.cref {
+  background-color: rgba(249, 232, 105, 0.3);
+  padding: 2px 4px;
+}
+.crefSource {
+  font-style: italic;
+}
+
+@media screen {
+  #toc {
+    & nav {
+      font-family: var(--font-title);
+      font-weight: 360;
+      & > ul { margin-bottom: 2em; }
+      & ul {
+        margin: 0 0 0 4px;
+        & :is(p, li) {
+          margin: 2px 0;
+        }
+      }
+    }
+    & a.toplink {
+      float: right;
+    }
+  }
+}
+@media not screen {
+  #toc a.toplink {
+    display: none;
+  }
+}
+
+
+/* TOC layout for smaller screens */
+@media screen and (max-width: 929px) {
+  #toc {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    padding: 1px 0 0 0;
+    margin: 0;
+    border-bottom: 1px solid #ccc;
+    opacity: 0.6;
+    & h2 {
+      margin: 0;
+      padding: 2px 0 2px 6px;
+      padding-right: 1em;
+      font-size: 18px;
+      line-height: 24px;
+      min-width: 190px;
+      text-align: right;
+      background-color: #444;
+      color: white;
+      cursor: pointer;
+      &::before { /* css hamburger */
+        float: right;
+        position: relative;
+        width: 1em;
+        height: 1px;
+        left: -164px;
+        margin: 8px 0 0 0;
+        background: white none repeat scroll 0 0;
+        box-shadow: 0 4px 0 0 white, 0 8px 0 0 white;
+        content: "";
+      }
+    }
+    & nav {
+      display: none;
+      background-color: var(--background-color);
+      padding: 0.5em 1em 1em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      height: calc(100vh - 48px);
+      border-left: 1px solid #ddd;
+    }
+    &.active {
+      opacity: 1;
+      & nav { display: block; }
+    }
+    /* Make the collapsed ToC header render white on gray also when it's a link */
+    & h2 a,
+    & h2 a:is(:link, :focus, :hover),
+    & a.toplink,
+    & a.toplink:hover {
+      color: white;
+      background-color: #444;
+      text-decoration: none;
+    }
+    & a.toplink {
+      margin: 2px 0.5em 0;
+    }
+  }
+}
+
+/* TOC layout for wide screens */
+@media screen and (min-width: 930px) {
+  body {
+    padding-right: 360px;
+    padding-right: calc(min(180px + 20%, 500px));
+  }
+  #toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 480px);
+    width: 312px;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    & h2 {
+      margin: 0;
+      padding: 0.25em 1em 1em 0;
+    }
+    & nav {
+      display: block;
+      height: calc(90vh - 84px);
+      bottom: 0;
+      padding: 0.5em 0 2em;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+    }
+    & a.toplink {
+      margin: 8px 0.5em 0;
+    }
+  }
+  img { /* future proofing */
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* pagination */
+@media print {
+  body {
+    width: 100%;
+  }
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+  #n-copyright-notice {
+    border-bottom: none;
+  }
+  #toc {
+    page-break-before: always;
+    border-top: none;
+    padding-top: 0;
+  }
+  #n-introduction {
+    page-break-before: always;
+  }
+  figure, pre, .vcard {
+    page-break-inside: avoid;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  :is(h2, h3, h4, h5, h6)+*, dd {
+    page-break-before: avoid;
+  }
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-size: 10pt;
+  }
+  table {
+    border: 1px solid #ddd;
+  }
+  td {
+    border-top: 1px solid #ddd;
+  }
+}
+
+@page :first {
+  padding-top: 0;
+  @top-left {
+    content: normal;
+    border: none;
+  }
+  @top-center {
+    content: normal;
+    border: none;
+  }
+  @top-right {
+    content: normal;
+    border: none;
+  }
+}
+
+@page {
+  size: A4;
+  margin-bottom: 45mm;
+  padding-top: 20px;
+}
+
+/* Dark mode. */
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --title-color: #fff;
+  --link-color: #4da4f0;
+  --highlight-color: #282828;
+  --line-color: #444;
+  --pilcrow-weak: #444;
+  --pilcrow-strong: #666;
+  scrollbar-color: #777 #333;
+}
+}
+
+/* SVG Trick: a prefix match works because only black and white are allowed */
+svg {
+  & :is([stroke="black"], [stroke^="#000"]) {
+    stroke: var(--text-color);
+  }
+  & :is([stroke="white"], [stroke^="#fff"]) {
+    stroke: var(--background-color);
+  }
+  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+    fill: var(--text-color);
+  }
+  & :is([fill="white"], [fill^="#fff"]) {
+    fill: var(--background-color);
+  }
+}
+</style>
+
+</head>
+<body class="xml2rfc">
+<table class="ears">
+<thead><tr>
+<td class="left">Internet-Draft</td>
+<td class="center">IoTinummDeploy</td>
+<td class="right">July 2026</td>
+</tr></thead>
+<tfoot><tr>
+<td class="left">Kamienski, et al.</td>
+<td class="center">Expires 20 January 2027</td>
+<td class="right">[Page]</td>
+</tr></tfoot>
+</table>
+<div id="external-metadata" class="document-information"></div>
+<div id="internal-metadata" class="document-information">
+<dl id="identifiers">
+<dt class="label-workgroup">Workgroup:</dt>
+<dd class="workgroup">RG Research Group</dd>
+<dt class="label-internet-draft">Internet-Draft:</dt>
+<dd class="internet-draft">draft-kamienski-iot-deployment</dd>
+<dt class="label-published">Published:</dt>
+<dd class="published">
+<time datetime="2026-07-19" class="published">19 July 2026</time>
+    </dd>
+<dt class="label-intended-status">Intended Status:</dt>
+<dd class="intended-status">Informational</dd>
+<dt class="label-expires">Expires:</dt>
+<dd class="expires"><time datetime="2027-01-20">20 January 2027</time></dd>
+<dt class="label-authors">Authors:</dt>
+<dd class="authors">
+<div class="author">
+      <div class="author-name">C. A. Kamienski</div>
+<div class="org">Federal University of ABC (UFABC)</div>
+</div>
+<div class="author">
+      <div class="author-name">M. Santos</div>
+<div class="org">Federal Institute of Sertão (IFSertão)</div>
+</div>
+<div class="author">
+      <div class="author-name">M. D. Felice</div>
+<div class="org">University of Bologna</div>
+</div>
+</dd>
+</dl>
+</div>
+<h1 id="title">Application-Centric Considerations for Deployment over the IoT Computing Continuum</h1>
+<section id="section-abstract">
+      <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
+<p id="section-abstract-1">Smart applications increasingly depend on the Internet of Things (IoT) and on distributed computing environments that span constrained devices, edge nodes, cloudlets, and cloud infrastructures, collectively referred to as the edge–cloud or computing continuum. This document uses the term IoT computing continuum to highlight the importance of IoT-specific constraints and requirements within this broader context. Although prior work has addressed communication aspects and edge functions in these environments, as noted in RFC 9556 and comprehensive surveys of the computing continuum, there has been comparatively less focus on application-centric issues such as deployment, placement, and lifecycle management. This document identifies key challenges and conceptual considerations for deploying smart applications across the IoT computing continuum, aiming to provide a unified architectural perspective and vocabulary to guide ongoing research within the IRTF and inform future standardization initiatives.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+</section>
+<section class="note rfcEditorRemove" id="section-note.1">
+      <h2 id="name-about-this-document">
+<a href="#name-about-this-document" class="section-name selfRef">About This Document</a>
+      </h2>
+<p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
+<p id="section-note.1-2">
+        The latest revision of this draft can be found at <span><a href="https://example.com/LATEST">https://example.com/LATEST</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-kamienski-iot/">https://datatracker.ietf.org/doc/draft-kamienski-iot/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+<p id="section-note.1-3">
+        Discussion of this document takes place on the
+        RG Research Group mailing list (<span><a href="mailto:WG@example.com">mailto:WG@example.com</a></span>),
+        which is archived at <span><a href="https://example.com/WG">https://example.com/WG</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
+<p id="section-note.1-4">Source for this draft and an issue tracker can be found at
+        <span><a href="https://github.com/USER/REPO">https://github.com/USER/REPO</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+</section>
+<div id="status-of-memo">
+<section id="section-boilerplate.1">
+        <h2 id="name-status-of-this-memo">
+<a href="#name-status-of-this-memo" class="section-name selfRef">Status of This Memo</a>
+        </h2>
+<p id="section-boilerplate.1-1">
+        This Internet-Draft is submitted in full conformance with the
+        provisions of BCP 78 and BCP 79.<a href="#section-boilerplate.1-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-2">
+        Internet-Drafts are working documents of the Internet Engineering Task
+        Force (IETF). Note that other groups may also distribute working
+        documents as Internet-Drafts. The list of current Internet-Drafts is
+        at <span><a href="https://datatracker.ietf.org/drafts/current/">https://datatracker.ietf.org/drafts/current/</a></span>.<a href="#section-boilerplate.1-2" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-3">
+        Internet-Drafts are draft documents valid for a maximum of six months
+        and may be updated, replaced, or obsoleted by other documents at any
+        time. It is inappropriate to use Internet-Drafts as reference
+        material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.1-4">
+        This Internet-Draft will expire on 20 January 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="copyright">
+<section id="section-boilerplate.2">
+        <h2 id="name-copyright-notice">
+<a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
+        </h2>
+<p id="section-boilerplate.2-1">
+            Copyright (c) 2026 IETF Trust and the persons identified as the
+            document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
+<p id="section-boilerplate.2-2">
+            This document is subject to BCP 78 and the IETF Trust's Legal
+            Provisions Relating to IETF Documents
+            (<span><a href="https://trustee.ietf.org/license-info">https://trustee.ietf.org/license-info</a></span>) in effect on the date of
+            publication of this document. Please review these documents
+            carefully, as they describe your rights and restrictions with
+            respect to this document.<a href="#section-boilerplate.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="toc">
+<section id="section-toc.1">
+        <a href="#" onclick="scroll(0,0)" class="toplink">▲</a><h2 id="name-table-of-contents">
+<a href="#name-table-of-contents" class="section-name selfRef">Table of Contents</a>
+        </h2>
+<nav class="toc"><ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1">
+            <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-scope-and-non-goals" class="internal xref">Scope and Non-Goals</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-background-the-iot-computin" class="internal xref">Background: The IoT Computing Continuum</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-an-application-centric-view" class="internal xref">An Application-Centric View of the Continuum</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-applications-as-distributed" class="internal xref">Applications as Distributed Functional Graphs</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-decoupling-application-logi" class="internal xref">Decoupling Application Logic from Execution Environments</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-placement-and-distribution-" class="internal xref">Placement and Distribution Across the Continuum</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-application-lifecycle-beyon" class="internal xref">Application Lifecycle Beyond Initial Deployment</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-challenges-in-smart-applica" class="internal xref">Challenges in Smart Application Development and Deployment</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-conceptual-deployment-model" class="internal xref">Conceptual Deployment Model</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-illustrative-scenarios" class="internal xref">Illustrative Scenarios</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
+                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-smart-irrigation-in-precisi" class="internal xref">Smart Irrigation in Precision Agriculture</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
+                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-drone-based-delivery-in-urb" class="internal xref">Drone-Based Delivery in Urban Environments</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.3">
+                <p id="section-toc.1-1.8.2.3.1"><a href="#section-8.3" class="auto internal xref">8.3</a>.  <a href="#name-discussion" class="internal xref">Discussion</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-relationship-to-ongoing-res" class="internal xref">Relationship to Ongoing Research and Standardization</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-research-directions" class="internal xref">Research Directions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#section-11" class="auto internal xref">11</a>. <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#section-12" class="auto internal xref">12</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.13">
+            <p id="section-toc.1-1.13.1"><a href="#section-13" class="auto internal xref">13</a>. <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.14">
+            <p id="section-toc.1-1.14.1"><a href="#section-14" class="auto internal xref">14</a>. <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.15">
+            <p id="section-toc.1-1.15.1"><a href="#section-15" class="auto internal xref">15</a>. <a href="#name-references" class="internal xref">References</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.16">
+            <p id="section-toc.1-1.16.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+</li>
+        </ul>
+</nav>
+</section>
+</div>
+<div id="introduction">
+<section id="section-1">
+      <h2 id="name-introduction">
+<a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
+      </h2>
+<p id="section-1-1">The Internet of Things (IoT) has evolved from simple data collection systems into a foundation for complex, data-driven smart applications spanning domains such as smart cities, precision agriculture, industrial automation and healthcare. These applications increasingly depend on distributed computing resources to sense, process, and act on data close to where it is generated, while also leveraging large-scale cloud infrastructures for coordination, analytics, and long-term storage.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">This evolution has led to the emergence of a distributed computing environment spanning multiple layers, from highly constrained devices and gateways to edge nodes, cloudlets, and centralized cloud platforms. In the literature, this environment is commonly described as the edge-cloud continuum, IoT-edge-cloud continuum, or simply computing continuum. Comprehensive perspectives on the evolution of this paradigm are provided in [CONTINUUM-SURVEY]. In this document, the term IoT computing continuum emphasizes the presence of constrained IoT devices and the domain-specific requirements they introduce.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Recent research and standardization efforts have highlighted the importance of this continuum and discussed challenges related to edge functions, data handling, and communication across heterogeneous environments, including work within the IETF and IRTF, such as [RFC9556]. However, much of the existing discussion remains infrastructure- or communication-centric, with comparatively less focus on the implications for smart application deployment and lifecycle management.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">From an application perspective, smart services are no longer confined to a single execution environment. Instead, they are composed of multiple functions that must be placed, coordinated, and potentially migrated across different stages of the IoT computing continuum to satisfy requirements for latency, resilience, scalability, privacy, and energy efficiency. In practice, these decisions are often handled manually or through ad hoc mechanisms, leading to fragmented solutions and limited portability across deployments.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">The lack of a shared, application-centric view of deployment over the IoT computing continuum creates challenges for both researchers and practitioners. It complicates systematic reasoning about application structure, hinders the comparison of alternative approaches, and makes it difficult to identify common requirements that could inform future research and standardization activities.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">This document aims to contribute to this discussion by examining smart application deployment over the IoT computing continuum from a conceptual and architectural perspective. Rather than proposing specific mechanisms or protocols, it focuses on identifying key challenges, clarifying terminology, and outlining considerations relevant to ongoing research within the Thing-to-Thing Research Group (T2TRG) of the Internet Research Task Force (IRTF).<a href="#section-1-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="scope-and-non-goals">
+<section id="section-2">
+      <h2 id="name-scope-and-non-goals">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-scope-and-non-goals" class="section-name selfRef">Scope and Non-Goals</a>
+      </h2>
+<p id="section-2-1">This document focuses on conceptual and architectural considerations for deploying smart applications across the IoT computing continuum. Its scope is limited to discussing challenges, common patterns, and terminology arising from distributed application logic across heterogeneous computing environments, including constrained IoT devices, edge nodes, and cloud platforms. The intent is to support research-oriented discussion and to provide a shared frame of reference for ongoing and future work within the IRTF. The discussion explicitly considers the interplay between application development and deployment, while remaining agnostic to specific tools, workflows, or operational practices.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The document does not specify concrete deployment mechanisms, protocols, or interfaces. It does not define a reference architecture, nor does it mandate how applications should be structured, deployed, or managed in practice. Instead, it aims to describe the problem space and highlight issues relevant across multiple technologies, deployment models, and research efforts.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">In particular, the following items are explicitly outside the scope of this document:<a href="#section-2-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-4.1">
+          <p id="section-2-4.1.1">The specification of new communication protocols, APIs, or data
+models.<a href="#section-2-4.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-4.2">
+          <p id="section-2-4.2.1">The definition of normative requirements, including the use of
+requirement keywords such as MUST, SHOULD, or MAY.<a href="#section-2-4.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-4.3">
+          <p id="section-2-4.3.1">The standardization of specific platforms, frameworks, or
+programming models for IoT application deployment.<a href="#section-2-4.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-4.4">
+          <p id="section-2-4.4.1">Detailed performance evaluations or quantitative comparisons
+between alternative solutions.<a href="#section-2-4.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-2-5">By clearly delineating its scope and non-goals, this document seeks to complement existing and ongoing efforts in the computing continuum, including work on communication, edge functions, and operational aspects, while maintaining a technology-agnostic and application-centric perspective.<a href="#section-2-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology">
+<section id="section-3">
+      <h2 id="name-terminology">
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+      </h2>
+<p id="section-3-1">This document uses the following terms with the meanings indicated below. The definitions are intended to clarify usage in this document and are not meant to redefine existing terminology used elsewhere.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<p id="section-3-2"><strong>Internet of Things (IoT):</strong>
+A system paradigm involving interconnected physical objects equipped with sensing, actuation, processing, and communication capabilities, operating under resource constraints, as discussed in [RFC7452].<a href="#section-3-2" class="pilcrow">¶</a></p>
+<p id="section-3-3"><strong>Constrained Devices:</strong>
+Devices with limited processing power, memory, energy availability, or communication capabilities. The use of the term <em>constrained</em> in this document follows the terminology defined in [I-D.ietf-iotops-7228bis].<a href="#section-3-3" class="pilcrow">¶</a></p>
+<p id="section-3-4"><strong>IoT Computing Continuum:</strong>
+A distributed computing environment spanning constrained IoT devices, edge nodes, and cloud platforms, where application components may execute at different stages depending on requirements and context. The shorthand term <em>IoTinuum</em> has been used in related work to denote this same concept [IOTINUUM]. This document uses the expanded form throughout for clarity and alignment with terminology used in related standardization efforts.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5"><strong>Edge Node:</strong>
+An intermediate computing node located between constrained devices and centralized cloud infrastructures, providing computation, storage, and networking capabilities closer to data sources, as described in [RFC9556].<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6"><strong>Orchestration and Choreography:</strong>
+Two coordination styles for distributed applications. Orchestration refers to coordination driven by explicit control logic, while choreography relies on decentralized interactions among components without a central coordinator.<a href="#section-3-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="background-the-iot-computing-continuum">
+<section id="section-4">
+      <h2 id="name-background-the-iot-computin">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-background-the-iot-computin" class="section-name selfRef">Background: The IoT Computing Continuum</a>
+      </h2>
+<p id="section-4-1">The increasing distribution of computation across networked systems has led to the emergence of what is commonly described as a computing continuum, spanning centralized cloud infrastructures, intermediate edge and fog nodes, and highly constrained end devices [CONTINUUM-SURVEY]. This paradigm reflects a shift away from strictly centralized processing models toward more distributed execution, driven by requirements related to latency, bandwidth efficiency, resilience, data locality, and regulatory constraints.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-4-2">Within the context of the Internet of Things (IoT), this continuum acquires additional characteristics that distinguish it from more general edge-cloud computing environments. IoT deployments involve large numbers of heterogeneous devices with severe resource constraints, intermittent connectivity, and close interaction with the physical world through sensing and actuation [RFC7452]. As a result, computation is often pushed closer to data sources not only for performance reasons, but also to enable timely control actions, reduce energy consumption, and preserve privacy.<a href="#section-4-2" class="pilcrow">¶</a></p>
+<p id="section-4-3">Recent research and standardization activities have explored different aspects of this continuum. In particular, work within the IETF and IRTF has highlighted the importance of edge computing and has discussed functional components and challenges associated with operating across distributed environments [RFC9556]. Existing documents have examined edge functions for data processing, storage, and communication, as well as the roles of gateways and intermediate nodes in bridging constrained devices to cloud services. These efforts provide an important foundation for understanding the structural and operational properties of the continuum.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">The perspective taken in this document is complementary rather than competing. While [RFC9556] characterizes functional components and challenges at the infrastructure level, focusing on edge functions and the communication fabric that supports them, the present document shifts attention to the application layer that operates on top of such infrastructure. Specifically, it considers how smart applications, composed of multiple interdependent functions, are decomposed, placed, coordinated, and managed across the heterogeneous stages enabled by that infrastructure. Application-centric concerns such as functional decomposition, placement, coordination style, and lifecycle management are largely orthogonal to the infrastructure view and remain comparatively underexplored in current standardization discussions.<a href="#section-4-4" class="pilcrow">¶</a></p>
+<p id="section-4-5">This document adopts the term <em>IoT computing continuum</em> to refer to this distributed execution environment, emphasizing the integration of constrained IoT devices, edge nodes, and cloud platforms into a unified computational space. Building on existing work, the focus here is on understanding how the properties of the IoT computing continuum influence application deployment, placement, and lifecycle management, rather than on defining specific technologies or architectural solutions.<a href="#section-4-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="an-application-centric-view-of-the-continuum">
+<section id="section-5">
+      <h2 id="name-an-application-centric-view">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-an-application-centric-view" class="section-name selfRef">An Application-Centric View of the Continuum</a>
+      </h2>
+<p id="section-5-1">Traditional IoT architectures often treat applications as tightly coupled to specific execution environments, typically assuming fixed roles for devices, gateways, and cloud services. In the context of the IoT computing continuum, this assumption no longer holds. Smart applications must be understood as distributed entities whose behavior emerges from the coordinated execution of multiple components across heterogeneous computing stages. Adopting an application-centric view is therefore essential to reason about deployment, adaptation, and lifecycle management in such environments.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<div id="applications-as-distributed-functional-graphs">
+<section id="section-5.1">
+        <h3 id="name-applications-as-distributed">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-applications-as-distributed" class="section-name selfRef">Applications as Distributed Functional Graphs</a>
+        </h3>
+<p id="section-5.1-1">From an application-centric perspective, smart applications can be modeled as collections of interdependent functions rather than as monolithic software artifacts. These functions interact through well-defined data and control dependencies, forming a logical application graph that captures the application's structure independently of where its components execute. This representation enables reasoning about application behavior, dependencies, and composition without prematurely binding functions to specific devices or platforms.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Viewing applications as distributed functional graphs is particularly relevant in IoT environments, where different functions may have distinct requirements for latency, computational resources, sensor or actuator access, and interaction with external services. By separating the application's logical structure from its physical deployment, this model supports more flexible placement and adaptation strategies across the continuum.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="decoupling-application-logic-from-execution-environments">
+<section id="section-5.2">
+        <h3 id="name-decoupling-application-logi">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-decoupling-application-logi" class="section-name selfRef">Decoupling Application Logic from Execution Environments</a>
+        </h3>
+<p id="section-5.2-1">A key implication of the application-centric view is the need to decouple application logic from execution environments. Application functionality should be expressed in a way that is independent of specific hardware platforms, operating systems, or runtime environments. This decoupling enables portability across heterogeneous devices and supports dynamic reassignment of application components as execution conditions change.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-2">In the IoT computing continuum, execution environments vary widely in terms of resource availability, connectivity, and operational constraints. Binding application logic too early to a particular environment limits the ability to adapt to failures, load variations, or evolving requirements. An application-centric approach instead treats execution environments as abstract resources onto which application functions can be mapped, allowing deployment decisions to be revisited over time.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="placement-and-distribution-across-the-continuum">
+<section id="section-5.3">
+        <h3 id="name-placement-and-distribution-">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-placement-and-distribution-" class="section-name selfRef">Placement and Distribution Across the Continuum</a>
+        </h3>
+<p id="section-5.3-1">Once application logic is decoupled from execution environments, the placement of application functions becomes a first-class concern. Placement decisions determine where individual functions of an application execute within the IoT computing continuum, ranging from constrained devices and gateways to edge nodes and cloud platforms. These decisions directly affect end-to-end application properties, including latency, reliability, energy consumption, and data locality.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">Importantly, placement is not a static decision. In many scenarios, application components may need to be redistributed in response to changes in workload, network conditions, or operational context. An application-centric view highlights the need to reason about placement and distribution as dynamic processes intrinsic to the operation of smart applications across the continuum.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="application-lifecycle-beyond-initial-deployment">
+<section id="section-5.4">
+        <h3 id="name-application-lifecycle-beyon">
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-application-lifecycle-beyon" class="section-name selfRef">Application Lifecycle Beyond Initial Deployment</a>
+        </h3>
+<p id="section-5.4-1">In centralized systems, application deployment is often treated as a one-time event followed by relatively infrequent updates. In contrast, the IoT computing continuum introduces a more complex and dynamic application lifecycle. Beyond initial deployment, applications may undergo continuous adaptation, including updates, reconfiguration, scaling, component migration, and partial redeployment across different continuum stages.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">Managing this lifecycle is particularly challenging in IoT environments due to device heterogeneity, intermittent connectivity, and the coexistence of multiple administrative domains. An application-centric perspective emphasizes that lifecycle management must be considered holistically, encompassing not only software updates but also the ongoing coordination of distributed application components. Understanding these lifecycle aspects is essential for identifying common challenges and research questions related to deployment and operation in the IoT computing continuum.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="challenges-in-smart-application-development-and-deployment">
+<section id="section-6">
+      <h2 id="name-challenges-in-smart-applica">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-challenges-in-smart-applica" class="section-name selfRef">Challenges in Smart Application Development and Deployment</a>
+      </h2>
+<p id="section-6-1">The IoT computing continuum introduces challenges that fundamentally affect both the development and deployment of smart applications. Unlike centralized environments, where development and deployment can often be treated as loosely coupled phases, the heterogeneity, distribution, and dynamism of the continuum create strong interdependencies between application design choices, deployment decisions, and runtime behavior. As a consequence, development and deployment concerns cannot be effectively addressed in isolation.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2">A primary challenge stems from the bidirectional influence between application development and deployment constraints. Decisions made during development, such as functional decomposition, communication patterns, and state management, directly impact deployment feasibility across constrained devices, edge nodes, and cloud platforms.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">At the same time, deployment realities related to resource availability, network conditions, latency requirements, and energy constraints frequently impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.<a href="#section-6-3" class="pilcrow">¶</a></p>
+<p id="section-6-4">Heterogeneity across the continuum further amplifies this challenge. Execution environments differ widely in terms of hardware capabilities, operating systems, runtime support, and management interfaces. Developers must therefore anticipate deployment diversity early in the development process, while deployment mechanisms must accommodate application abstractions that span multiple platforms.<a href="#section-6-4" class="pilcrow">¶</a></p>
+<p id="section-6-5">Without integrated development and deployment considerations, solutions tend to become brittle, tightly coupled to specific environments, and difficult to evolve.<a href="#section-6-5" class="pilcrow">¶</a></p>
+<p id="section-6-6">Another challenge arises from the dynamic nature of deployment in the IoT computing continuum. Smart applications often need to adapt to changing conditions, such as workload variations, mobility, intermittent connectivity, or evolving physical contexts. Supporting such adaptation requires continuous feedback between runtime behavior and development-time assumptions.<a href="#section-6-6" class="pilcrow">¶</a></p>
+<p id="section-6-7">Static deployment models and rigid application designs limit the ability to respond to these dynamics, underscoring the need for approaches that treat deployment as an ongoing process rather than a one-time event.<a href="#section-6-7" class="pilcrow">¶</a></p>
+<p id="section-6-8">These challenges align with principles commonly associated with DevOps practices, which emphasize continuous integration, continuous deployment, and feedback loops between development and operations. However, transferring DevOps concepts to the IoT computing continuum is non-trivial. Conventional DevOps pipelines are typically designed for cloud-centric environments and assume homogeneous infrastructure, reliable connectivity, and centralized control.<a href="#section-6-8" class="pilcrow">¶</a></p>
+<p id="section-6-9">In contrast, IoT scenarios involve constrained devices, distributed execution across multiple continuum stages, and, in many cases, multiple administrative domains, which complicates the application of traditional DevOps assumptions.<a href="#section-6-9" class="pilcrow">¶</a></p>
+<p id="section-6-10">Finally, the absence of shared abstractions and terminology for reasoning about development and deployment in the continuum makes it difficult to compare approaches and to identify common requirements. When the interplay between development and deployment is not made explicit, solutions often remain ad hoc and platform-specific.<a href="#section-6-10" class="pilcrow">¶</a></p>
+<p id="section-6-11">Addressing this gap requires an application-centric perspective that explicitly acknowledges development--deployment interdependencies and treats them as first-class concerns. Such a perspective is essential for advancing research on smart application deployment and for informing future standardization efforts related to the IoT computing continuum.<a href="#section-6-11" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="conceptual-deployment-model">
+<section id="section-7">
+      <h2 id="name-conceptual-deployment-model">
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-conceptual-deployment-model" class="section-name selfRef">Conceptual Deployment Model</a>
+      </h2>
+<p id="section-7-1">This section outlines a conceptual model for reasoning about the deployment of smart applications across the IoT computing continuum. The model is intended to support analysis and discussion rather than to prescribe specific mechanisms, architectures, or workflows. Its purpose is to provide a shared abstraction that captures how application structure, execution environments, and coordination mechanisms interact in heterogeneous and dynamic IoT scenarios.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-7-2">At the core of the model is the separation between application logic and execution environments. Application logic is represented independently of where it executes, allowing functionality, dependencies, and interaction patterns to be reasoned about without binding components to specific devices or platforms. Execution environments are treated as abstract resources characterized by capabilities, constraints, and operational context, such as computational power, connectivity, proximity to data sources, and energy availability.<a href="#section-7-2" class="pilcrow">¶</a></p>
+<p id="section-7-3">Within this model, a smart application is viewed as a set of functional components connected through data and control dependencies, forming a logical application graph. Deployment consists of mapping these components onto available execution environments across the IoT computing continuum. This mapping determines where components execute, but it does not, by itself, define how they coordinate during execution. As a result, deployment decisions must be considered together with coordination strategies that govern interactions among distributed components.<a href="#section-7-3" class="pilcrow">¶</a></p>
+<p id="section-7-4">Coordination among application components can be conceptualized using different styles, most notably orchestration and choreography. In an orchestration style, coordination is driven by explicit control logic that manages execution order, data flow, and component interactions. This style provides a global view of application behavior and can simplify reasoning about end-to-end execution, but it may introduce centralization and scalability concerns in highly distributed environments. In contrast, a choreography style relies on local interactions and shared interaction rules, allowing components to coordinate in a decentralized manner without a single point of control. This style can improve scalability and resilience, but it may complicate global reasoning and debugging.<a href="#section-7-4" class="pilcrow">¶</a></p>
+<p id="section-7-5">The choice between orchestration and choreography, or combinations thereof, is closely tied to deployment decisions and to the characteristics of the IoT computing continuum. Resource constraints, network conditions, mobility, and administrative boundaries may favor one coordination style over another at different stages of the continuum. Moreover, coordination strategies may need to evolve over time as applications adapt to changing conditions, reinforcing the dynamic nature of deployment.<a href="#section-7-5" class="pilcrow">¶</a></p>
+<p id="section-7-6">The conceptual deployment model, therefore, treats placement, coordination, and lifecycle management as interrelated concerns. Beyond initial placement, deployment encompasses actions such as reconfiguration, scaling, migration, and adaptation of coordination strategies. Runtime observations, including performance metrics and failure events, provide feedback that can inform both deployment decisions and future iterations of application design. By explicitly incorporating coordination styles into the deployment model, this abstraction provides a more concrete foundation for discussing development--deployment interdependencies in the IoT computing continuum, while remaining agnostic to specific technologies or implementations.<a href="#section-7-6" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="illustrative-scenarios">
+<section id="section-8">
+      <h2 id="name-illustrative-scenarios">
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-illustrative-scenarios" class="section-name selfRef">Illustrative Scenarios</a>
+      </h2>
+<p id="section-8-1">We present two illustrative scenarios that ground the conceptual deployment model discussed earlier. The scenarios are intended solely to demonstrate how application-centric concepts, deployment decisions, and coordination styles manifest in realistic settings, without prescribing specific technologies or architectures. The first scenario describes a smart irrigation application deployed in operational agricultural settings, providing a concrete reference for placement and lifecycle concerns under real-world constraints. The second scenario describes a drone-based delivery application that spans a broader range of continuum stages and exhibits a richer interplay between coordination styles.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<div id="smart-irrigation-in-precision-agriculture">
+<section id="section-8.1">
+        <h3 id="name-smart-irrigation-in-precisi">
+<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-smart-irrigation-in-precisi" class="section-name selfRef">Smart Irrigation in Precision Agriculture</a>
+        </h3>
+<p id="section-8.1-1">Smart irrigation applications collect environmental data, such as soil moisture and weather conditions, and use it to determine how much, when, and where to irrigate. In operational deployments, these applications typically span constrained sensor devices in the field, low-power gateways acting as radio concentrators, on-premises edge nodes located in farm facilities, and cloud services used for analytics, forecasting, and long-term storage. End users interact with the application through mobile or web interfaces to inspect data and approve irrigation plans.<a href="#section-8.1-1" class="pilcrow">¶</a></p>
+<p id="section-8.1-2">From an application-centric perspective, the irrigation scenario exemplifies how functional decomposition maps naturally onto multiple continuum stages. Sensing and local preprocessing functions execute on constrained devices and field gateways. Intermediate functions, such as data filtering, sensor calibration, and resilience against disconnections, execute on on-premises edge nodes, which are positioned close to the irrigation infrastructure and remain operational even when connectivity to the cloud is unavailable. More computationally intensive functions, including data fusion, soil moisture forecasting, and irrigation optimization, run on cloud platforms that offer greater resources and broader data visibility.<a href="#section-8.1-2" class="pilcrow">¶</a></p>
+<p id="section-8.1-3">A defining property of this scenario is the need to continue operating under intermittent wide-area connectivity, a common condition in rural deployments. Functions placed at on-premises edge nodes are expected to sustain essential behavior when cloud services are temporarily unreachable, such as enforcing safety thresholds or executing simplified local models, and to reconcile state once connectivity is restored. This requirement directly influences how application functions are decomposed at development time and where they are deployed, illustrating the bidirectional influence between development and deployment concerns discussed in earlier sections.<a href="#section-8.1-3" class="pilcrow">¶</a></p>
+<p id="section-8.1-4">The irrigation scenario also highlights that deployment decisions extend beyond initial placement. Over time, functions may be updated, reconfigured, or extended to incorporate new models or new sensor modalities, and the same application logic may need to be deployed across multiple farms with different infrastructure configurations. These lifecycle aspects underscore the relevance of an application-centric view that treats deployment as an ongoing process rather than a one-time event.<a href="#section-8.1-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="drone-based-delivery-in-urban-environments">
+<section id="section-8.2">
+        <h3 id="name-drone-based-delivery-in-urb">
+<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-drone-based-delivery-in-urb" class="section-name selfRef">Drone-Based Delivery in Urban Environments</a>
+        </h3>
+<p id="section-8.2-1">A drone-based delivery application uses unmanned aerial vehicles to deliver packages in urban areas. The application comprises multiple functional components, including mission planning, navigation, sensing, local coordination, and backend services for order management and analytics. From an application-centric perspective, these components form a logical application graph, with dependencies reflecting data flows and control interactions among functions. The application operates across the full span of the IoT computing continuum, leveraging constrained onboard devices, nearby edge nodes, operator-provided cloudlets, and cloud platforms.<a href="#section-8.2-1" class="pilcrow">¶</a></p>
+<p id="section-8.2-2">Low-level sensing, actuation, and real-time navigation functions execute directly on the drone due to strict latency and control requirements. Local coordination and situational awareness functions may execute on nearby edge nodes or gateways that aggregate information from multiple drones operating in the same area. Operator-provided cloudlets, for example, those associated with 5G or future 6G infrastructure, can host functions that support cooperative behavior among drones, such as collision avoidance assistance and shared situational awareness. Backend services, including mission planning, optimization, logging, and analytics, typically run on cloud platforms that provide greater computational resources and global system visibility.<a href="#section-8.2-2" class="pilcrow">¶</a></p>
+<p id="section-8.2-3">This scenario is particularly relevant for illustrating the coexistence of different coordination styles within a single application. Mission planning and high-level task assignment naturally follow an orchestration style, in which a centralized component coordinates delivery schedules and routes based on global system state. In contrast, local interactions among drones, such as collision avoidance or cooperative sensing, follow a choreography style, relying on decentralized interactions and shared interaction rules without a single controlling entity. Both coordination styles coexist within the same application and are influenced by deployment choices across the continuum, demonstrating that the distinction between orchestration and choreography is not merely theoretical but reflects concrete architectural trade-offs.<a href="#section-8.2-3" class="pilcrow">¶</a></p>
+<p id="section-8.2-4">Deployment decisions in this scenario are also inherently dynamic. As drones move through different environments or experience changing network conditions, mappings of coordination functions to edge nodes or cloudlets may need to be revised, while backend services remain centralized. The application lifecycle extends beyond initial deployment, with components being updated, reconfigured, or migrated in response to changes in delivery demand, failures of individual drones, or variations in network availability.<a href="#section-8.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="discussion">
+<section id="section-8.3">
+        <h3 id="name-discussion">
+<a href="#section-8.3" class="section-number selfRef">8.3. </a><a href="#name-discussion" class="section-name selfRef">Discussion</a>
+        </h3>
+<p id="section-8.3-1">Together, these two scenarios illustrate the spectrum of smart applications that operate over the IoT computing continuum. The first grounds the discussion in operational deployments with documented constraints, particularly around intermittent connectivity and the need for resilient edge behavior. The second reveals the broader architectural space where placement, coordination, and lifecycle concerns fully manifest, including the explicit coexistence of orchestration and choreography within a single application. Both share the fundamental property that application behavior emerges from the coordinated execution of distributed functions across heterogeneous stages, reinforcing the need for application-centric perspectives on deployment and lifecycle management.<a href="#section-8.3-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+</section>
+</div>
+<div id="relationship-to-ongoing-research-and-standardization">
+<section id="section-9">
+      <h2 id="name-relationship-to-ongoing-res">
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-relationship-to-ongoing-res" class="section-name selfRef">Relationship to Ongoing Research and Standardization</a>
+      </h2>
+<p id="section-9-1">The issues discussed in this document build on existing research and standardization efforts related to edge computing and the computing continuum, including work within the IETF and IRTF, such as [RFC9556], as well as broader academic perspectives, such as [CONTINUUM-SURVEY]. Within the IRTF, the T2TRG has explored programmability, coordination, and interoperability among connected devices.<a href="#section-9-1" class="pilcrow">¶</a></p>
+<p id="section-9-2">Several concrete research efforts have examined application-centric aspects of the IoT computing continuum and informed the perspective adopted in this document. Work on the notion of an IoT computing continuum as a unifying framework for reasoning about development and deployment choices has clarified the role of distributed application stages [IOTINUUM]. Complementary work on deployment-aware approaches, such as IoTDeploy, has explored how application components can be systematically placed and migrated across continuum stages while preserving application-level properties [IOTDEPLOY]. More recent efforts have investigated integrated frameworks for developing and deploying continuum-aware smart applications, providing concrete examples of how application-centric abstractions can be realized in practice. These efforts are cited here as representative examples of ongoing work in the area and not as prescriptive references; this document remains agnostic to specific frameworks or implementations.<a href="#section-9-2" class="pilcrow">¶</a></p>
+<p id="section-9-3">Community-driven efforts, including workshops focused on future Internet research, have also discussed application deployment over the IoT computing continuum in the context of IETF and IRTF engagement, as exemplified by [WPIETF2025]. This document complements these efforts by adopting an application-centric perspective on deployment and lifecycle management.<a href="#section-9-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="research-directions">
+<section id="section-10">
+      <h2 id="name-research-directions">
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-research-directions" class="section-name selfRef">Research Directions</a>
+      </h2>
+<p id="section-10-1">The challenges and conceptual considerations discussed in this document point to several open research directions for smart application development and deployment across the IoT computing continuum. These directions are not exhaustive. Rather, they highlight areas that require further investigation to better understand the interplay among application structure, deployment decisions, coordination strategies, and lifecycle management in heterogeneous and dynamic environments.<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-2">A first research direction concerns the definition of application-centric abstractions for deployment. While existing work has extensively explored infrastructure-level aspects of edge and continuum computing, there is a clear need for abstractions that allow applications to express functional decomposition, dependencies, and non-functional requirements independently of specific execution environments. Such abstractions would enable more systematic reasoning about placement, migration, and adaptation of application components across different stages of the IoT computing continuum, complementing existing architectural perspectives on edge computing [RFC9556] and broader analyses of the computing continuum [CONTINUUM-SURVEY].<a href="#section-10-2" class="pilcrow">¶</a></p>
+<p id="section-10-3">A second research direction involves integrated approaches to application development and deployment. In the IoT computing continuum, development-time decisions about application structure, communication patterns, and state management are tightly coupled with deployment constraints, such as resource availability, connectivity, and latency. Traditional workflows that treat development and deployment as largely independent phases are therefore insufficient. Further research is needed to explore models, methodologies, and tools that explicitly account for this interdependence and that support feedback loops between design-time assumptions and runtime observations, building on early deployment-aware approaches such as those discussed in [IOTDEPLOY].<a href="#section-10-3" class="pilcrow">¶</a></p>
+<p id="section-10-4">Coordination strategies for distributed applications constitute another important research direction. Orchestration and choreography are complementary styles for coordinating distributed application components, each with distinct trade-offs in scalability, resilience, observability, and manageability. Understanding how these coordination styles can be combined, adapted, or dynamically transitioned as applications evolve and deployment conditions change remains an open problem. This includes investigating how coordination strategies interact with placement decisions, fault handling, and lifecycle operations across heterogeneous execution environments in the IoT computing continuum.<a href="#section-10-4" class="pilcrow">¶</a></p>
+<p id="section-10-5">Automation and intelligence in deployment and lifecycle management represent a further area for research. Given the scale, heterogeneity, and dynamism of IoT environments, manual deployment, configuration, and adaptation quickly become impractical. Research into automated, declarative, or policy-driven approaches for placement, migration, and reconfiguration may help address these challenges, provided that such approaches remain transparent, controllable, and aligned with application-level objectives. These mechanisms must also account for IoT-specific constraints, including limited resources, intermittent connectivity, and decentralized control across administrative domains.<a href="#section-10-5" class="pilcrow">¶</a></p>
+<p id="section-10-6">An additional research direction concerns the role of software agents in managing the deployment of smart applications across the IoT computing continuum. Placement, coordination, adaptation, and lifecycle management involve decisions that are increasingly difficult to capture with static policies, particularly when application workloads exhibit heterogeneous, context-sensitive behavior. A concrete example arises in the deployment of inference workloads based on large language models, where placement decisions must balance latency, cost, and resilience to connectivity disruptions. Preliminary work by the authors suggests that adaptive placement strategies driven by agents can outperform static configurations, particularly under variable demand or intermittent wide-area connectivity.<a href="#section-10-6" class="pilcrow">¶</a></p>
+<p id="section-10-7">Beyond individual applications, the broader question of how agents interact across administrative domains and heterogeneous environments poses interoperability and control challenges relevant to Internet architecture. Foundational work on multi-agent systems [WOOLDRIDGE-AGENTS] provides established abstractions for reasoning about agent behavior. More recent proposals illustrate early attempts to standardize agent interaction semantics along the two coordination styles discussed earlier in this document: the Model Context Protocol [MCP] emphasizes orchestration-style interactions between an agent and the tools or services it invokes, while agent-to-agent interaction frameworks [A2A] emphasize choreography-style interactions among peer agents coordinating without a central controller. These efforts remain evolving, but they highlight open questions regarding how agent responsibilities should be distributed between application-level and infrastructure-level concerns, how agent interactions can be made secure, auditable, and aligned with Internet architectural principles, and how orchestration and choreography styles may be combined dynamically in deployed systems. Further research is needed to explore how agent-based mechanisms can complement application-centric deployment models in the IoT computing continuum.<a href="#section-10-7" class="pilcrow">¶</a></p>
+<p id="section-10-8">Finally, there is a broader need for shared terminology and conceptual frameworks that facilitate comparison across research efforts and support dialogue with standardization activities. Without a common vocabulary for reasoning about application-centric deployment and lifecycle management in the IoT computing continuum, research results risk remaining fragmented and difficult to generalize.<a href="#section-10-8" class="pilcrow">¶</a></p>
+<p id="section-10-9">Informational documents that clarify the problem space, such as this one, can help align research agendas and identify areas where future standardization efforts within the IRTF or the IETF may be beneficial.<a href="#section-10-9" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="security-considerations">
+<section id="section-11">
+      <h2 id="name-security-considerations">
+<a href="#section-11" class="section-number selfRef">11. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+      </h2>
+<p id="section-11-1">This document does not specify protocols, mechanisms, or architectures and therefore does not introduce new security vulnerabilities directly. However, the concepts discussed have important security implications that merit consideration.<a href="#section-11-1" class="pilcrow">¶</a></p>
+<p id="section-11-2">In the IoT computing continuum, application components are distributed across heterogeneous and potentially untrusted execution environments, increasing the attack surface and complicating traditional security assumptions. Deployment decisions influence trust boundaries, data exposure, and the ability to isolate faults or compromised components.<a href="#section-11-2" class="pilcrow">¶</a></p>
+<p id="section-11-3">Coordination strategies also have security implications. Orchestration-based approaches may introduce centralized control points that become attractive attack targets, while choreography-based approaches rely on decentralized interactions that require robust authentication, authorization, and trust management among components.<a href="#section-11-3" class="pilcrow">¶</a></p>
+<p id="section-11-4">The tight coupling between development and deployment further emphasizes the need to consider security throughout the application lifecycle. Design-time assumptions about trust, isolation, and access control may be invalidated by deployment changes, migration of components, or dynamic adaptation at runtime. As a result, security considerations must be revisited whenever application structure, placement, or coordination strategies evolve.<a href="#section-11-4" class="pilcrow">¶</a></p>
+<p id="section-11-5">Finally, the distributed and multi-domain nature of the IoT computing continuum raises challenges related to identity management, secure communication, and policy enforcement across administrative boundaries. While addressing these challenges is outside the scope of this document, they underscore the importance of integrating security considerations into research and standardization efforts related to application-centric deployment and lifecycle management.<a href="#section-11-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="iana-considerations">
+<section id="section-12">
+      <h2 id="name-iana-considerations">
+<a href="#section-12" class="section-number selfRef">12. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+      </h2>
+<p id="section-12-1">This document has no IANA actions.<a href="#section-12-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="acknowledgments">
+<section id="section-13">
+      <h2 id="name-acknowledgments">
+<a href="#section-13" class="section-number selfRef">13. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+      </h2>
+<p id="section-13-1">The authors would like to acknowledge CGI.br (Brazilian Internet Steering Committee) for its support through the IETF/IRTF participation program, which enabled engagement in research and discussions within the Internet Research Task Force (IRTF).<a href="#section-13-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="informative-references">
+<section id="section-14">
+      <h2 id="name-informative-references">
+<a href="#section-14" class="section-number selfRef">14. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+    </h2>
+</section>
+</div>
+<div id="references">
+<section id="section-15">
+      <h2 id="name-references">
+<a href="#section-15" class="section-number selfRef">15. </a><a href="#name-references" class="section-name selfRef">References</a>
+      </h2>
+<p id="section-15-1"><strong>[A2A]</strong> A2A Project, "Agent2Agent (A2A) Protocol", 2024, <a href="https://a2aproject.github.io/A2A/">https://a2aproject.github.io/A2A/</a>.<a href="#section-15-1" class="pilcrow">¶</a></p>
+<p id="section-15-2"><strong>[CONTINUUM-SURVEY]</strong> Bittencourt, L. F., Rodrigues-Filho, R., Spillner, J., Turck, F. D., Santos, J., Fonseca, N. L. S. da, Rana, O., Parashar, M., and I. Foster, "The Computing Continuum: Past, Present, and Future", <em>Computer Science Review</em>, Elsevier, Vol. 58, Article 100782, DOI 10.1016/j.cosrev.2025.100782, 2025, <a href="https://doi.org/10.1016/j.cosrev.2025.100782">https://doi.org/10.1016/j.cosrev.2025.100782</a>.<a href="#section-15-2" class="pilcrow">¶</a></p>
+<p id="section-15-3"><strong>[I-D.ietf-iotops-7228bis]</strong> Bormann, C., Ersue, M., Keränen, A., and C. Gomez, "Terminology for Constrained-Node Networks", Work in Progress, Internet-Draft, draft-ietf-iotops-7228bis-07, 23 April 2026, <a href="https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-07">https://datatracker.ietf.org/doc/html/draft-ietf-iotops-7228bis-07</a>.<a href="#section-15-3" class="pilcrow">¶</a></p>
+<p id="section-15-4"><strong>[IOTDEPLOY]</strong> Oliveira, F. B., Felice, M. D., and C. Kamienski, "IoTDeploy: Deployment of IoT Smart Applications over the Computing Continuum", <em>Internet of Things</em>, Elsevier, Vol. 28, Article 101348, DOI 10.1016/j.iot.2024.101348, 2024, <a href="https://doi.org/10.1016/j.iot.2024.101348">https://doi.org/10.1016/j.iot.2024.101348</a>.<a href="#section-15-4" class="pilcrow">¶</a></p>
+<p id="section-15-5"><strong>[IOTINUUM]</strong> Kamienski, C., Zyrianoff, I., Bittencourt, L. F., and M. D. Felice, "IoTinuum: The IoT Computing Continuum", <em>Proceedings of the 20th International Conference on Distributed Computing in Smart Systems and the Internet of Things (DCOSS-IoT)</em>, IEEE, pp. 732-739, DOI 10.1109/DCOSS-IoT61029.2024.00114, 2024, <a href="https://doi.org/10.1109/DCOSS-IoT61029.2024.00114">https://doi.org/10.1109/DCOSS-IoT61029.2024.00114</a>.<a href="#section-15-5" class="pilcrow">¶</a></p>
+<p id="section-15-6"><strong>[MCP]</strong> Anthropic, "Model Context Protocol Specification", 2024, <a href="https://modelcontextprotocol.io/">https://modelcontextprotocol.io/</a>.<a href="#section-15-6" class="pilcrow">¶</a></p>
+<p id="section-15-7"><strong>[RFC7452]</strong> Tschofenig, H., Arkko, J., Thaler, D., and D. McPherson, "Architectural Considerations in Smart Object Networking", RFC 7452, DOI 10.17487/RFC7452, March 2015, <a href="https://www.rfc-editor.org/rfc/rfc7452">https://www.rfc-editor.org/rfc/rfc7452</a>.<a href="#section-15-7" class="pilcrow">¶</a></p>
+<p id="section-15-8"><strong>[RFC9556]</strong> Hong, J., Hong, Y., de Foy, X., Kovatsch, M., Schooler, E., and D. Kutscher, "Internet of Things (IoT) Edge Challenges and Functions", RFC 9556, DOI 10.17487/RFC9556, April 2024, <a href="https://www.rfc-editor.org/rfc/rfc9556">https://www.rfc-editor.org/rfc/rfc9556</a>.<a href="#section-15-8" class="pilcrow">¶</a></p>
+<p id="section-15-9"><strong>[WOOLDRIDGE-AGENTS]</strong> Wooldridge, M., <em>An Introduction to MultiAgent Systems</em>, 2nd Edition, John Wiley and Sons, 2009.<a href="#section-15-9" class="pilcrow">¶</a></p>
+<p id="section-15-10"><strong>[WPIETF2025]</strong> Kamienski, C. A. and M. A. B. Santos, "Smart Application Deployment over the IoT Computing Continuum", <em>Workshop de Pesquisa em Internet do Futuro (WPIETF)</em>, Sociedade Brasileira de Computacao (SBC), 2025. Available via SBC Open Library (SOL).<a href="#section-15-10" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="authors-addresses">
+<section id="appendix-A">
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
+      </h2>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Carlos Alberto Kamienski</span></div>
+<div dir="auto" class="left"><span class="org">Federal University of ABC (UFABC)</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:carlos.kamienski@ufabc.edu.br" class="email">carlos.kamienski@ufabc.edu.br</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Marco Santos</span></div>
+<div dir="auto" class="left"><span class="org">Federal Institute of Sertão (IFSertão)</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:marcelo.santos@ifsertao-pe.edu.br" class="email">marcelo.santos@ifsertao-pe.edu.br</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Marco Di Felice</span></div>
+<div dir="auto" class="left"><span class="org">University of Bologna</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:marco.difelice3@unibo.it" class="email">marco.difelice3@unibo.it</a>
+</div>
+</address>
+</section>
+</div>
+<script>const toc = document.getElementById("toc");
+toc.querySelector("h2").addEventListener("click", e => {
+  toc.classList.toggle("active");
+});
+toc.querySelector("nav").addEventListener("click", e => {
+  toc.classList.remove("active");
+});
+</script>
+</body>
+</html>
