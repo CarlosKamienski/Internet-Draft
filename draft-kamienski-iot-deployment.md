@@ -5,10 +5,10 @@ abbrev: "IoTinummDeploy"
 category: info
 
 docname: draft-kamienski-iot-deployment-latest
-submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
+submissiontype: IRTF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
-consensus: true
+# consensus: true
 v: 3
 # area: AREA
 # workgroup: RG Research Group
