@@ -1,0 +1,234 @@
+
+
+
+
+RG Research Group                                        C. A. Kamienski
+Internet-Draft                         Federal University of ABC (UFABC)
+Intended status: Informational                                 M. Santos
+Expires: 20 January 2027          Federal Institute of Sertão (IFSertão)
+                                                            M. D. Felice
+                                                   University of Bologna
+                                                            19 July 2026
+
+
+Application-Centric Considerations for Deployment over the IoT Computing
+                               Continuum
+                     draft-kamienski-iot-deployment
+
+Abstract
+
+   Smart applications increasingly depend on the Internet of Things
+   (IoT) and on distributed computing environments that span constrained
+   devices, edge nodes, cloudlets, and cloud infrastructures,
+   collectively referred to as the edge–cloud or computing continuum.
+   This document uses the term IoT computing continuum to highlight the
+   importance of IoT-specific constraints and requirements within this
+   broader context.  Although prior work has addressed communication
+   aspects and edge functions in these environments, as noted in RFC
+   9556 and comprehensive surveys of the computing continuum, there has
+   been comparatively less focus on application-centric issues such as
+   deployment, placement, and lifecycle management.  This document
+   identifies key challenges and conceptual considerations for deploying
+   smart applications across the IoT computing continuum, aiming to
+   provide a unified architectural perspective and vocabulary to guide
+   ongoing research within the IRTF and inform future standardization
+   initiatives.
+
+About This Document
+
+   This note is to be removed before publishing as an RFC.
+
+   The latest revision of this draft can be found at
+   https://example.com/LATEST.  Status information for this document may
+   be found at https://datatracker.ietf.org/doc/draft-kamienski-iot/.
+
+   Discussion of this document takes place on the RG Research Group
+   mailing list (mailto:WG@example.com), which is archived at
+   https://example.com/WG.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/USER/REPO.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on 20 January 2027.
+
+Copyright Notice
+
+   Copyright (c) 2026 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.
+
+Table of Contents
+
+   1.  Introduction
+   2.  Scope and Non-Goals
+   3.  Conventions and Definitions
+   4.  Security Considerations
+   5.  IANA Considerations
+   6.  Normative References
+   Acknowledgments
+   Authors' Addresses
+
+1.  Introduction
+
+   The Internet of Things (IoT) has evolved from simple data collection
+   systems into a foundation for complex, data-driven smart applications
+   spanning domains such as smart cities, precision agriculture,
+   industrial automation and healthcare.  These applications
+   increasingly depend on distributed computing resources to sense,
+   process, and act on data close to where it is generated, while also
+   leveraging large-scale cloud infrastructures for coordination,
+   analytics, and long-term storage.
+
+   This evolution has led to the emergence of a distributed computing
+   environment spanning multiple layers, from highly constrained devices
+   and gateways to edge nodes, cloudlets, and centralized cloud
+   platforms.  In the literature, this environment is commonly described
+   as the edge-cloud continuum, IoT-edge-cloud continuum, or simply
+   computing continuum.  Comprehensive perspectives on the evolution of
+   this paradigm are provided in [CONTINUUM-SURVEY].  In this document,
+   the term IoT computing continuum emphasizes the presence of
+   constrained IoT devices and the domain-specific requirements they
+   introduce.
+
+   Recent research and standardization efforts have highlighted the
+   importance of this continuum and discussed challenges related to edge
+   functions, data handling, and communication across heterogeneous
+   environments, including work within the IETF and IRTF, such as
+   [RFC9556].  However, much of the existing discussion remains
+   infrastructure- or communication-centric, with comparatively less
+   focus on the implications for smart application deployment and
+   lifecycle management.
+
+   From an application perspective, smart services are no longer
+   confined to a single execution environment.  Instead, they are
+   composed of multiple functions that must be placed, coordinated, and
+   potentially migrated across different stages of the IoT computing
+   continuum to satisfy requirements for latency, resilience,
+   scalability, privacy, and energy efficiency.  In practice, these
+   decisions are often handled manually or through ad hoc mechanisms,
+   leading to fragmented solutions and limited portability across
+   deployments.
+
+   The lack of a shared, application-centric view of deployment over the
+   IoT computing continuum creates challenges for both researchers and
+   practitioners.  It complicates systematic reasoning about application
+   structure, hinders the comparison of alternative approaches, and
+   makes it difficult to identify common requirements that could inform
+   future research and standardization activities.
+
+   This document aims to contribute to this discussion by examining
+   smart application deployment over the IoT computing continuum from a
+   conceptual and architectural perspective.  Rather than proposing
+   specific mechanisms or protocols, it focuses on identifying key
+   challenges, clarifying terminology, and outlining considerations
+   relevant to ongoing research within the Thing-to-Thing Research Group
+   (T2TRG) of the Internet Research Task Force (IRTF).
+
+2.  Scope and Non-Goals
+
+   This document focuses on conceptual and architectural considerations
+   for deploying smart applications across the IoT computing continuum.
+   Its scope is limited to discussing challenges, common patterns, and
+   terminology arising from distributed application logic across
+   heterogeneous computing environments, including constrained IoT
+   devices, edge nodes, and cloud platforms.  The intent is to support
+   research-oriented discussion and to provide a shared frame of
+   reference for ongoing and future work within the IRTF.  The
+   discussion explicitly considers the interplay between application
+   development and deployment, while remaining agnostic to specific
+   tools, workflows, or operational practices.
+
+   The document does not specify concrete deployment mechanisms,
+   protocols, or interfaces.  It does not define a reference
+   architecture, nor does it mandate how applications should be
+   structured, deployed, or managed in practice.  Instead, it aims to
+   describe the problem space and highlight issues relevant across
+   multiple technologies, deployment models, and research efforts.
+
+   In particular, the following items are explicitly outside the scope
+   of this document:
+
+   *  The specification of new communication protocols, APIs, or data
+      models.
+
+   *  The definition of normative requirements, including the use of
+      requirement keywords such as MUST, SHOULD, or MAY.
+
+   *  The standardization of specific platforms, frameworks, or
+      programming models for IoT application deployment.
+
+   *  Detailed performance evaluations or quantitative comparisons
+      between alternative solutions.
+
+   By clearly delineating its scope and non-goals, this document seeks
+   to complement existing and ongoing efforts in the computing
+   continuum, including work on communication, edge functions, and
+   operational aspects, while maintaining a technology-agnostic and
+   application-centric perspective.
+
+3.  Conventions and Definitions
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+4.  Security Considerations
+
+   TODO Security
+
+5.  IANA Considerations
+
+   This document has no IANA actions.
+
+6.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+Acknowledgments
+
+   TODO acknowledge.
+
+Authors' Addresses
+
+   Carlos Alberto Kamienski
+   Federal University of ABC (UFABC)
+   Email: carlos.kamienski@ufabc.edu.br
+
+
+   Marco Santos
+   Federal Institute of Sertão (IFSertão)
+   Email: marcelo.santos@ifsertao-pe.edu.br
+
+
+   Marco Di Felice
+   University of Bologna
+   Email: marco.difelice3@unibo.it
