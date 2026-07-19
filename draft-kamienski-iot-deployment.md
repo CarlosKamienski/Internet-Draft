@@ -138,6 +138,34 @@ The perspective taken in this document is complementary rather than competing. W
 
 This document adopts the term *IoT computing continuum* to refer to this distributed execution environment, emphasizing the integration of constrained IoT devices, edge nodes, and cloud platforms into a unified computational space. Building on existing work, the focus here is on understanding how the properties of the IoT computing continuum influence application deployment, placement, and lifecycle management, rather than on defining specific technologies or architectural solutions.
 
+# An Application-Centric View of the Continuum
+
+Traditional IoT architectures often treat applications as tightly coupled to specific execution environments, typically assuming fixed roles for devices, gateways, and cloud services. In the context of the IoT computing continuum, this assumption no longer holds. Smart applications must be understood as distributed entities whose behavior emerges from the coordinated execution of multiple components across heterogeneous computing stages. Adopting an application-centric view is therefore essential to reason about deployment, adaptation, and lifecycle management in such environments.
+
+## Applications as Distributed Functional Graphs
+
+From an application-centric perspective, smart applications can be modeled as collections of interdependent functions rather than as monolithic software artifacts. These functions interact through well-defined data and control dependencies, forming a logical application graph that captures the application's structure independently of where its components execute. This representation enables reasoning about application behavior, dependencies, and composition without prematurely binding functions to specific devices or platforms.
+
+Viewing applications as distributed functional graphs is particularly relevant in IoT environments, where different functions may have distinct requirements for latency, computational resources, sensor or actuator access, and interaction with external services. By separating the application's logical structure from its physical deployment, this model supports more flexible placement and adaptation strategies across the continuum.
+
+## Decoupling Application Logic from Execution Environments
+
+A key implication of the application-centric view is the need to decouple application logic from execution environments. Application functionality should be expressed in a way that is independent of specific hardware platforms, operating systems, or runtime environments. This decoupling enables portability across heterogeneous devices and supports dynamic reassignment of application components as execution conditions change.
+
+In the IoT computing continuum, execution environments vary widely in terms of resource availability, connectivity, and operational constraints. Binding application logic too early to a particular environment limits the ability to adapt to failures, load variations, or evolving requirements. An application-centric approach instead treats execution environments as abstract resources onto which application functions can be mapped, allowing deployment decisions to be revisited over time.
+
+## Placement and Distribution Across the Continuum
+
+Once application logic is decoupled from execution environments, the placement of application functions becomes a first-class concern. Placement decisions determine where individual functions of an application execute within the IoT computing continuum, ranging from constrained devices and gateways to edge nodes and cloud platforms. These decisions directly affect end-to-end application properties, including latency, reliability, energy consumption, and data locality.
+
+Importantly, placement is not a static decision. In many scenarios, application components may need to be redistributed in response to changes in workload, network conditions, or operational context. An application-centric view highlights the need to reason about placement and distribution as dynamic processes intrinsic to the operation of smart applications across the continuum.
+
+## Application Lifecycle Beyond Initial Deployment
+
+In centralized systems, application deployment is often treated as a one-time event followed by relatively infrequent updates. In contrast, the IoT computing continuum introduces a more complex and dynamic application lifecycle. Beyond initial deployment, applications may undergo continuous adaptation, including updates, reconfiguration, scaling, component migration, and partial redeployment across different continuum stages.
+
+Managing this lifecycle is particularly challenging in IoT environments due to device heterogeneity, intermittent connectivity, and the coexistence of multiple administrative domains. An application-centric perspective emphasizes that lifecycle management must be considered holistically, encompassing not only software updates but also the ongoing coordination of distributed application components. Understanding these lifecycle aspects is essential for identifying common challenges and research questions related to deployment and operation in the IoT computing continuum.
+
 
 # Conventions and Definitions
 
