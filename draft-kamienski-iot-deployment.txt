@@ -89,10 +89,14 @@ Table of Contents
      5.3.  Placement and Distribution Across the Continuum
      5.4.  Application Lifecycle Beyond Initial Deployment
    6.  Challenges in Smart Application Development and Deployment
-   7.  Conventions and Definitions
-   8.  Security Considerations
-   9.  IANA Considerations
-   10. Normative References
+   7.  Conceptual Deployment Model
+   8.  Illustrative Scenarios
+     8.1.  Smart Irrigation in Precision Agriculture
+     8.2.  Drone-Based Delivery in Urban Environments
+   9.  Conventions and Definitions
+   10. Security Considerations
+   11. IANA Considerations
+   12. Normative References
    Acknowledgments
    Authors' Addresses
 
@@ -450,7 +454,179 @@ Table of Contents
    informing future standardization efforts related to the IoT computing
    continuum.
 
-7.  Conventions and Definitions
+7.  Conceptual Deployment Model
+
+   This section outlines a conceptual model for reasoning about the
+   deployment of smart applications across the IoT computing continuum.
+   The model is intended to support analysis and discussion rather than
+   to prescribe specific mechanisms, architectures, or workflows.  Its
+   purpose is to provide a shared abstraction that captures how
+   application structure, execution environments, and coordination
+   mechanisms interact in heterogeneous and dynamic IoT scenarios.
+
+   At the core of the model is the separation between application logic
+   and execution environments.  Application logic is represented
+   independently of where it executes, allowing functionality,
+   dependencies, and interaction patterns to be reasoned about without
+   binding components to specific devices or platforms.  Execution
+   environments are treated as abstract resources characterized by
+   capabilities, constraints, and operational context, such as
+   computational power, connectivity, proximity to data sources, and
+   energy availability.
+
+   Within this model, a smart application is viewed as a set of
+   functional components connected through data and control
+   dependencies, forming a logical application graph.  Deployment
+   consists of mapping these components onto available execution
+   environments across the IoT computing continuum.  This mapping
+   determines where components execute, but it does not, by itself,
+   define how they coordinate during execution.  As a result, deployment
+   decisions must be considered together with coordination strategies
+   that govern interactions among distributed components.
+
+   Coordination among application components can be conceptualized using
+   different styles, most notably orchestration and choreography.  In an
+   orchestration style, coordination is driven by explicit control logic
+   that manages execution order, data flow, and component interactions.
+   This style provides a global view of application behavior and can
+   simplify reasoning about end-to-end execution, but it may introduce
+   centralization and scalability concerns in highly distributed
+   environments.  In contrast, a choreography style relies on local
+   interactions and shared interaction rules, allowing components to
+   coordinate in a decentralized manner without a single point of
+   control.  This style can improve scalability and resilience, but it
+   may complicate global reasoning and debugging.
+
+   The choice between orchestration and choreography, or combinations
+   thereof, is closely tied to deployment decisions and to the
+   characteristics of the IoT computing continuum.  Resource
+   constraints, network conditions, mobility, and administrative
+   boundaries may favor one coordination style over another at different
+   stages of the continuum.  Moreover, coordination strategies may need
+   to evolve over time as applications adapt to changing conditions,
+   reinforcing the dynamic nature of deployment.
+
+   The conceptual deployment model, therefore, treats placement,
+   coordination, and lifecycle management as interrelated concerns.
+   Beyond initial placement, deployment encompasses actions such as
+   reconfiguration, scaling, migration, and adaptation of coordination
+   strategies.  Runtime observations, including performance metrics and
+   failure events, provide feedback that can inform both deployment
+   decisions and future iterations of application design.  By explicitly
+   incorporating coordination styles into the deployment model, this
+   abstraction provides a more concrete foundation for discussing
+   development--deployment interdependencies in the IoT computing
+   continuum, while remaining agnostic to specific technologies or
+   implementations.
+
+8.  Illustrative Scenarios
+
+   We present two illustrative scenarios that ground the conceptual
+   deployment model discussed earlier.  The scenarios are intended
+   solely to demonstrate how application-centric concepts, deployment
+   decisions, and coordination styles manifest in realistic settings,
+   without prescribing specific technologies or architectures.  The
+   first scenario describes a smart irrigation application deployed in
+   operational agricultural settings, providing a concrete reference for
+   placement and lifecycle concerns under real-world constraints.  The
+   second scenario describes a drone-based delivery application that
+   spans a broader range of continuum stages and exhibits a richer
+   interplay between coordination styles.
+
+8.1.  Smart Irrigation in Precision Agriculture
+
+   Smart irrigation applications collect environmental data, such as
+   soil moisture and weather conditions, and use it to determine how
+   much, when, and where to irrigate.  In operational deployments, these
+   applications typically span constrained sensor devices in the field,
+   low-power gateways acting as radio concentrators, on-premises edge
+   nodes located in farm facilities, and cloud services used for
+   analytics, forecasting, and long-term storage.  End users interact
+   with the application through mobile or web interfaces to inspect data
+   and approve irrigation plans.
+
+   From an application-centric perspective, the irrigation scenario
+   exemplifies how functional decomposition maps naturally onto multiple
+   continuum stages.  Sensing and local preprocessing functions execute
+   on constrained devices and field gateways.  Intermediate functions,
+   such as data filtering, sensor calibration, and resilience against
+   disconnections, execute on on-premises edge nodes, which are
+   positioned close to the irrigation infrastructure and remain
+   operational even when connectivity to the cloud is unavailable.  More
+   computationally intensive functions, including data fusion, soil
+   moisture forecasting, and irrigation optimization, run on cloud
+   platforms that offer greater resources and broader data visibility.
+
+   A defining property of this scenario is the need to continue
+   operating under intermittent wide-area connectivity, a common
+   condition in rural deployments.  Functions placed at on-premises edge
+   nodes are expected to sustain essential behavior when cloud services
+   are temporarily unreachable, such as enforcing safety thresholds or
+   executing simplified local models, and to reconcile state once
+   connectivity is restored.  This requirement directly influences how
+   application functions are decomposed at development time and where
+   they are deployed, illustrating the bidirectional influence between
+   development and deployment concerns discussed in earlier sections.
+
+   The irrigation scenario also highlights that deployment decisions
+   extend beyond initial placement.  Over time, functions may be
+   updated, reconfigured, or extended to incorporate new models or new
+   sensor modalities, and the same application logic may need to be
+   deployed across multiple farms with different infrastructure
+   configurations.  These lifecycle aspects underscore the relevance of
+   an application-centric view that treats deployment as an ongoing
+   process rather than a one-time event.
+
+8.2.  Drone-Based Delivery in Urban Environments
+
+   A drone-based delivery application uses unmanned aerial vehicles to
+   deliver packages in urban areas.  The application comprises multiple
+   functional components, including mission planning, navigation,
+   sensing, local coordination, and backend services for order
+   management and analytics.  From an application-centric perspective,
+   these components form a logical application graph, with dependencies
+   reflecting data flows and control interactions among functions.  The
+   application operates across the full span of the IoT computing
+   continuum, leveraging constrained onboard devices, nearby edge nodes,
+   operator-provided cloudlets, and cloud platforms.
+
+   Low-level sensing, actuation, and real-time navigation functions
+   execute directly on the drone due to strict latency and control
+   requirements.  Local coordination and situational awareness functions
+   may execute on nearby edge nodes or gateways that aggregate
+   information from multiple drones operating in the same area.
+   Operator-provided cloudlets, for example, those associated with 5G or
+   future 6G infrastructure, can host functions that support cooperative
+   behavior among drones, such as collision avoidance assistance and
+   shared situational awareness.  Backend services, including mission
+   planning, optimization, logging, and analytics, typically run on
+   cloud platforms that provide greater computational resources and
+   global system visibility.
+
+   This scenario is particularly relevant for illustrating the
+   coexistence of different coordination styles within a single
+   application.  Mission planning and high-level task assignment
+   naturally follow an orchestration style, in which a centralized
+   component coordinates delivery schedules and routes based on global
+   system state.  In contrast, local interactions among drones, such as
+   collision avoidance or cooperative sensing, follow a choreography
+   style, relying on decentralized interactions and shared interaction
+   rules without a single controlling entity.  Both coordination styles
+   coexist within the same application and are influenced by deployment
+   choices across the continuum, demonstrating that the distinction
+   between orchestration and choreography is not merely theoretical but
+   reflects concrete architectural trade-offs.
+
+   Deployment decisions in this scenario are also inherently dynamic.
+   As drones move through different environments or experience changing
+   network conditions, mappings of coordination functions to edge nodes
+   or cloudlets may need to be revised, while backend services remain
+   centralized.  The application lifecycle extends beyond initial
+   deployment, with components being updated, reconfigured, or migrated
+   in response to changes in delivery demand, failures of individual
+   drones, or variations in network availability.
+
+9.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -458,15 +634,15 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-8.  Security Considerations
+10.  Security Considerations
 
    TODO Security
 
-9.  IANA Considerations
+11.  IANA Considerations
 
    This document has no IANA actions.
 
-10.  Normative References
+12.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
