@@ -230,16 +230,51 @@ This scenario is particularly relevant for illustrating the coexistence of diffe
 
 Deployment decisions in this scenario are also inherently dynamic. As drones move through different environments or experience changing network conditions, mappings of coordination functions to edge nodes or cloudlets may need to be revised, while backend services remain centralized. The application lifecycle extends beyond initial deployment, with components being updated, reconfigured, or migrated in response to changes in delivery demand, failures of individual drones, or variations in network availability.
 
+## Discussion
+
+Together, these two scenarios illustrate the spectrum of smart applications that operate over the IoT computing continuum. The first grounds the discussion in operational deployments with documented constraints, particularly around intermittent connectivity and the need for resilient edge behavior. The second reveals the broader architectural space where placement, coordination, and lifecycle concerns fully manifest, including the explicit coexistence of orchestration and choreography within a single application. Both share the fundamental property that application behavior emerges from the coordinated execution of distributed functions across heterogeneous stages, reinforcing the need for application-centric perspectives on deployment and lifecycle management.
 
 
-# Conventions and Definitions
+# Relationship to Ongoing Research and Standardization
 
-{::boilerplate bcp14-tagged}
+The issues discussed in this document build on existing research and standardization efforts related to edge computing and the computing continuum, including work within the IETF and IRTF, such as [RFC9556], as well as broader academic perspectives, such as [CONTINUUM-SURVEY]. Within the IRTF, the T2TRG has explored programmability, coordination, and interoperability among connected devices.
+
+Several concrete research efforts have examined application-centric aspects of the IoT computing continuum and informed the perspective adopted in this document. Work on the notion of an IoT computing continuum as a unifying framework for reasoning about development and deployment choices has clarified the role of distributed application stages [IOTINUUM]. Complementary work on deployment-aware approaches, such as IoTDeploy, has explored how application components can be systematically placed and migrated across continuum stages while preserving application-level properties [IOTDEPLOY]. More recent efforts have investigated integrated frameworks for developing and deploying continuum-aware smart applications, providing concrete examples of how application-centric abstractions can be realized in practice. These efforts are cited here as representative examples of ongoing work in the area and not as prescriptive references; this document remains agnostic to specific frameworks or implementations.
+
+Community-driven efforts, including workshops focused on future Internet research, have also discussed application deployment over the IoT computing continuum in the context of IETF and IRTF engagement, as exemplified by [WPIETF2025]. This document complements these efforts by adopting an application-centric perspective on deployment and lifecycle management.
+
+# Research Directions
+
+The challenges and conceptual considerations discussed in this document point to several open research directions for smart application development and deployment across the IoT computing continuum. These directions are not exhaustive. Rather, they highlight areas that require further investigation to better understand the interplay among application structure, deployment decisions, coordination strategies, and lifecycle management in heterogeneous and dynamic environments.
+
+A first research direction concerns the definition of application-centric abstractions for deployment. While existing work has extensively explored infrastructure-level aspects of edge and continuum computing, there is a clear need for abstractions that allow applications to express functional decomposition, dependencies, and non-functional requirements independently of specific execution environments. Such abstractions would enable more systematic reasoning about placement, migration, and adaptation of application components across different stages of the IoT computing continuum, complementing existing architectural perspectives on edge computing [RFC9556] and broader analyses of the computing continuum [CONTINUUM-SURVEY].
+
+A second research direction involves integrated approaches to application development and deployment. In the IoT computing continuum, development-time decisions about application structure, communication patterns, and state management are tightly coupled with deployment constraints, such as resource availability, connectivity, and latency. Traditional workflows that treat development and deployment as largely independent phases are therefore insufficient. Further research is needed to explore models, methodologies, and tools that explicitly account for this interdependence and that support feedback loops between design-time assumptions and runtime observations, building on early deployment-aware approaches such as those discussed in [IOTDEPLOY].
+
+Coordination strategies for distributed applications constitute another important research direction. Orchestration and choreography are complementary styles for coordinating distributed application components, each with distinct trade-offs in scalability, resilience, observability, and manageability. Understanding how these coordination styles can be combined, adapted, or dynamically transitioned as applications evolve and deployment conditions change remains an open problem. This includes investigating how coordination strategies interact with placement decisions, fault handling, and lifecycle operations across heterogeneous execution environments in the IoT computing continuum.
+
+Automation and intelligence in deployment and lifecycle management represent a further area for research. Given the scale, heterogeneity, and dynamism of IoT environments, manual deployment, configuration, and adaptation quickly become impractical. Research into automated, declarative, or policy-driven approaches for placement, migration, and reconfiguration may help address these challenges, provided that such approaches remain transparent, controllable, and aligned with application-level objectives. These mechanisms must also account for IoT-specific constraints, including limited resources, intermittent connectivity, and decentralized control across administrative domains.
+
+An additional research direction concerns the role of software agents in managing the deployment of smart applications across the IoT computing continuum. Placement, coordination, adaptation, and lifecycle management involve decisions that are increasingly difficult to capture with static policies, particularly when application workloads exhibit heterogeneous, context-sensitive behavior. A concrete example arises in the deployment of inference workloads based on large language models, where placement decisions must balance latency, cost, and resilience to connectivity disruptions. Preliminary work by the authors suggests that adaptive placement strategies driven by agents can outperform static configurations, particularly under variable demand or intermittent wide-area connectivity.
+
+Beyond individual applications, the broader question of how agents interact across administrative domains and heterogeneous environments poses interoperability and control challenges relevant to Internet architecture. Foundational work on multi-agent systems [WOOLDRIDGE-AGENTS] provides established abstractions for reasoning about agent behavior. More recent proposals illustrate early attempts to standardize agent interaction semantics along the two coordination styles discussed earlier in this document: the Model Context Protocol [MCP] emphasizes orchestration-style interactions between an agent and the tools or services it invokes, while agent-to-agent interaction frameworks [A2A] emphasize choreography-style interactions among peer agents coordinating without a central controller. These efforts remain evolving, but they highlight open questions regarding how agent responsibilities should be distributed between application-level and infrastructure-level concerns, how agent interactions can be made secure, auditable, and aligned with Internet architectural principles, and how orchestration and choreography styles may be combined dynamically in deployed systems. Further research is needed to explore how agent-based mechanisms can complement application-centric deployment models in the IoT computing continuum.
+
+Finally, there is a broader need for shared terminology and conceptual frameworks that facilitate comparison across research efforts and support dialogue with standardization activities. Without a common vocabulary for reasoning about application-centric deployment and lifecycle management in the IoT computing continuum, research results risk remaining fragmented and difficult to generalize.
+
+Informational documents that clarify the problem space, such as this one, can help align research agendas and identify areas where future standardization efforts within the IRTF or the IETF may be beneficial.
 
 
 # Security Considerations
 
-TODO Security
+This document does not specify protocols, mechanisms, or architectures and therefore does not introduce new security vulnerabilities directly. However, the concepts discussed have important security implications that merit consideration.
+
+In the IoT computing continuum, application components are distributed across heterogeneous and potentially untrusted execution environments, increasing the attack surface and complicating traditional security assumptions. Deployment decisions influence trust boundaries, data exposure, and the ability to isolate faults or compromised components.
+
+Coordination strategies also have security implications. Orchestration-based approaches may introduce centralized control points that become attractive attack targets, while choreography-based approaches rely on decentralized interactions that require robust authentication, authorization, and trust management among components.
+
+The tight coupling between development and deployment further emphasizes the need to consider security throughout the application lifecycle. Design-time assumptions about trust, isolation, and access control may be invalidated by deployment changes, migration of components, or dynamic adaptation at runtime. As a result, security considerations must be revisited whenever application structure, placement, or coordination strategies evolve.
+
+Finally, the distributed and multi-domain nature of the IoT computing continuum raises challenges related to identity management, secure communication, and policy enforcement across administrative boundaries. While addressing these challenges is outside the scope of this document, they underscore the importance of integrating security considerations into research and standardization efforts related to application-centric deployment and lifecycle management.
 
 
 # IANA Considerations
@@ -247,9 +282,104 @@ TODO Security
 This document has no IANA actions.
 
 
---- back
-
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors would like to acknowledge CGI.br (Brazilian Internet Steering Committee) for its support through the IETF/IRTF participation program, which enabled engagement in research and discussions within the Internet Research Task Force (IRTF).
+
+# References
+{:numbered="false"}
+
+informative:
+RFC9556:
+RFC7452:
+I-D.ietf-iotops-7228bis:
+
+IOTINUUM:
+title: "IoTinuum: The IoT Computing Continuum"
+author:
+- ins: C. Kamienski
+name: Carlos Kamienski
+- ins: I. Zyrianoff
+name: Ivan Zyrianoff
+- ins: L. F. Bittencourt
+name: Luiz F. Bittencourt
+- ins: M. Di Felice
+name: Marco Di Felice
+date: 2024
+seriesinfo:
+IEEE: "Proceedings of the 20th International Conference on Distributed Computing in Smart Systems and the Internet of Things (DCOSS-IoT), pp. 732-739"
+
+IOTDEPLOY:
+title: "IoTDeploy: Deployment of IoT Smart Applications over the Computing Continuum"
+author:
+- ins: F. B. Oliveira
+name: Felipe B. Oliveira
+- ins: M. Di Felice
+name: Marco Di Felice
+- ins: C. Kamienski
+name: Carlos Kamienski
+date: 2024
+seriesinfo:
+Internet of Things: "Vol. 28, Article 101348"
+target: "https://doi.org/10.1016/j.iot.2024.101348"
+
+WPIETF2025:
+title: "Smart Application Deployment over the IoT Computing Continuum"
+author:
+- ins: C. A. Kamienski
+name: Carlos A. Kamienski
+- ins: M. A. B. Santos
+name: M. A. B. Santos
+date: 2025
+seriesinfo:
+WPIETF: "Workshop Pre-IETF"
+target: "https://sol.sbc.org.br/"
+
+CONTINUUM-SURVEY:
+title: "The Computing Continuum: Past, Present, and Future"
+author:
+- ins: L. F. Bittencourt
+name: Luiz F. Bittencourt
+- ins: R. Rodrigues-Filho
+name: R. Rodrigues-Filho
+- ins: J. Spillner
+name: Josef Spillner
+- ins: F. De Turck
+name: Filip De Turck
+- ins: J. Santos
+name: José Santos
+- ins: N. L. S. da Fonseca
+name: Nelson L. S. da Fonseca
+- ins: O. Rana
+name: Omer Rana
+- ins: M. Parashar
+name: Manish Parashar
+- ins: I. Foster
+name: Ian Foster
+date: 2025
+seriesinfo:
+Computer Science Review: "Vol. 58, Article 100782"
+target: "https://doi.org/10.1016/j.cosrev.2025.100782"
+
+WOOLDRIDGE-AGENTS:
+title: "An Introduction to MultiAgent Systems"
+author:
+- ins: M. Wooldridge
+name: Michael Wooldridge
+date: 2009
+seriesinfo:
+Wiley: "2nd Edition"
+
+MCP:
+title: "Model Context Protocol Specification"
+author:
+- org: Anthropic
+date: 2026
+target: "https://modelcontextprotocol.io/"
+
+A2A:
+title: "Agent2Agent (A2A) Protocol"
+date: 2026
+target: "https://a2aproject.github.io/A2A/"
+
