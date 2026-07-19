@@ -33,7 +33,6 @@ author:
     fullname: Marco Santos
     organization: Federal Institute of Sertão (IFSertão)
     email: marcelo.santos@ifsertao-pe.edu.br
-
  -
     fullname: Marco Di Felice
     organization: University of Bologna
@@ -44,8 +43,6 @@ normative:
 
 informative:
 
-
-...
 
 --- abstract
 
