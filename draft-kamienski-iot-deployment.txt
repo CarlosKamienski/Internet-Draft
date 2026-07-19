@@ -837,6 +837,17 @@ Acknowledgments
 
 References
 
+
+   title: "Smart Application Deployment over the IoT Computing
+   Continuum" abbrev: "IoT Continuum Deployment" docname: draft-
+   kamienski-iot-deployment-latest category: info ipr: trust200902 area:
+   Internet workgroup: T2TRG keyword: - Internet of Things - computing
+   continuum - application deployment
+
+   author: - ins: C.  A.  Kamienski name: Carlos A.  Kamienski org:
+   Federal University of ABC country: Brazil email:
+   carlos.kamienski@ufabc.edu.br
+
    informative: RFC9556: RFC7452: I-D.ietf-iotops-7228bis:
 
    IOTINUUM: title: "IoTinuum: The IoT Computing Continuum" author: -
