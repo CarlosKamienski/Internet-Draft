@@ -85,6 +85,29 @@ The lack of a shared, application-centric view of deployment over the IoT comput
 
 This document aims to contribute to this discussion by examining smart application deployment over the IoT computing continuum from a conceptual and architectural perspective. Rather than proposing specific mechanisms or protocols, it focuses on identifying key challenges, clarifying terminology, and outlining considerations relevant to ongoing research within the Thing-to-Thing Research Group (T2TRG) of the Internet Research Task Force (IRTF).
 
+# Scope and Non-Goals
+
+This document focuses on conceptual and architectural considerations for deploying smart applications across the IoT computing continuum. Its scope is limited to discussing challenges, common patterns, and terminology arising from distributed application logic across heterogeneous computing environments, including constrained IoT devices, edge nodes, and cloud platforms. The intent is to support research-oriented discussion and to provide a shared frame of reference for ongoing and future work within the IRTF. The discussion explicitly considers the interplay between application development and deployment, while remaining agnostic to specific tools, workflows, or operational practices.
+
+The document does not specify concrete deployment mechanisms, protocols, or interfaces. It does not define a reference architecture, nor does it mandate how applications should be structured, deployed, or managed in practice. Instead, it aims to describe the problem space and highlight issues relevant across multiple technologies, deployment models, and research efforts.
+
+In particular, the following items are explicitly outside the scope of this document:
+
+   *  The specification of new communication protocols, APIs, or data
+      models.
+
+   *  The definition of normative requirements, including the use of
+      requirement keywords such as MUST, SHOULD, or MAY.
+
+   *  The standardization of specific platforms, frameworks, or
+      programming models for IoT application deployment.
+
+   *  Detailed performance evaluations or quantitative comparisons
+      between alternative solutions.
+
+By clearly delineating its scope and non-goals, this document seeks to complement existing and ongoing efforts in the computing continuum, including work on communication, edge functions, and operational aspects, while maintaining a technology-agnostic and application-centric perspective.
+
+
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
