@@ -126,6 +126,18 @@ An intermediate computing node located between constrained devices and centraliz
 **Orchestration and Choreography:**
 Two coordination styles for distributed applications. Orchestration refers to coordination driven by explicit control logic, while choreography relies on decentralized interactions among components without a central coordinator.
 
+# Background: The IoT Computing Continuum
+
+The increasing distribution of computation across networked systems has led to the emergence of what is commonly described as a computing continuum, spanning centralized cloud infrastructures, intermediate edge and fog nodes, and highly constrained end devices [CONTINUUM-SURVEY]. This paradigm reflects a shift away from strictly centralized processing models toward more distributed execution, driven by requirements related to latency, bandwidth efficiency, resilience, data locality, and regulatory constraints.
+
+Within the context of the Internet of Things (IoT), this continuum acquires additional characteristics that distinguish it from more general edge-cloud computing environments. IoT deployments involve large numbers of heterogeneous devices with severe resource constraints, intermittent connectivity, and close interaction with the physical world through sensing and actuation [RFC7452]. As a result, computation is often pushed closer to data sources not only for performance reasons, but also to enable timely control actions, reduce energy consumption, and preserve privacy.
+
+Recent research and standardization activities have explored different aspects of this continuum. In particular, work within the IETF and IRTF has highlighted the importance of edge computing and has discussed functional components and challenges associated with operating across distributed environments [RFC9556]. Existing documents have examined edge functions for data processing, storage, and communication, as well as the roles of gateways and intermediate nodes in bridging constrained devices to cloud services. These efforts provide an important foundation for understanding the structural and operational properties of the continuum.
+
+The perspective taken in this document is complementary rather than competing. While [RFC9556] characterizes functional components and challenges at the infrastructure level, focusing on edge functions and the communication fabric that supports them, the present document shifts attention to the application layer that operates on top of such infrastructure. Specifically, it considers how smart applications, composed of multiple interdependent functions, are decomposed, placed, coordinated, and managed across the heterogeneous stages enabled by that infrastructure. Application-centric concerns such as functional decomposition, placement, coordination style, and lifecycle management are largely orthogonal to the infrastructure view and remain comparatively underexplored in current standardization discussions.
+
+This document adopts the term *IoT computing continuum* to refer to this distributed execution environment, emphasizing the integration of constrained IoT devices, edge nodes, and cloud platforms into a unified computational space. Building on existing work, the focus here is on understanding how the properties of the IoT computing continuum influence application deployment, placement, and lifecycle management, rather than on defining specific technologies or architectural solutions.
+
 
 # Conventions and Definitions
 
