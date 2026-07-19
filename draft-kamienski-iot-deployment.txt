@@ -648,36 +648,36 @@ Table of Contents
 
 9.  The Role of AI Agents in Application Deployment
 
-   The conceptual deployment model discussed earlier treats placement,
-   coordination, and lifecycle management as interrelated and inherently
-   dynamic concerns.  As the scale, heterogeneity, and dynamism of the
-   IoT computing continuum increase, capturing these concerns through
-   static policies or manual procedures becomes progressively less
-   tractable, particularly when application workloads exhibit
-   heterogeneous, context-sensitive behavior.  AI agents, understood
-   here as autonomous software entities capable of perceiving their
-   environment, reasoning about goals, and acting upon deployment
-   infrastructure, offer a promising approach to managing this
-   complexity.  Foundational work on multi-agent systems [WOOLDRIDGE-
-   AGENTS] provides established abstractions for reasoning about agent
-   behavior.  This section examines the role of such agents from an
-   application-centric perspective, without prescribing specific agent
-   architectures, frameworks, or protocols.
+   The previously discussed conceptual deployment model considers
+   placement, coordination, and lifecycle management as interconnected
+   and inherently dynamic concerns.  As the scale, heterogeneity, and
+   dynamism of the Internet of Things (IoT) computing continuum
+   increase, addressing these concerns through static policies or manual
+   procedures becomes increasingly challenging, especially when
+   application workloads demonstrate heterogeneous and context-sensitive
+   behavior.  AI agents, defined as autonomous software entities capable
+   of perceiving their environment, reasoning about objectives, and
+   acting upon deployment infrastructure, present a promising solution
+   for managing this complexity.  Foundational research on multi-agent
+   systems [WOOLDRIDGE-AGENTS] offers established abstractions for
+   understanding agent behavior.  This section analyzes the role of such
+   agents from an application-centric perspective, without specifying
+   particular agent architectures, frameworks, or protocols.
 
-   AI agents relate to application deployment in two complementary ways.
-   First, agents can act as enablers of the deployment process itself,
-   assisting in or automating decisions about the placement,
-   coordination, adaptation, and lifecycle management of application
-   functions.  Second, agents are themselves software components that
-   must execute somewhere in the continuum; consequently, the deployment
-   of agents becomes a concern in its own right, subject to the same
-   placement considerations that apply to application functions.  These
-   two roles are examined in turn.
+   AI agents are connected to application deployment in two
+   complementary ways.  First, agents can facilitate the deployment
+   process by assisting with or automating decisions regarding the
+   placement, coordination, adaptation, and lifecycle management of
+   application functions.  Second, agents themselves are software
+   components that require execution within the continuum; therefore,
+   their deployment must also be considered, subject to the same
+   placement criteria as application functions.  The following
+   discussion examines these two roles sequentially.
 
 9.1.  Agents as Enablers of the Deployment Process
 
-   In their first role, AI agents support the deployment of the services
-   that compose a smart application across the IoT computing continuum.
+   In their first role, AI agents support deploying the services that
+   comprise a smart application across the IoT computing continuum.
    Given a logical application graph and a set of available execution
    environments, agents can evaluate candidate mappings of functions to
    continuum stages, taking into account application-level requirements
@@ -691,8 +691,8 @@ Table of Contents
    A concrete example arises in the deployment of inference workloads
    based on large language models, where placement decisions must
    balance latency, cost, and resilience to connectivity disruptions.
-   Preliminary work by the authors suggests that adaptive placement
-   strategies driven by agents can outperform static configurations,
+   Preliminary work by the authors suggests that agent-driven adaptive
+   placement strategies can outperform static configurations,
    particularly under variable demand or intermittent wide-area
    connectivity.
 
@@ -702,52 +702,51 @@ Table of Contents
    multiple agents interacting through shared rules may realize
    deployment coordination in a choreography style.  Recent proposals
    illustrate early attempts to standardize agent interaction semantics
-   along these two styles: the Model Context Protocol [MCP] emphasizes
+   in two styles: the Model Context Protocol [MCP] emphasizes
    orchestration-style interactions between an agent and the tools or
    services it invokes, while agent-to-agent interaction frameworks
    [A2A] emphasize choreography-style interactions among peer agents
-   coordinating without a central controller.  In practice, agents
+   that coordinate without a central controller.  In practice, agents
    distributed across the continuum communicate with one another at all
-   stages to coordinate the deployment process, exchanging information
-   about local resource availability, observed conditions, and pending
-   deployment actions.  This inter-agent communication allows deployment
-   decisions to reflect both local knowledge, available only close to
-   constrained devices, and global objectives, maintained at cloud
-   platforms, and suggests that hybrid combinations of orchestration and
-   choreography may emerge naturally in agent-based deployment.
+   stages to coordinate deployment, exchanging information on local
+   resource availability, observed conditions, and pending deployment
+   actions.  This inter-agent communication allows deployment decisions
+   to reflect both local knowledge, available only near constrained
+   devices, and global objectives, maintained on cloud platforms, and
+   suggests that hybrid combinations of orchestration and choreography
+   may emerge naturally in agent-based deployment.
 
 9.2.  Deployment of the Agents Themselves
 
-   In their second role, agents appear as deployable entities.  Because
-   agents are software components, they require execution environments
-   with sufficient computational, memory, and connectivity resources.
-   In principle, agents can execute at any stage of the IoT computing
-   continuum, from gateways and edge nodes to cloudlets and cloud
-   platforms, with the choice of stage influencing the timeliness of
-   their decisions, their visibility into local conditions, and their
-   resilience to connectivity disruptions.
+   In their secondary role, agents function as deployable entities.  As
+   software components, they require execution environments that provide
+   sufficient computational power, memory, and connectivity.  Agents may
+   operate at any location within the IoT computing continuum, including
+   gateways, edge nodes, cloudlets, and cloud platforms.  The selected
+   deployment stage influences the timeliness of agent decisions, the
+   degree of local context awareness, and resilience to connectivity
+   disruptions.
 
-   Constrained devices deserve particular attention in this respect.
-   Many such devices lack the resources to host a full agent runtime,
-   yet deployment decisions may still need to account for, and act upon,
-   conditions observed at the device level.  A proxy-based approach can
-   address this asymmetry: a lightweight proxy executing on the
-   constrained device represents it toward an agent running at a nearby
-   stage, such as a gateway or an edge node, which performs reasoning on
-   the device's behalf.  This pattern preserves the reach of agent-based
-   deployment down to the most constrained stages of the continuum while
-   respecting the resource limitations discussed in [I-D.ietf-iotops-
-   7228bis].
+   Constrained devices necessitate special consideration, as many do not
+   possess sufficient resources to support a complete agent runtime.
+   Nevertheless, deployment strategies must often account for device-
+   level conditions.  A proxy-based approach addresses this challenge: a
+   lightweight proxy on the constrained device represents it to an agent
+   located at a proximate stage, such as a gateway or edge node, which
+   then performs reasoning on behalf of the device.  This method enables
+   agent-based deployment at even the most resource-limited stages of
+   the continuum, while adhering to the constraints outlined in [I-
+   D.ietf-iotops-7228bis].
 
-   The deployment of agents thus exhibits a recursive character: the
-   mechanisms that agents provide for deploying application functions
-   apply, in principle, to the agents themselves.  Placement, migration,
-   and lifecycle management of agents raise questions similar to those
-   discussed for application components, compounded by additional
-   concerns regarding trust, accountability, and control when agents
-   operate autonomously across administrative domains.  Open research
-   questions arising from this dual role are outlined in the Research
-   Directions section.
+   Agent deployment exhibits a recursive nature, as the mechanisms used
+   by agents to deploy application functions are equally applicable to
+   the agents themselves.  The placement, migration, and lifecycle
+   management of agents present challenges analogous to those
+   encountered with application components, but also introduce
+   additional concerns regarding trust, accountability, and control,
+   particularly when agents operate autonomously across multiple
+   administrative domains.  The Research Directions section identifies
+   open questions associated with this dual role.
 
 10.  Relationship to Ongoing Research and Standardization
 
