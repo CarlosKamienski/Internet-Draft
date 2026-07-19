@@ -73,8 +73,17 @@ Smart applications increasingly depend on the Internet of Things (IoT) and on di
 
 # Introduction
 
-TODO Introduction
+The Internet of Things (IoT) has evolved from simple data collection systems into a foundation for complex, data-driven smart applications spanning domains such as smart cities, precision agriculture, industrial automation and healthcare. These applications increasingly depend on distributed computing resources to sense, process, and act on data close to where it is generated, while also leveraging large-scale cloud infrastructures for coordination, analytics, and long-term storage.
 
+This evolution has led to the emergence of a distributed computing environment spanning multiple layers, from highly constrained devices and gateways to edge nodes, cloudlets, and centralized cloud platforms. In the literature, this environment is commonly described as the edge-cloud continuum, IoT-edge-cloud continuum, or simply computing continuum. Comprehensive perspectives on the evolution of this paradigm are provided in [CONTINUUM-SURVEY]. In this document, the term IoT computing continuum emphasizes the presence of constrained IoT devices and the domain-specific requirements they introduce.
+
+Recent research and standardization efforts have highlighted the importance of this continuum and discussed challenges related to edge functions, data handling, and communication across heterogeneous environments, including work within the IETF and IRTF, such as [RFC9556]. However, much of the existing discussion remains infrastructure- or communication-centric, with comparatively less focus on the implications for smart application deployment and lifecycle management.
+
+From an application perspective, smart services are no longer confined to a single execution environment. Instead, they are composed of multiple functions that must be placed, coordinated, and potentially migrated across different stages of the IoT computing continuum to satisfy requirements for latency, resilience, scalability, privacy, and energy efficiency. In practice, these decisions are often handled manually or through ad hoc mechanisms, leading to fragmented solutions and limited portability across deployments.
+
+The lack of a shared, application-centric view of deployment over the IoT computing continuum creates challenges for both researchers and practitioners. It complicates systematic reasoning about application structure, hinders the comparison of alternative approaches, and makes it difficult to identify common requirements that could inform future research and standardization activities.
+
+This document aims to contribute to this discussion by examining smart application deployment over the IoT computing continuum from a conceptual and architectural perspective. Rather than proposing specific mechanisms or protocols, it focuses on identifying key challenges, clarifying terminology, and outlining considerations relevant to ongoing research within the Thing-to-Thing Research Group (T2TRG) of the Internet Research Task Force (IRTF).
 
 # Conventions and Definitions
 
