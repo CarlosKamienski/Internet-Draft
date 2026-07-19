@@ -289,8 +289,6 @@ The authors would like to acknowledge CGI.br (Brazilian Internet Steering Commit
 
 # Informative References
 
-# References
-
 **[A2A]** A2A Project, "Agent2Agent (A2A) Protocol", 2024, <https://a2aproject.github.io/A2A/>.
 
 **[CONTINUUM-SURVEY]** Bittencourt, L. F., Rodrigues-Filho, R., Spillner, J., Turck, F. D., Santos, J., Fonseca, N. L. S. da, Rana, O., Parashar, M., and I. Foster, "The Computing Continuum: Past, Present, and Future", *Computer Science Review*, Elsevier, Vol. 58, Article 100782, DOI 10.1016/j.cosrev.2025.100782, 2025, <https://doi.org/10.1016/j.cosrev.2025.100782>.
