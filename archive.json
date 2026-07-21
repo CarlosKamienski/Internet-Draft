@@ -1,0 +1,83 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2026-07-21T01:24:16.150044+00:00",
+  "repo": "CarlosKamienski/Internet-Draft",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOTdKAUc7zhoCD",
+      "title": "Update draft-kamienski-iot-deployment.md",
+      "url": "https://github.com/CarlosKamienski/Internet-Draft/pull/1",
+      "state": "MERGED",
+      "author": "CarlosKamienski",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "This is just an example",
+      "createdAt": "2026-07-19T11:34:30Z",
+      "updatedAt": "2026-07-19T11:35:05Z",
+      "baseRepository": "CarlosKamienski/Internet-Draft",
+      "baseRefName": "main",
+      "baseRefOid": "e4e7689825734aeb9ca717b72a00ced77da2ac13",
+      "headRepository": "CarlosKamienski/Internet-Draft",
+      "headRefName": "CarlosKamienski-patch-1",
+      "headRefOid": "d401fa67c68cf9eedb23c51f77486d1fb7212c17",
+      "closedAt": "2026-07-19T11:35:05Z",
+      "mergedAt": "2026-07-19T11:35:05Z",
+      "mergedBy": "CarlosKamienski",
+      "mergeCommit": {
+        "oid": "72dca3ef1e6a0b4e77cd3930867b861b875db02c"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
