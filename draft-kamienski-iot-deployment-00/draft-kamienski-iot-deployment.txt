@@ -2,18 +2,18 @@
 
 
 
-RG Research Group                                        C. A. Kamienski
+Network Working Group                                    C. A. Kamienski
 Internet-Draft                         Federal University of ABC (UFABC)
 Intended status: Informational                                 M. Santos
-Expires: 20 January 2027          Federal Institute of Sertão (IFSertão)
+Expires: 23 January 2027          Federal Institute of Sertão (IFSertão)
                                                             M. D. Felice
                                                    University of Bologna
-                                                            19 July 2026
+                                                            22 July 2026
 
 
 Application-Centric Considerations for Deployment over the IoT Computing
                                Continuum
-                     draft-kamienski-iot-deployment
+                 draft-kamienski-iot-deployment-latest
 
 Abstract
 
@@ -39,15 +39,12 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://example.com/LATEST.  Status information for this document may
-   be found at https://datatracker.ietf.org/doc/draft-kamienski-iot/.
-
-   Discussion of this document takes place on the RG Research Group
-   mailing list (mailto:WG@example.com), which is archived at
-   https://example.com/WG.
+   https://CarlosKamienski.github.io/Internet-Draft/draft-kamienski-iot-
+   deployment.html.  Status information for this document may be found
+   at https://datatracker.ietf.org/doc/draft-kamienski-iot-deployment/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/USER/REPO.
+   https://github.com/CarlosKamienski/Internet-Draft.
 
 Status of This Memo
 
@@ -64,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 January 2027.
+   This Internet-Draft will expire on 23 January 2027.
 
 Copyright Notice
 
@@ -94,13 +91,15 @@ Table of Contents
      8.1.  Smart Irrigation in Precision Agriculture
      8.2.  Drone-Based Delivery in Urban Environments
      8.3.  Discussion
-   9.  Relationship to Ongoing Research and Standardization
-   10. Research Directions
-   11. Security Considerations
-   12. IANA Considerations
-   13. Acknowledgments
-   14. Informative References
-   15. References
+   9.  The Role of AI Agents in Application Deployment
+     9.1.  Agents as Enablers of the Deployment Process
+     9.2.  Deployment of the Agents Themselves
+   10. Relationship to Ongoing Research and Standardization
+   11. Research Directions
+   12. Security Considerations
+   13. IANA Considerations
+   14. Acknowledgments
+   15. Informative References
    Authors' Addresses
 
 1.  Introduction
@@ -242,11 +241,11 @@ Table of Contents
    The increasing distribution of computation across networked systems
    has led to the emergence of what is commonly described as a computing
    continuum, spanning centralized cloud infrastructures, intermediate
-   edge and fog nodes, and highly constrained end devices [CONTINUUM-
-   SURVEY].  This paradigm reflects a shift away from strictly
-   centralized processing models toward more distributed execution,
-   driven by requirements related to latency, bandwidth efficiency,
-   resilience, data locality, and regulatory constraints.
+   edge and fog nodes, and highly constrained end devices
+   [CONTINUUM-SURVEY].  This paradigm reflects a shift away from
+   strictly centralized processing models toward more distributed
+   execution, driven by requirements related to latency, bandwidth
+   efficiency, resilience, data locality, and regulatory constraints.
 
    Within the context of the Internet of Things (IoT), this continuum
    acquires additional characteristics that distinguish it from more
@@ -644,7 +643,109 @@ Table of Contents
    heterogeneous stages, reinforcing the need for application-centric
    perspectives on deployment and lifecycle management.
 
-9.  Relationship to Ongoing Research and Standardization
+9.  The Role of AI Agents in Application Deployment
+
+   The previously discussed conceptual deployment model considers
+   placement, coordination, and lifecycle management as interconnected
+   and inherently dynamic concerns.  As the scale, heterogeneity, and
+   dynamism of the Internet of Things (IoT) computing continuum
+   increase, addressing these concerns through static policies or manual
+   procedures becomes increasingly challenging, especially when
+   application workloads demonstrate heterogeneous and context-sensitive
+   behavior.  AI agents, defined as autonomous software entities capable
+   of perceiving their environment, reasoning about objectives, and
+   acting upon deployment infrastructure, present a promising solution
+   for managing this complexity.  Foundational research on multi-agent
+   systems [WOOLDRIDGE-AGENTS] offers established abstractions for
+   understanding agent behavior.  This section analyzes the role of such
+   agents from an application-centric perspective, without specifying
+   particular agent architectures, frameworks, or protocols.
+
+   AI agents are connected to application deployment in two
+   complementary ways.  First, agents can facilitate the deployment
+   process by assisting with or automating decisions regarding the
+   placement, coordination, adaptation, and lifecycle management of
+   application functions.  Second, agents themselves are software
+   components that require execution within the continuum; therefore,
+   their deployment must also be considered, subject to the same
+   placement criteria as application functions.  The following
+   discussion examines these two roles sequentially.
+
+9.1.  Agents as Enablers of the Deployment Process
+
+   In their first role, AI agents support deploying the services that
+   comprise a smart application across the IoT computing continuum.
+   Given a logical application graph and a set of available execution
+   environments, agents can evaluate candidate mappings of functions to
+   continuum stages, taking into account application-level requirements
+   such as latency, resilience, energy consumption, and data locality,
+   as well as runtime observations of infrastructure conditions.  Beyond
+   initial placement, agents can drive lifecycle operations, including
+   reconfiguration, scaling, migration, and partial redeployment, in
+   response to workload variations, mobility, connectivity disruptions,
+   or evolving physical contexts.
+
+   A concrete example arises in the deployment of inference workloads
+   based on large language models, where placement decisions must
+   balance latency, cost, and resilience to connectivity disruptions.
+   Preliminary work by the authors suggests that agent-driven adaptive
+   placement strategies can outperform static configurations,
+   particularly under variable demand or intermittent wide-area
+   connectivity.
+
+   Agent-assisted deployment does not presuppose a particular
+   coordination style.  A single agent with global visibility may
+   coordinate deployment decisions in an orchestration style, while
+   multiple agents interacting through shared rules may realize
+   deployment coordination in a choreography style.  Recent proposals
+   illustrate early attempts to standardize agent interaction semantics
+   in two styles: the Model Context Protocol [MCP] emphasizes
+   orchestration-style interactions between an agent and the tools or
+   services it invokes, while agent-to-agent interaction frameworks
+   [A2A] emphasize choreography-style interactions among peer agents
+   that coordinate without a central controller.  In practice, agents
+   distributed across the continuum communicate with one another at all
+   stages to coordinate deployment, exchanging information on local
+   resource availability, observed conditions, and pending deployment
+   actions.  This inter-agent communication allows deployment decisions
+   to reflect both local knowledge, available only near constrained
+   devices, and global objectives, maintained on cloud platforms, and
+   suggests that hybrid combinations of orchestration and choreography
+   may emerge naturally in agent-based deployment.
+
+9.2.  Deployment of the Agents Themselves
+
+   In their secondary role, agents function as deployable entities.  As
+   software components, they require execution environments that provide
+   sufficient computational power, memory, and connectivity.  Agents may
+   operate at any location within the IoT computing continuum, including
+   gateways, edge nodes, cloudlets, and cloud platforms.  The selected
+   deployment stage influences the timeliness of agent decisions, the
+   degree of local context awareness, and resilience to connectivity
+   disruptions.
+
+   Constrained devices necessitate special consideration, as many do not
+   possess sufficient resources to support a complete agent runtime.
+   Nevertheless, deployment strategies must often account for device-
+   level conditions.  A proxy-based approach addresses this challenge: a
+   lightweight proxy on the constrained device represents it to an agent
+   located at a proximate stage, such as a gateway or edge node, which
+   then performs reasoning on behalf of the device.  This method enables
+   agent-based deployment at even the most resource-limited stages of
+   the continuum, while adhering to the constraints outlined in
+   [I-D.ietf-iotops-7228bis].
+
+   Agent deployment exhibits a recursive nature, as the mechanisms used
+   by agents to deploy application functions are equally applicable to
+   the agents themselves.  The placement, migration, and lifecycle
+   management of agents present challenges analogous to those
+   encountered with application components, but also introduce
+   additional concerns regarding trust, accountability, and control,
+   particularly when agents operate autonomously across multiple
+   administrative domains.  The Research Directions section identifies
+   open questions associated with this dual role.
+
+10.  Relationship to Ongoing Research and Standardization
 
    The issues discussed in this document build on existing research and
    standardization efforts related to edge computing and the computing
@@ -678,7 +779,7 @@ Table of Contents
    complements these efforts by adopting an application-centric
    perspective on deployment and lifecycle management.
 
-10.  Research Directions
+11.  Research Directions
 
    The challenges and conceptual considerations discussed in this
    document point to several open research directions for smart
@@ -699,8 +800,8 @@ Table of Contents
    reasoning about placement, migration, and adaptation of application
    components across different stages of the IoT computing continuum,
    complementing existing architectural perspectives on edge computing
-   [RFC9556] and broader analyses of the computing continuum [CONTINUUM-
-   SURVEY].
+   [RFC9556] and broader analyses of the computing continuum
+   [CONTINUUM-SURVEY].
 
    A second research direction involves integrated approaches to
    application development and deployment.  In the IoT computing
@@ -739,41 +840,22 @@ Table of Contents
    limited resources, intermittent connectivity, and decentralized
    control across administrative domains.
 
-   An additional research direction concerns the role of software agents
-   in managing the deployment of smart applications across the IoT
-   computing continuum.  Placement, coordination, adaptation, and
-   lifecycle management involve decisions that are increasingly
-   difficult to capture with static policies, particularly when
-   application workloads exhibit heterogeneous, context-sensitive
-   behavior.  A concrete example arises in the deployment of inference
-   workloads based on large language models, where placement decisions
-   must balance latency, cost, and resilience to connectivity
-   disruptions.  Preliminary work by the authors suggests that adaptive
-   placement strategies driven by agents can outperform static
-   configurations, particularly under variable demand or intermittent
-   wide-area connectivity.
-
-   Beyond individual applications, the broader question of how agents
-   interact across administrative domains and heterogeneous environments
-   poses interoperability and control challenges relevant to Internet
-   architecture.  Foundational work on multi-agent systems [WOOLDRIDGE-
-   AGENTS] provides established abstractions for reasoning about agent
-   behavior.  More recent proposals illustrate early attempts to
-   standardize agent interaction semantics along the two coordination
-   styles discussed earlier in this document: the Model Context Protocol
-   [MCP] emphasizes orchestration-style interactions between an agent
-   and the tools or services it invokes, while agent-to-agent
-   interaction frameworks [A2A] emphasize choreography-style
-   interactions among peer agents coordinating without a central
-   controller.  These efforts remain evolving, but they highlight open
-   questions regarding how agent responsibilities should be distributed
-   between application-level and infrastructure-level concerns, how
-   agent interactions can be made secure, auditable, and aligned with
-   Internet architectural principles, and how orchestration and
-   choreography styles may be combined dynamically in deployed systems.
-   Further research is needed to explore how agent-based mechanisms can
-   complement application-centric deployment models in the IoT computing
-   continuum.
+   An additional research direction builds on the dual role of AI agents
+   in deployment discussed earlier in this document.  That discussion
+   raises open questions that remain largely unresolved: how agent
+   responsibilities should be distributed between application-level and
+   infrastructure-level concerns; how inter-agent interactions can be
+   made secure, auditable, and aligned with Internet architectural
+   principles, particularly when agents interact across administrative
+   domains and heterogeneous environments; how orchestration and
+   choreography styles may be combined dynamically in agent-based
+   deployment; and how the placement and lifecycle of the agents
+   themselves, including proxy-based representation of constrained
+   devices, can be managed without introducing new points of fragility
+   or centralization.  Emerging interaction frameworks such as [MCP] and
+   [A2A] remain evolving, and further research is needed to assess how
+   agent-based mechanisms can complement application-centric deployment
+   models in the IoT computing continuum.
 
    Finally, there is a broader need for shared terminology and
    conceptual frameworks that facilitate comparison across research
@@ -788,7 +870,7 @@ Table of Contents
    standardization efforts within the IRTF or the IETF may be
    beneficial.
 
-11.  Security Considerations
+12.  Security Considerations
 
    This document does not specify protocols, mechanisms, or
    architectures and therefore does not introduce new security
@@ -825,75 +907,74 @@ Table of Contents
    security considerations into research and standardization efforts
    related to application-centric deployment and lifecycle management.
 
-12.  IANA Considerations
+13.  IANA Considerations
 
    This document has no IANA actions.
 
-13.  Acknowledgments
+14.  Acknowledgments
 
    The authors would like to acknowledge CGI.br (Brazilian Internet
    Steering Committee) for its support through the IETF/IRTF
    participation program, which enabled engagement in research and
    discussions within the Internet Research Task Force (IRTF).
 
-14.  Informative References
+15.  Informative References
 
-15.  References
+   [A2A]      A2A Project, "Agent2Agent (A2A) Protocol", 2024,
+              <https://a2aproject.github.io/A2A/>.
 
-   *[A2A]* A2A Project, "Agent2Agent (A2A) Protocol", 2024,
-   https://a2aproject.github.io/A2A/ (https://a2aproject.github.io/
-   A2A/).
+   [CONTINUUM-SURVEY]
+              Bittencourt, L. F., Rodrigues-Filho, R., Spillner, J., De
+              Turck, F., Santos, J., da Fonseca, N. L. S., Rana, O.,
+              Parashar, M., and I. Foster, "The Computing Continuum:
+              Past, Present, and Future", Computer Science Review Vol.
+              58, Article 100782, DOI 10.1016/j.cosrev.2025.100782,
+              2025, <https://doi.org/10.1016/j.cosrev.2025.100782>.
 
-   *[CONTINUUM-SURVEY]* Bittencourt, L.  F., Rodrigues-Filho, R.,
-   Spillner, J., Turck, F.  D., Santos, J., Fonseca, N.  L.  S. da,
-   Rana, O., Parashar, M., and I.  Foster, "The Computing Continuum:
-   Past, Present, and Future", _Computer Science Review_, Elsevier, Vol.
-   58, Article 100782, DOI 10.1016/j.cosrev.2025.100782, 2025,
-   https://doi.org/10.1016/j.cosrev.2025.100782
-   (https://doi.org/10.1016/j.cosrev.2025.100782).
+   [I-D.ietf-iotops-7228bis]
+              Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
+              "Terminology for Constrained-Node Networks", Work in
+              Progress, Internet-Draft, draft-ietf-iotops-7228bis-10, 6
+              July 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-iotops-7228bis-10>.
 
-   *[I-D.ietf-iotops-7228bis]* Bormann, C., Ersue, M., Keränen, A., and
-   C.  Gomez, "Terminology for Constrained-Node Networks", Work in
-   Progress, Internet-Draft, draft-ietf-iotops-7228bis-07, 23 April
-   2026, https://datatracker.ietf.org/doc/html/draft-ietf-iotops-
-   7228bis-07 (https://datatracker.ietf.org/doc/html/draft-ietf-iotops-
-   7228bis-07).
+   [IOTDEPLOY]
+              Oliveira, F. B., Di Felice, M., and C. Kamienski,
+              "IoTDeploy: Deployment of IoT Smart Applications over the
+              Computing Continuum", Internet of Things Vol. 28, Article
+              101348, DOI 10.1016/j.iot.2024.101348, 2024,
+              <https://doi.org/10.1016/j.iot.2024.101348>.
 
-   *[IOTDEPLOY]* Oliveira, F.  B., Felice, M.  D., and C.  Kamienski,
-   "IoTDeploy: Deployment of IoT Smart Applications over the Computing
-   Continuum", _Internet of Things_, Elsevier, Vol. 28, Article 101348,
-   DOI 10.1016/j.iot.2024.101348, 2024, https://doi.org/10.1016/
-   j.iot.2024.101348 (https://doi.org/10.1016/j.iot.2024.101348).
+   [IOTINUUM] Kamienski, C., Zyrianoff, I., Bittencourt, L. F., and M.
+              Di Felice, "IoTinuum: The IoT Computing Continuum",
+              IEEE Proceedings of the 20th International Conference on
+              Distributed Computing in Smart Systems and the Internet of
+              Things (DCOSS-IoT), pp. 732-739, DOI 10.1109/DCOSS-
+              IoT61029.2024.00114, 2024,
+              <https://doi.org/10.1109/DCOSS-IoT61029.2024.00114>.
 
-   *[IOTINUUM]* Kamienski, C., Zyrianoff, I., Bittencourt, L.  F., and
-   M.  D.  Felice, "IoTinuum: The IoT Computing Continuum", _Proceedings
-   of the 20th International Conference on Distributed Computing in
-   Smart Systems and the Internet of Things (DCOSS-IoT)_, IEEE, pp.
-   732-739, DOI 10.1109/DCOSS-IoT61029.2024.00114, 2024,
-   https://doi.org/10.1109/DCOSS-IoT61029.2024.00114
-   (https://doi.org/10.1109/DCOSS-IoT61029.2024.00114).
+   [MCP]      Anthropic, "Model Context Protocol Specification", 2024,
+              <https://modelcontextprotocol.io/>.
 
-   *[MCP]* Anthropic, "Model Context Protocol Specification", 2024,
-   https://modelcontextprotocol.io/ (https://modelcontextprotocol.io/).
+   [RFC7452]  Tschofenig, H., Arkko, J., Thaler, D., and D. McPherson,
+              "Architectural Considerations in Smart Object Networking",
+              RFC 7452, DOI 10.17487/RFC7452, March 2015,
+              <https://www.rfc-editor.org/rfc/rfc7452>.
 
-   *[RFC7452]* Tschofenig, H., Arkko, J., Thaler, D., and D.  McPherson,
-   "Architectural Considerations in Smart Object Networking", RFC 7452,
-   DOI 10.17487/RFC7452, March 2015, https://www.rfc-editor.org/rfc/
-   rfc7452 (https://www.rfc-editor.org/rfc/rfc7452).
+   [RFC9556]  Hong, J., Hong, Y., de Foy, X., Kovatsch, M., Schooler,
+              E., and D. Kutscher, "Internet of Things (IoT) Edge
+              Challenges and Functions", RFC 9556, DOI 10.17487/RFC9556,
+              April 2024, <https://www.rfc-editor.org/rfc/rfc9556>.
 
-   *[RFC9556]* Hong, J., Hong, Y., de Foy, X., Kovatsch, M., Schooler,
-   E., and D.  Kutscher, "Internet of Things (IoT) Edge Challenges and
-   Functions", RFC 9556, DOI 10.17487/RFC9556, April 2024,
-   https://www.rfc-editor.org/rfc/rfc9556 (https://www.rfc-
-   editor.org/rfc/rfc9556).
+   [WOOLDRIDGE-AGENTS]
+              Wooldridge, M., "An Introduction to MultiAgent Systems",
+              John Wiley and Sons 2nd Edition, 2009.
 
-   *[WOOLDRIDGE-AGENTS]* Wooldridge, M., _An Introduction to MultiAgent
-   Systems_, 2nd Edition, John Wiley and Sons, 2009.
-
-   *[WPIETF2025]* Kamienski, C.  A. and M.  A.  B.  Santos, "Smart
-   Application Deployment over the IoT Computing Continuum", _Workshop
-   de Pesquisa em Internet do Futuro (WPIETF)_, Sociedade Brasileira de
-   Computacao (SBC), 2025.  Available via SBC Open Library (SOL).
+   [WPIETF2025]
+              Kamienski, C. A. and M. A. B. Santos, "Smart Application
+              Deployment over the IoT Computing Continuum",
+              WPIETF Workshop Pre-IETF/IRTF, Brazilian Computer Society
+              (SBC), available via SBC Open Library (SOL), 2025.
 
 Authors' Addresses
 
