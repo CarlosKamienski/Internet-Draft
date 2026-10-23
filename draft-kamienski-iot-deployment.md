@@ -121,6 +121,15 @@ informative:
       DOI: "10.1109/TITS.2023.3329029"
     target: "https://doi.org/10.1109/TITS.2023.3329029"
 
+  AGENTPROTO:
+    title: "Agent Communication Protocols Working Group Charter"
+    author:
+      - org: "IETF"
+    date: 2026-10-08
+    seriesinfo:
+      Charter: "charter-ietf-agentproto-01"
+    target: "https://datatracker.ietf.org/doc/charter-ietf-agentproto/01/"
+
   A2A:
     title: "Agent2Agent (A2A) Protocol"
     author:
@@ -401,7 +410,11 @@ In their first role, AI agents support deploying the services that comprise a sm
 
 A concrete example arises in deploying inference workloads based on large language models, where placement decisions must balance latency, cost, and resilience to connectivity disruptions. Preliminary work by the authors suggests that agent-driven adaptive placement strategies can outperform static configurations, particularly under variable demand or intermittent wide-area connectivity.
 
-Agent-assisted deployment does not presuppose a particular coordination style. A single agent with global visibility may coordinate deployment decisions in an orchestration style, while multiple agents interacting through shared rules may realize deployment coordination in a choreography style. Recent proposals illustrate early attempts to standardize agent interaction semantics in two styles: the Model Context Protocol {{MCP}} emphasizes orchestration-style interactions between an agent and the tools or services it invokes, while agent-to-agent interaction frameworks {{A2A}} emphasize choreography-style interactions among peer agents that coordinate without a central controller. In practice, agents distributed across the continuum communicate at all stages to coordinate deployment, exchanging information on local resource availability, observed conditions, and pending deployment actions. This inter-agent communication allows deployment decisions to reflect both local knowledge, available only near constrained devices, and global objectives maintained on cloud platforms, suggesting that hybrid combinations of orchestration and choreography may emerge naturally in agent-based deployment.
+Agent-assisted deployment does not presuppose a particular coordination style. A single agent with global visibility may coordinate deployment decisions in an orchestration style, while multiple agents interacting through shared rules may realize deployment coordination in a choreography style. The Model Context Protocol {{MCP}} supports interactions between applications and tools or contextual resources, while the Agent2Agent protocol {{A2A}} supports interactions among agents. Neither protocol, by itself, determines whether an application follows orchestration, choreography, or a hybrid arrangement; that choice depends on the distribution of coordination logic and decision authority.
+
+The IETF Agent Communication Protocols (agentproto) Working Group {{AGENTPROTO}} addresses a complementary concern: the correlation, lifecycle, and continuity of agentic dialogs across participants, intermediaries, and trust boundaries. Such capabilities are relevant when deployment agents exchange observations and actions across the continuum, including when an interaction resumes after interruption, or a participant changes network attachment. Dialog management does not itself preserve application state or guarantee the completion of a deployment action. The group's charter does not standardize agent decision-making or planning semantics, and therefore does not determine placement policies or the application's coordination style.
+
+Agents distributed across the continuum may exchange information on local resource availability, observed conditions, and pending deployment actions. These interactions can combine local knowledge available near constrained devices with global objectives maintained on cloud platforms. Their use requires distinguishing communication and dialog continuity from the application-level rules that govern deployment decisions and recovery.
 
 ## Deployment of the Agents Themselves
 
@@ -435,6 +448,12 @@ For example, an application may place filtering, aggregation, or preprocessing i
 This connection is distinct from the relationship to CoRE described above. CoRE discovery and management mechanisms are relevant to finding and managing constrained resources and their interfaces. On the other hand, COIN concerns using network elements as execution environments. The two perspectives can complement each other, but the model does not assume that an in-network execution environment exposes a CoRE interface.
 
 NMRG's work on intent-based networking, including the concepts and definitions in {{RFC9315}}, is relevant to expressing desired outcomes separately from operational actions. A research question here is how application objectives, such as retaining local behavior during disconnection, can be translated into deployment constraints and checked against observed behavior. This document does not specify such a mapping.
+
+## Agent Communication and Dialog Management
+
+The agentproto Working Group {{AGENTPROTO}} is chartered to define a baseline agentic dialog management protocol and a reference architecture integrating related protocol building blocks. Its scope includes dialog identifiers, lifecycle semantics, and propagation of dialog context over existing IETF protocols. Here, dialog context refers to identifiers and lifecycle state used for correlation and continuity, rather than model prompts, retrieved documents, or conversation memory.
+
+This work is relevant to agents that coordinate deployment across heterogeneous execution environments and administrative boundaries. Correlating interactions and maintaining dialogs through interruptions can support exchanges among agents, operators, and tools in either orchestrated or choreographed applications. The relationship is complementary: this document considers which functions and agents execute where, how their responsibilities are coordinated, and how application behavior is preserved. Agentproto addresses interoperability of the dialogs used in those interactions. Its charter explicitly leaves agent decision-making and planning semantics outside its scope and does not replace application-layer protocols such as MCP or A2A. A migration of an application function or agent therefore still requires separate handling of execution state, authority, and application recovery.
 
 ## Descriptions of Things and Application Abstractions
 
