@@ -97,7 +97,8 @@ Table of Contents
    10. Relationship to Ongoing Research and Standardization
      10.1.  Device Update, Discovery, and Management
      10.2.  Computing in the Network and Intent
-     10.3.  Descriptions of Things and Application Abstractions
+     10.3.  Agent Communication and Dialog Management
+     10.4.  Descriptions of Things and Application Abstractions
    11. Research Directions
    12. Security Considerations
    13. IANA Considerations
@@ -733,21 +734,33 @@ Table of Contents
    coordination style.  A single agent with global visibility may
    coordinate deployment decisions in an orchestration style, while
    multiple agents interacting through shared rules may realize
-   deployment coordination in a choreography style.  Recent proposals
-   illustrate early attempts to standardize agent interaction semantics
-   in two styles: the Model Context Protocol [MCP] emphasizes
-   orchestration-style interactions between an agent and the tools or
-   services it invokes, while agent-to-agent interaction frameworks
-   [A2A] emphasize choreography-style interactions among peer agents
-   that coordinate without a central controller.  In practice, agents
-   distributed across the continuum communicate at all stages to
-   coordinate deployment, exchanging information on local resource
-   availability, observed conditions, and pending deployment actions.
-   This inter-agent communication allows deployment decisions to reflect
-   both local knowledge, available only near constrained devices, and
-   global objectives maintained on cloud platforms, suggesting that
-   hybrid combinations of orchestration and choreography may emerge
-   naturally in agent-based deployment.
+   deployment coordination in a choreography style.  The Model Context
+   Protocol [MCP] supports interactions between applications and tools
+   or contextual resources, while the Agent2Agent protocol [A2A]
+   supports interactions among agents.  Neither protocol, by itself,
+   determines whether an application follows orchestration,
+   choreography, or a hybrid arrangement; that choice depends on the
+   distribution of coordination logic and decision authority.
+
+   The IETF Agent Communication Protocols (agentproto) Working Group
+   [AGENTPROTO] addresses a complementary concern: the correlation,
+   lifecycle, and continuity of agentic dialogs across participants,
+   intermediaries, and trust boundaries.  Such capabilities are relevant
+   when deployment agents exchange observations and actions across the
+   continuum, including when an interaction resumes after interruption,
+   or a participant changes network attachment.  Dialog management does
+   not itself preserve application state or guarantee the completion of
+   a deployment action.  The group's charter does not standardize agent
+   decision-making or planning semantics, and therefore does not
+   determine placement policies or the application's coordination style.
+
+   Agents distributed across the continuum may exchange information on
+   local resource availability, observed conditions, and pending
+   deployment actions.  These interactions can combine local knowledge
+   available near constrained devices with global objectives maintained
+   on cloud platforms.  Their use requires distinguishing communication
+   and dialog continuity from the application-level rules that govern
+   deployment decisions and recovery.
 
 9.2.  Deployment of the Agents Themselves
 
@@ -869,7 +882,33 @@ Table of Contents
    checked against observed behavior.  This document does not specify
    such a mapping.
 
-10.3.  Descriptions of Things and Application Abstractions
+10.3.  Agent Communication and Dialog Management
+
+   The agentproto Working Group [AGENTPROTO] is chartered to define a
+   baseline agentic dialog management protocol and a reference
+   architecture integrating related protocol building blocks.  Its scope
+   includes dialog identifiers, lifecycle semantics, and propagation of
+   dialog context over existing IETF protocols.  Here, dialog context
+   refers to identifiers and lifecycle state used for correlation and
+   continuity, rather than model prompts, retrieved documents, or
+   conversation memory.
+
+   This work is relevant to agents that coordinate deployment across
+   heterogeneous execution environments and administrative boundaries.
+   Correlating interactions and maintaining dialogs through
+   interruptions can support exchanges among agents, operators, and
+   tools in either orchestrated or choreographed applications.  The
+   relationship is complementary: this document considers which
+   functions and agents execute where, how their responsibilities are
+   coordinated, and how application behavior is preserved.  Agentproto
+   addresses interoperability of the dialogs used in those interactions.
+   Its charter explicitly leaves agent decision-making and planning
+   semantics outside its scope and does not replace application-layer
+   protocols such as MCP or A2A.  A migration of an application function
+   or agent therefore still requires separate handling of execution
+   state, authority, and application recovery.
+
+10.4.  Descriptions of Things and Application Abstractions
 
    The Semantic Definition Format (SDF) [RFC9880] describes data and
    interaction models of Things.  W3C WoT Thing Descriptions [WOT-TD]
@@ -1029,6 +1068,12 @@ Table of Contents
 
    [A2A]      A2A Project, "Agent2Agent (A2A) Protocol", 2024,
               <https://a2aproject.github.io/A2A/>.
+
+   [AGENTPROTO]
+              IETF, "Agent Communication Protocols Working Group
+              Charter", Charter charter-ietf-agentproto-01, 8 October
+              2026, <https://datatracker.ietf.org/doc/charter-ietf-
+              agentproto/01/>.
 
    [COINRG]   IRTF, "Computing in the Network Research Group Charter",
               n.d.,
