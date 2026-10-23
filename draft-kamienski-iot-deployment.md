@@ -482,5 +482,3 @@ This document has no IANA actions.
 # Acknowledgments
 
 The authors acknowledge CGI.br (Brazilian Internet Steering Committee) for its support through the IETF/IRTF participation program, which enabled engagement in research and discussions within the Internet Research Task Force (IRTF).
-
-
