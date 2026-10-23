@@ -232,7 +232,7 @@ From an application perspective, smart services are no longer confined to a sing
 
 The lack of a shared, application-centric view of deployment over the IoT computing continuum creates challenges for both researchers and practitioners. It complicates systematic reasoning about application structure, hinders the comparison of alternative approaches, and makes it difficult to identify common requirements that could inform future research and standardization activities. 
 
-This document contributes to this discussion by examining smart application deployment across the IoT computing continuum from a conceptual and architectural perspective. Rather than proposing specific mechanisms or protocols, it focuses on identifying key challenges, clarifying terminology, and outlining considerations relevant to ongoing research within the Thing-to-Thing Research Group (T2TRG) of the Internet Research Task Force (IRTF).
+This document contributes to this discussion by examining smart application deployment across the IoT computing continuum from a conceptual and architectural perspective. Rather than proposing specific mechanisms or protocols, it identifies key challenges, clarifies terminology, and outlines considerations relevant to ongoing research within the Thing-to-Thing Research Group (T2TRG) of the Internet Research Task Force (IRTF).
 
 # Scope and Non-Goals
 
