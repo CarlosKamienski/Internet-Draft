@@ -229,6 +229,23 @@ informative:
       DOI: "10.5753/wpietf.2025.17508"
     target: "https://doi.org/10.5753/wpietf.2025.17508"
 
+  METROAGRIFOR2025:
+    title: "Distributed Smart Agriculture Monitoring over the IoT Computing Continuum"
+    author:
+      - ins: "C. Kamienski"
+        name: "Carlos Kamienski"
+      - ins: "I. Zyrianoff"
+        name: "Ivan Zyrianoff"
+      - ins: "L. Xue"
+        name: "Lei Xue"
+      - ins: "M. Di Felice"
+        name: "Marco Di Felice"
+    date: 2025
+    seriesinfo:
+      "2025 IEEE International Workshop on Metrology for Agriculture and Forestry (MetroAgriFor)": "pp. 406-411"
+      DOI: "10.1109/MetroAgriFor66923.2025.11512449"
+    target: "https://doi.org/10.1109/MetroAgriFor66923.2025.11512449"    
+
 --- abstract
 
 Smart applications increasingly depend on the Internet of Things (IoT) and distributed computing environments spanning constrained devices, edge nodes, cloudlets, and cloud infrastructure, collectively known as the edge-cloud, or computing continuum. This document uses the term IoT computing continuum to highlight the importance of IoT-specific constraints and requirements within this broader context. Although prior work has addressed communication aspects and edge functions in these environments, as noted in RFC 9556 and comprehensive surveys of the computing continuum, there has been comparatively less focus on application-centric issues such as deployment, placement, and lifecycle management. This document identifies key challenges and conceptual considerations for deploying smart applications across the IoT computing continuum, aiming to provide a unified architectural perspective and vocabulary to guide ongoing research within the IRTF and inform future standardization initiatives.
@@ -266,8 +283,9 @@ In particular, the following items are explicitly outside the scope of this docu
    *  The standardization of specific platforms, frameworks, or
       programming models for IoT application deployment.
 
-   *  Detailed performance evaluations or quantitative comparisons
-      between alternative solutions.
+   *  Performance evaluations or quantitative comparisons between
+      alternative solutions. Where this document mentions quantitative
+      results, it does so only by reference to published work.
 
 By clearly delineating its scope and non-goals, this document complements existing and ongoing efforts in the computing continuum, including work on communication, edge functions, and operational aspects, while maintaining a technology-agnostic, application-centric perspective.
 
@@ -435,9 +453,9 @@ Agent deployment is recursive: the mechanisms agents use to deploy application f
 
 The issues discussed in this document build on existing research and standardization efforts on edge computing and the computing continuum, including work within the IETF and IRTF (e.g., {{RFC9556}}) and broader academic perspectives (e.g., {{CONTINUUM-SURVEY}}). Within the IRTF, the T2TRG has explored programmability, coordination, and interoperability among connected devices.
 
-Several concrete research efforts have examined application-centric aspects of the IoT computing continuum and informed the perspective adopted in this document. Work on the notion of an IoT computing continuum as a unifying framework for reasoning about development and deployment choices has clarified the role of distributed application stages {{IOTINUUM}}. Complementary work on deployment-aware approaches, such as IoTDeploy, has explored how application components can be systematically placed and migrated across continuum stages while preserving application-level properties {{IOTDEPLOY}}. More recent efforts have investigated integrated frameworks for developing and deploying continuum-aware smart applications, providing concrete examples of how application-centric abstractions can be realized in practice. These efforts are cited here as representative of ongoing work in the area, not as prescriptive references; this document remains agnostic to specific frameworks or implementations.
+Several concrete research efforts have examined application-centric aspects of the IoT computing continuum and informed the perspective adopted in this document. Work on the notion of an IoT computing continuum as a unifying framework for reasoning about development and deployment choices has clarified the role of distributed application stages {{IOTINUUM}}. Complementary work on deployment-aware approaches, such as IoTDeploy, has explored how application components can be systematically placed and migrated across continuum stages while preserving application-level properties {{IOTDEPLOY}}. More recent efforts have investigated integrated frameworks for developing and deploying continuum-aware smart applications {{WPIETF2025}} {{METROAGRIFOR2025}}, providing concrete examples of how application-centric abstractions can be realized in practice. These efforts are cited here as representative of ongoing work in the area, not as prescriptive references, and this document remains agnostic to specific frameworks or implementations.
 
-Community-driven efforts, including workshops focused on future Internet research, have also discussed application deployment over the IoT computing continuum in the context of IETF and IRTF engagement, as exemplified by {{WPIETF2025}}. This document complements these efforts by adopting an application-centric perspective on deployment and lifecycle management.
+Community-driven efforts, including workshops focused on future Internet research, have also discussed application deployment over the IoT computing continuum in the context of IETF and IRTF engagement, as exemplified by {{WPIETF2025}}. This document complements these efforts by taking an application-centric view of deployment and lifecycle management.
 
 ## Device Update, Discovery, and Management
 
