@@ -57,14 +57,7 @@ informative:
 
   RFC9880:
 
-  CORE-COMI:
-    title: "CoAP Management Interface (CORECONF)"
-    author:
-      - org: "IETF CoRE Working Group"
-    date: 2026-03-02
-    seriesinfo:
-      Internet-Draft: "draft-ietf-core-comi-21"
-    target: "https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-21"
+  I-D.ietf-core-comi:
 
   COINRG:
     title: "Computing in the Network Research Group Charter"
