@@ -1,7 +1,7 @@
 ---
 
 title: "Application-Centric Considerations for Deployment over the IoT Computing Continuum"
-abbrev: "IoTinummDeploy"
+abbrev: "IoT Continuum Deployment"
 category: info
 
 docname: draft-kamienski-iot-deployment-latest
@@ -17,10 +17,10 @@ keyword:
  - Computing Continuum
  - Service Deployment
 venue:
-#  group: RG
-#  type: Research Group
-#  mail: WG@example.com
-#  arch: https://example.com/WG
+  group: Thing-to-Thing
+  type: Research Group
+  mail: t2trg@irtf.org
+  arch: https://mailarchive.ietf.org/arch/browse/t2trg/
   github: "CarlosKamienski/Internet-Draft"
   latest: "https://CarlosKamienski.github.io/Internet-Draft/draft-kamienski-iot-deployment.html"
 
@@ -30,11 +30,13 @@ author:
     organization: Federal University of ABC (UFABC)
     email: carlos.kamienski@ufabc.edu.br
  -
-    fullname: Marco Santos
+    fullname: Marcelo Anderson Batista dos Santos
+    ins: M. A. B. Santos
     organization: Federal Institute of Sertão (IFSertão)
     email: marcelo.santos@ifsertao-pe.edu.br
  -
     fullname: Marco Di Felice
+    ins: M. Di Felice
     organization: University of Bologna
     email: marco.difelice3@unibo.it
 
@@ -218,7 +220,7 @@ informative:
 
 --- abstract
 
-Smart applications increasingly depend on the Internet of Things (IoT) and distributed computing environments spanning constrained devices, edge nodes, cloudlets, and cloud infrastructure, collectively known as the edge–cloud, or computing continuum. This document uses the term IoT computing continuum to highlight the importance of IoT-specific constraints and requirements within this broader context. Although prior work has addressed communication aspects and edge functions in these environments, as noted in RFC 9556 and comprehensive surveys of the computing continuum, there has been comparatively less focus on application-centric issues such as deployment, placement, and lifecycle management. This document identifies key challenges and conceptual considerations for deploying smart applications across the IoT computing continuum, aiming to provide a unified architectural perspective and vocabulary to guide ongoing research within the IRTF and inform future standardization initiatives.
+Smart applications increasingly depend on the Internet of Things (IoT) and distributed computing environments spanning constrained devices, edge nodes, cloudlets, and cloud infrastructure, collectively known as the edge-cloud, or computing continuum. This document uses the term IoT computing continuum to highlight the importance of IoT-specific constraints and requirements within this broader context. Although prior work has addressed communication aspects and edge functions in these environments, as noted in RFC 9556 and comprehensive surveys of the computing continuum, there has been comparatively less focus on application-centric issues such as deployment, placement, and lifecycle management. This document identifies key challenges and conceptual considerations for deploying smart applications across the IoT computing continuum, aiming to provide a unified architectural perspective and vocabulary to guide ongoing research within the IRTF and inform future standardization initiatives.
 
 --- middle
 
@@ -393,7 +395,7 @@ Together, these two scenarios illustrate the spectrum of smart applications that
 
 # The Role of AI Agents in Application Deployment
 
-The previously discussed conceptual deployment model considers placement, coordination, and lifecycle management as interconnected and inherently dynamic concerns. As the scale, heterogeneity, and dynamism of the Internet of Things (IoT) computing continuum increase, addressing these concerns through static policies or manual procedures becomes increasingly challenging, especially when application workloads demonstrate heterogeneous and context-sensitive behavior. AI agents, defined as autonomous software entities capable of perceiving their environment, reasoning about objectives, and acting upon deployment infrastructure, present a promising solution for managing this complexity. Foundational research on multi-agent systems {{WOOLDRIDGE-AGENTS}} offers established abstractions for understanding agent behavior. This section analyzes the role of such agents from an application-centric perspective, without specifying particular agent architectures, frameworks, or protocols.
+The previously discussed conceptual deployment model considers placement, coordination, and lifecycle management as interconnected and inherently dynamic concerns. As the scale, heterogeneity, and dynamism of IoT computing continuum increase, addressing these concerns through static policies or manual procedures becomes increasingly challenging, especially when application workloads demonstrate heterogeneous and context-sensitive behavior. AI agents, defined as autonomous software entities capable of perceiving their environment, reasoning about objectives, and acting upon deployment infrastructure, present a promising solution for managing this complexity. Foundational research on multi-agent systems {{WOOLDRIDGE-AGENTS}} offers established abstractions for understanding agent behavior. This section analyzes the role of such agents from an application-centric perspective, without specifying particular agent architectures, frameworks, or protocols.
 
 AI agents are connected to application deployment in two complementary ways. First, agents can facilitate the deployment process by assisting with or automating decisions regarding the placement, coordination, adaptation, and lifecycle management of application functions. Second, agents themselves are software components that require execution within the continuum. Therefore, their deployment must also be considered, subject to the same placement criteria as application functions. The following discussion examines these two roles sequentially.
 
