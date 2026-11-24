@@ -194,7 +194,7 @@ informative:
       DOI: "10.1109/DCOSS-IoT61029.2024.00114"
     target: "https://doi.org/10.1109/DCOSS-IoT61029.2024.00114"
 
- MCP:
+  MCP:
     title: "Model Context Protocol (MCP)"
     author:
       - org: "Agentic AI Foundation (AAIF)"
@@ -329,7 +329,7 @@ The IoT computing continuum introduces challenges that fundamentally affect both
 
 A primary challenge stems from the bidirectional influence between application development and deployment constraints. Development decisions, such as functional decomposition, communication patterns, and state management, directly affect deployment feasibility across constrained devices, edge nodes, and cloud platforms.
 
-At the same time, deployment realities, resource availability, network conditions, latency requirements, and energy constraints, often impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.
+At the same time, deployment realities, such as resource availability, network conditions, latency requirements, and energy constraints, often impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.
 
 Heterogeneity across the continuum further amplifies this challenge. Execution environments vary widely in hardware capabilities, operating systems, runtime support, and management interfaces. Developers must therefore anticipate deployment diversity early in development, while deployment mechanisms must accommodate application abstractions that span multiple platforms.
 
@@ -394,17 +394,17 @@ Deployment decisions in this scenario are also inherently dynamic. As drones mov
 
 ## Discussion
 
-Together, these two scenarios illustrate the spectrum of smart applications that operate over the IoT computing continuum. The first grounds the discussion in operational deployments with documented constraints, particularly around intermittent connectivity and the need for resilient edge behavior. The second reveals the broader architectural space where placement, coordination, and lifecycle concerns fully manifest, including the explicit coexistence of orchestration and choreography within a single application. Both share the fundamental property that application behavior emerges from the coordinated execution of distributed functions across heterogeneous stages, reinforcing the need for application-centric perspectives on deployment and lifecycle management.
+Together, these two scenarios illustrate the spectrum of smart applications operating across the IoT computing continuum. The first grounds the discussion in operational deployments with documented constraints, particularly around intermittent connectivity and the need for resilient edge behavior. The second reveals the broader architectural space where placement, coordination, and lifecycle concerns fully manifest, including the explicit coexistence of orchestration and choreography within a single application. Both share the fundamental property that application behavior emerges from the coordinated execution of distributed functions across heterogeneous stages, reinforcing the need for application-centric perspectives on deployment and lifecycle management.
 
 # The Role of AI Agents in Application Deployment
 
-The previously discussed conceptual deployment model considers placement, coordination, and lifecycle management as interconnected and inherently dynamic concerns. As the scale, heterogeneity, and dynamism of IoT computing continuum increase, addressing these concerns through static policies or manual procedures becomes increasingly challenging, especially when application workloads demonstrate heterogeneous and context-sensitive behavior. AI agents, defined as autonomous software entities capable of perceiving their environment, reasoning about objectives, and acting upon deployment infrastructure, present a promising solution for managing this complexity. Foundational research on multi-agent systems {{WOOLDRIDGE-AGENTS}} offers established abstractions for understanding agent behavior. This section analyzes the role of such agents from an application-centric perspective, without specifying particular agent architectures, frameworks, or protocols.
+The previously discussed conceptual deployment model treats placement, coordination, and lifecycle management as interconnected, inherently dynamic concerns. As the scale, heterogeneity, and dynamism of the IoT computing continuum increase, addressing these concerns through static policies or manual procedures becomes increasingly challenging, especially when application workloads exhibit heterogeneous, context-sensitive behavior. AI agents, defined as autonomous software entities that can perceive their environment, reason about objectives, and act on deployment infrastructure, offer a promising solution for managing this complexity. Foundational research on multi-agent systems {{WOOLDRIDGE-AGENTS}} offers established abstractions for understanding agent behavior. This section analyzes the role of such agents from an application-centric perspective, without specifying particular agent architectures, frameworks, or protocols.
 
 AI agents are connected to application deployment in two complementary ways. First, agents can facilitate deployment by assisting with or automating decisions about the placement, coordination, adaptation, and lifecycle management of application functions. Second, agents themselves are software components that require execution within the continuum. Therefore, their deployment must also be considered under the same placement criteria as application functions. The following discussion examines these two roles sequentially.
 
 ## Agents as Enablers of the Deployment Process
 
-In their first role, AI agents support deploying the services that comprise a smart application across the IoT computing continuum. Given a logical application graph and a set of available execution environments, agents can evaluate candidate mappings of functions to continuum stages, considering application-level requirements such as latency, resilience, energy consumption, and data locality, as well as runtime observations of infrastructure conditions. Beyond initial placement, agents can drive lifecycle operations, including reconfiguration, scaling, migration, and partial redeployment, in response to workload variations, mobility, connectivity disruptions, or evolving physical contexts.
+In this first role, AI agents support the deployment of the services that comprise a smart application across the IoT computing continuum. Given a logical application graph and a set of available execution environments, agents can evaluate candidate mappings of functions to continuum stages, considering application-level requirements such as latency, resilience, energy consumption, and data locality, as well as runtime observations of infrastructure conditions. Beyond initial placement, agents can drive lifecycle operations, including reconfiguration, scaling, migration, and partial redeployment, in response to workload variations, mobility, connectivity disruptions, or evolving physical contexts.
 
 A concrete example arises in deploying inference workloads based on large language models, where placement decisions must balance latency, cost, and resilience to connectivity disruptions. Preliminary work by the authors suggests that agent-driven adaptive placement strategies can outperform static configurations, particularly under variable demand or intermittent wide-area connectivity.
 
