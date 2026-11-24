@@ -59,6 +59,14 @@ informative:
 
   RFC9880:
 
+  RFC8693:
+
+  RFC9200:
+
+  RFC9334:
+
+  RFC9943:
+
   I-D.ietf-core-comi:
 
   COINRG:
@@ -482,11 +490,13 @@ Informational documents that clarify the problem space, such as this one, can he
 
 This document does not specify protocols, mechanisms, or architectures and therefore does not directly introduce new security vulnerabilities. However, the concepts discussed have important security implications worth considering.
 
-In the IoT computing continuum, application components are distributed across heterogeneous and potentially untrusted execution environments, increasing the attack surface and complicating traditional security assumptions. Deployment decisions influence trust boundaries, data exposure, and the ability to isolate faults or compromised components.
+In the IoT computing continuum, application components are distributed across heterogeneous and potentially untrusted execution environments, increasing the attack surface and complicating traditional security assumptions. Deployment decisions influence trust boundaries, data exposure, and the ability to isolate faults or compromised components. Remote attestation {{RFC9334}} is one way placement decisions can incorporate evidence about the state of a candidate execution environment, although many constrained devices lack the hardware support it requires.
 
 Coordination strategies also have security implications. Orchestration-based approaches may introduce centralized control points that attackers can target, while choreography-based approaches rely on decentralized interactions that require robust authentication, authorization, and trust management among components.
 
 The tight coupling between development and deployment further emphasizes the need to consider security throughout the application lifecycle. Deployment changes, component migration, or runtime adaptation can invalidate design-time assumptions about trust, isolation, and access control. As a result, security considerations must be revisited whenever application structure, placement, or coordination strategies evolve.
+
+Agents that place or migrate functions ({{agents}}) introduce two additional considerations. The first is authorization. When an agent acts on behalf of a party, any placement or migration spanning administrative domains requires each affected domain to verify who authorized the agent, for which functions and execution environments, and for how long the authorization is valid. Delegation mechanisms such as OAuth 2.0 Token Exchange {{RFC8693}} and their adaptation for constrained environments in ACE {{RFC9200}} may provide a means to express such scoped authority. However, whether they are adequate for agent-initiated deployment actions is still unclear. The second consideration is accountability. Autonomous deployment decisions need to be recorded, along with the observations and objectives that led to them, so operators in each affected domain can review them afterward. Transparency logs of signed statements, as defined for digital supply chains in {{RFC9943}}, suggest one possible model, but whether it suits deployment decisions remains an open question.
 
 Finally, the distributed, multi-domain nature of the IoT computing continuum raises challenges in identity management, secure communication, and policy enforcement across administrative boundaries. While this document does not address these challenges, they underscore the need to integrate security considerations into research and standardization efforts for application-centric deployment and lifecycle management.
 
