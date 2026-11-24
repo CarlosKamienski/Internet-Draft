@@ -65,7 +65,10 @@ informative:
     title: "Computing in the Network Research Group Charter"
     author:
       - org: "IRTF"
-    target: "https://datatracker.ietf.org/doc/charter-irtf-coinrg/"
+    date: 2019-08-21
+    seriesinfo:
+      Charter: "charter-irtf-coinrg-01"
+    target: "https://datatracker.ietf.org/doc/charter-irtf-coinrg/01/"
 
   WOT-TD:
     title: "Web of Things (WoT) Thing Description 1.1"
@@ -128,9 +131,9 @@ informative:
   A2A:
     title: "Agent2Agent (A2A) Protocol"
     author:
-      - org: "A2A Project"
-    date: 2024
-    target: "https://a2aproject.github.io/A2A/"
+      - org: "Agentic AI Foundation (AAIF)"
+    date: 2026
+    target: "https://aaif.io/projects/agent2agent"
 
   CONTINUUM-SURVEY:
     title: "The Computing Continuum: Past, Present, and Future"
@@ -191,12 +194,12 @@ informative:
       DOI: "10.1109/DCOSS-IoT61029.2024.00114"
     target: "https://doi.org/10.1109/DCOSS-IoT61029.2024.00114"
 
-  MCP:
-    title: "Model Context Protocol Specification"
+ MCP:
+    title: "Model Context Protocol (MCP)"
     author:
-      - org: "Anthropic"
-    date: 2024
-    target: "https://modelcontextprotocol.io/"
+      - org: "Agentic AI Foundation (AAIF)"
+    date: 2026
+    target: "https://aaif.io/projects/model-context-protocol"
 
   WOOLDRIDGE-AGENTS:
     title: "An Introduction to MultiAgent Systems"
@@ -208,15 +211,15 @@ informative:
       "John Wiley and Sons": "2nd Edition"
 
   WPIETF2025:
-    title: "Smart Application Deployment over the IoT Computing Continuum"
+    title: "Smart Application Development and Deployment over the IoT Computing Continuum"
     author:
-      - ins: "C. A. Kamienski"
-        name: "C. A. Kamienski"
-      - ins: "M. A. B. Santos"
-        name: "M. A. B. Santos"
+      - ins: "C. Kamienski"
+        name: "Carlos Kamienski"
     date: 2025
     seriesinfo:
-      WPIETF: "Workshop Pre-IETF/IRTF, Brazilian Computer Society (SBC), available via SBC Open Library (SOL)"
+      "Proceedings of the 10th Pre-IETF Workshop (WPIETF 2025)": "Brazilian Computer Society (SBC), pp. 15-28"
+      DOI: "10.5753/wpietf.2025.17508"
+    target: "https://doi.org/10.5753/wpietf.2025.17508"
 
 --- abstract
 
@@ -240,7 +243,7 @@ This document contributes to this discussion by examining smart application depl
 
 # Scope and Non-Goals
 
-This document focuses on conceptual and architectural considerations for deploying smart applications across the IoT computing continuum. It focuses on challenges, common patterns, and terminology arising from distributed application logic across heterogeneous computing environments, including constrained IoT devices, edge nodes, and cloud platforms. The intent is to support research-oriented discussion and provide a shared frame of reference for ongoing and future IRTF work. The discussion explicitly considers the interplay between application development and deployment, while remaining agnostic to specific tools, workflows, or operational practices.
+This document focuses on conceptual and architectural considerations for deploying smart applications across the IoT computing continuum. It addresses challenges, common patterns, and terminology arising from distributed application logic across heterogeneous computing environments, including constrained IoT devices, edge nodes, and cloud platforms. The intent is to support research-oriented discussion and provide a shared frame of reference for ongoing and future IRTF work. The discussion explicitly considers the interplay between application development and deployment, while remaining agnostic to specific tools, workflows, or operational practices.
 
 The document does not specify concrete deployment mechanisms, protocols, or interfaces. It does not define a reference architecture or mandate how applications should be structured, deployed, or managed in practice. Instead, it describes the problem space and highlights issues relevant across multiple technologies, deployment models, and research efforts.
 
@@ -326,7 +329,7 @@ The IoT computing continuum introduces challenges that fundamentally affect both
 
 A primary challenge stems from the bidirectional influence between application development and deployment constraints. Development decisions, such as functional decomposition, communication patterns, and state management, directly affect deployment feasibility across constrained devices, edge nodes, and cloud platforms.
 
-At the same time, deployment realities, resource availability, network conditions, latency requirements, and energy constraints often impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.
+At the same time, deployment realities, resource availability, network conditions, latency requirements, and energy constraints, often impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.
 
 Heterogeneity across the continuum further amplifies this challenge. Execution environments vary widely in hardware capabilities, operating systems, runtime support, and management interfaces. Developers must therefore anticipate deployment diversity early in development, while deployment mechanisms must accommodate application abstractions that span multiple platforms.
 
@@ -397,7 +400,7 @@ Together, these two scenarios illustrate the spectrum of smart applications that
 
 The previously discussed conceptual deployment model considers placement, coordination, and lifecycle management as interconnected and inherently dynamic concerns. As the scale, heterogeneity, and dynamism of IoT computing continuum increase, addressing these concerns through static policies or manual procedures becomes increasingly challenging, especially when application workloads demonstrate heterogeneous and context-sensitive behavior. AI agents, defined as autonomous software entities capable of perceiving their environment, reasoning about objectives, and acting upon deployment infrastructure, present a promising solution for managing this complexity. Foundational research on multi-agent systems {{WOOLDRIDGE-AGENTS}} offers established abstractions for understanding agent behavior. This section analyzes the role of such agents from an application-centric perspective, without specifying particular agent architectures, frameworks, or protocols.
 
-AI agents are connected to application deployment in two complementary ways. First, agents can facilitate the deployment process by assisting with or automating decisions regarding the placement, coordination, adaptation, and lifecycle management of application functions. Second, agents themselves are software components that require execution within the continuum. Therefore, their deployment must also be considered, subject to the same placement criteria as application functions. The following discussion examines these two roles sequentially.
+AI agents are connected to application deployment in two complementary ways. First, agents can facilitate deployment by assisting with or automating decisions about the placement, coordination, adaptation, and lifecycle management of application functions. Second, agents themselves are software components that require execution within the continuum. Therefore, their deployment must also be considered under the same placement criteria as application functions. The following discussion examines these two roles sequentially.
 
 ## Agents as Enablers of the Deployment Process
 
@@ -413,11 +416,11 @@ Agents distributed across the continuum may exchange information on local resour
 
 ## Deployment of the Agents Themselves
 
-In their secondary role, agents function as deployable entities. As software components, they require execution environments that provide sufficient computational power, memory, and connectivity. Agents can operate anywhere in the IoT computing continuum, including gateways, edge nodes, cloudlets, and cloud platforms. The selected deployment stage influences the timeliness of agent decisions, the degree of local context awareness, and resilience to connectivity disruptions.
+In their second role, agents function as deployable entities. As software components, they require execution environments that provide sufficient computational power, memory, and connectivity. Agents can operate anywhere in the IoT computing continuum, including gateways, edge nodes, cloudlets, and cloud platforms. The selected deployment stage influences the timeliness of agent decisions, the degree of local context awareness, and resilience to connectivity disruptions.
 
 Constrained devices require special consideration, as many lack sufficient resources to support a full agent runtime. Nevertheless, deployment strategies must often account for device-level conditions. A proxy-based approach addresses this challenge: a lightweight proxy on the constrained device represents it to a nearby agent, such as a gateway or edge node, which then reasons on the device's behalf. This method enables agent-based deployment at even the most resource-limited stages of the continuum, while adhering to the constraints outlined in {{I-D.ietf-iotops-7228bis}}.
 
-Agent deployment is recursive: the mechanisms agents use to deploy application functions also apply to the agents themselves. The placement, migration, and lifecycle management of agents present challenges analogous to those for application components, but they also raise additional concerns about trust, accountability, and control, especially when agents operate autonomously across multiple administrative domains. The Research Directions section identifies open questions associated with this dual role.
+Agent deployment is recursive: the mechanisms agents use to deploy application functions also apply to the agents themselves. The placement, migration, and lifecycle management of agents present challenges analogous to those for application components, but they also raise additional concerns about trust, accountability, and control, especially when agents operate autonomously across multiple administrative domains. {{research-directions}} identifies open questions associated with this dual role.
 
 
 # Relationship to Ongoing Research and Standardization
