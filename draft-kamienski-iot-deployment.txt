@@ -715,8 +715,8 @@ Table of Contents
 
 9.1.  Agents as Enablers of the Deployment Process
 
-   In this first role, AI agents support the deployment of the services
-   that comprise a smart application across the IoT computing continuum.
+   In this first role, AI agents support deploying the services that
+   comprise a smart application across the IoT computing continuum.
    Given a logical application graph and a set of available execution
    environments, agents can evaluate candidate mappings of functions to
    continuum stages, considering application-level requirements such as
@@ -1034,7 +1034,10 @@ Table of Contents
    environments, increasing the attack surface and complicating
    traditional security assumptions.  Deployment decisions influence
    trust boundaries, data exposure, and the ability to isolate faults or
-   compromised components.
+   compromised components.  Remote attestation [RFC9334] is one way
+   placement decisions can incorporate evidence about the state of a
+   candidate execution environment, although many constrained devices
+   lack the hardware support it requires.
 
    Coordination strategies also have security implications.
    Orchestration-based approaches may introduce centralized control
@@ -1049,6 +1052,23 @@ Table of Contents
    isolation, and access control.  As a result, security considerations
    must be revisited whenever application structure, placement, or
    coordination strategies evolve.
+
+   Agents that place or migrate functions (Section 9) introduce two
+   additional considerations.  The first is authorization.  When an
+   agent acts on behalf of a party, any placement or migration spanning
+   administrative domains requires each affected domain to verify who
+   authorized the agent, for which functions and execution environments,
+   and for how long the authorization is valid.  Delegation mechanisms
+   such as OAuth 2.0 Token Exchange [RFC8693] and their adaptation for
+   constrained environments in ACE [RFC9200] may provide a means to
+   express such scoped authority.  However, whether they are adequate
+   for agent-initiated deployment actions is still unclear.  The second
+   consideration is accountability.  Autonomous deployment decisions
+   need to be recorded, along with the observations and objectives that
+   led to them, so operators in each affected domain can review them
+   afterward.  Transparency logs of signed statements, as defined for
+   digital supply chains in [RFC9943], suggest one possible model, but
+   whether it suits deployment decisions remains an open question.
 
    Finally, the distributed, multi-domain nature of the IoT computing
    continuum raises challenges in identity management, secure
@@ -1143,6 +1163,11 @@ Table of Contents
               RFC 7452, DOI 10.17487/RFC7452, March 2015,
               <https://www.rfc-editor.org/rfc/rfc7452>.
 
+   [RFC8693]  Jones, M., Nadalin, A., Campbell, B., Ed., Bradley, J.,
+              and C. Mortimore, "OAuth 2.0 Token Exchange", RFC 8693,
+              DOI 10.17487/RFC8693, January 2020,
+              <https://www.rfc-editor.org/rfc/rfc8693>.
+
    [RFC9019]  Moran, B., Tschofenig, H., Brown, D., and M. Meriac, "A
               Firmware Update Architecture for Internet of Things",
               RFC 9019, DOI 10.17487/RFC9019, April 2021,
@@ -1153,10 +1178,21 @@ Table of Contents
               Resource Directory", RFC 9176, DOI 10.17487/RFC9176, April
               2022, <https://www.rfc-editor.org/rfc/rfc9176>.
 
+   [RFC9200]  Seitz, L., Selander, G., Wahlstroem, E., Erdtman, S., and
+              H. Tschofenig, "Authentication and Authorization for
+              Constrained Environments Using the OAuth 2.0 Framework
+              (ACE-OAuth)", RFC 9200, DOI 10.17487/RFC9200, August 2022,
+              <https://www.rfc-editor.org/rfc/rfc9200>.
+
    [RFC9315]  Clemm, A., Ciavaglia, L., Granville, L. Z., and J.
               Tantsura, "Intent-Based Networking - Concepts and
               Definitions", RFC 9315, DOI 10.17487/RFC9315, October
               2022, <https://www.rfc-editor.org/rfc/rfc9315>.
+
+   [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
+              W. Pan, "Remote ATtestation procedureS (RATS)
+              Architecture", RFC 9334, DOI 10.17487/RFC9334, January
+              2023, <https://www.rfc-editor.org/rfc/rfc9334>.
 
    [RFC9556]  Hong, J., Hong, Y., de Foy, X., Kovatsch, M., Schooler,
               E., and D. Kutscher, "Internet of Things (IoT) Edge
@@ -1167,6 +1203,12 @@ Table of Contents
               "Semantic Definition Format (SDF) for Data and
               Interactions of Things", RFC 9880, DOI 10.17487/RFC9880,
               January 2026, <https://www.rfc-editor.org/rfc/rfc9880>.
+
+   [RFC9943]  Birkholz, H., Delignat-Lavaud, A., Fournet, C., Deshpande,
+              Y., and S. Lasker, "An Architecture for Trustworthy and
+              Transparent Digital Supply Chains", RFC 9943,
+              DOI 10.17487/RFC9943, June 2026,
+              <https://www.rfc-editor.org/rfc/rfc9943>.
 
    [SWAMP]    Kamienski, C., Soininen, J., Taumberger, M., Dantas, R.,
               Toscano, A., Salmon Cinotti, T., Filev Maia, R., and A.
