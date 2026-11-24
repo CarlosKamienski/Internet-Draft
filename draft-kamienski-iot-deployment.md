@@ -244,7 +244,7 @@ informative:
     seriesinfo:
       "2025 IEEE International Workshop on Metrology for Agriculture and Forestry (MetroAgriFor)": "pp. 406-411"
       DOI: "10.1109/MetroAgriFor66923.2025.11512449"
-    target: "https://doi.org/10.1109/MetroAgriFor66923.2025.11512449"    
+    target: "https://doi.org/10.1109/MetroAgriFor66923.2025.11512449"
 
 --- abstract
 
@@ -396,7 +396,7 @@ We present two illustrative scenarios that ground the conceptual deployment mode
 
 ## Smart Irrigation in Precision Agriculture
 
-This scenario is grounded in the SWAMP platform {{SWAMP}}, which describes an IoT-based precision-irrigation architecture and deployments for four pilots in Brazil and Europe. Its configurable distribution of components across cloud and farm-side fog resources supports the discussion of deployment diversity and reuse across farms. In particular, the MATOPIBA deployment description includes local processing and resilience to Internet disconnections. The placement and lifecycle considerations below build on that operational motivation; they are not a claim that the paper evaluates every adaptation mechanism discussed here.
+This scenario is grounded in the SWAMP platform {{SWAMP}}, which describes an IoT-based precision-irrigation architecture and deployments for four pilots in Brazil and Europe. Its configurable distribution of components across cloud and farm-side fog resources supports the discussion of deployment diversity and reuse across farms. In particular, the MATOPIBA deployment description includes local processing and resilience to Internet disconnections. {{METROAGRIFOR2025}} revisits the MATOPIBA irrigation application, maps its functions onto continuum stages from field devices to farm-side fog and cloud, and qualitatively evaluates a continuum-aware development and deployment framework on that use case. The placement and lifecycle considerations below build on that operational motivation and are not a claim that either paper evaluates every adaptation mechanism discussed here.
 
 Smart irrigation applications collect environmental data, such as soil moisture and weather conditions, and use it to determine how much, when, and where to irrigate. In operational deployments, these applications typically span constrained field sensors, low-power gateways that act as radio concentrators, on-premises edge nodes in farm facilities, and cloud services for analytics, forecasting, and long-term storage. End users interact with the application through mobile or web interfaces to inspect data and approve irrigation plans.
 
