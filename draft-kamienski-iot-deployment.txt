@@ -732,17 +732,16 @@ Table of Contents
    response to workload variations, mobility, connectivity disruptions,
    or evolving physical contexts.
 
-   A fairly concrete example is deploying inference workloads on large
-   language models, where your placement decision must account for
-   response quality, response time, and the availability of each
-   candidate execution environment.  Whether you use an adaptive
-   placement approach (agent-driven or otherwise), it is not clear it
-   will outperform a simple static configuration.  The answer depends
-   heavily on how well the placement logic can estimate each
-   environment's availability; under intermittent connectivity in
-   particular, inaccurate estimates can lead to worse outcomes than
-   simply picking a static environment.  That's something we're
-   currently looking at.
+   A concrete example is deploying inference workloads based on large
+   language models, where placement decisions must account for response
+   quality, response time, and the availability of each candidate
+   execution environment.  Whether adaptive placement, agent-driven or
+   not, outperforms a simple static configuration is an open question.
+   The answer depends heavily on how accurately the placement logic
+   estimates the availability of each environment: under intermittent
+   connectivity in particular, inaccurate estimates can lead to worse
+   outcomes than a static choice.  The authors are currently
+   investigating these trade-offs.
 
    Agent-assisted deployment does not presuppose a particular
    coordination style.  A single agent with global visibility may
