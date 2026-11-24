@@ -488,7 +488,7 @@ Coordination strategies also have security implications. Orchestration-based app
 
 The tight coupling between development and deployment further emphasizes the need to consider security throughout the application lifecycle. Deployment changes, component migration, or runtime adaptation can invalidate design-time assumptions about trust, isolation, and access control. As a result, security considerations must be revisited whenever application structure, placement, or coordination strategies evolve.
 
-Finally, the distributed, multi-domain nature of the IoT computing continuum raises challenges in identity management, secure communication, and policy enforcement across administrative boundaries. While this document does not address these challenges, they underscore the importance of integrating security considerations into research and standardization efforts for application-centric deployment and lifecycle management.
+Finally, the distributed, multi-domain nature of the IoT computing continuum raises challenges in identity management, secure communication, and policy enforcement across administrative boundaries. While this document does not address these challenges, they underscore the need to integrate security considerations into research and standardization efforts for application-centric deployment and lifecycle management.
 
 
 # IANA Considerations
@@ -498,4 +498,6 @@ This document has no IANA actions.
 
 # Acknowledgments
 
-The authors acknowledge CGI.br (Brazilian Internet Steering Committee) for its support through the IETF/IRTF participation program, which enabled engagement in research and discussions within the Internet Research Task Force (IRTF).
+The authors acknowledge CGI.br (Brazilian Internet Steering Committee) for supporting their participation in the IETF/IRTF program, which enabled engagement in research and discussions within the Internet Research Task Force (IRTF).
+
+The authors thank Ari Keränen for reviewing earlier versions of this document.
