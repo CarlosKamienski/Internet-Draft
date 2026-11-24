@@ -11,25 +11,25 @@
 <meta content="
        Smart applications increasingly depend on the Internet of Things (IoT) and distributed computing environments spanning constrained devices, edge nodes, cloudlets, and cloud infrastructure, collectively known as the edge–cloud, or computing continuum. This document uses the term IoT computing continuum to highlight the importance of IoT-specific constraints and requirements within this broader context. Although prior work has addressed communication aspects and edge functions in these environments, as noted in RFC 9556 and comprehensive surveys of the computing continuum, there has been comparatively less focus on application-centric issues such as deployment, placement, and lifecycle management. This document identifies key challenges and conceptual considerations for deploying smart applications across the IoT computing continuum, aiming to provide a unified architectural perspective and vocabulary to guide ongoing research within the IRTF and inform future standardization initiatives. 
     " name="description">
-<meta content="xml2rfc 3.34.1" name="generator">
+<meta content="xml2rfc 3.35.0" name="generator">
 <meta content="Internet of Things (IoT)" name="keyword">
 <meta content="Computing Continuum" name="keyword">
 <meta content="Service Deployment" name="keyword">
 <meta content="draft-kamienski-iot-deployment-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.1
-    Python 3.14.8
-    ConfigArgParse 1.8.0
+  xml2rfc 3.35.0
+    Python 3.14.10
+    ConfigArgParse 1.10.1
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.13.4
+    platformdirs 4.14.7
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.9.2
+    wcwidth 0.9.4
 -->
 <link href="draft-kamienski-iot-deployment.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1030,7 +1030,7 @@ svg {
   & :is([stroke="white"], [stroke^="#fff"]) {
     stroke: var(--background-color);
   }
-  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+  & :is([fill="black"], [fill^="#000"], :not([fill], [fill] *)) {
     fill: var(--text-color);
   }
   & :is([fill="white"], [fill^="#fff"]) {
@@ -1045,11 +1045,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">IoTinummDeploy</td>
-<td class="right">October 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Kamienski, et al.</td>
-<td class="center">Expires 26 April 2027</td>
+<td class="center">Expires 28 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1062,12 +1062,12 @@ svg {
 <dd class="internet-draft">draft-kamienski-iot-deployment-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-23" class="published">23 October 2026</time>
+<time datetime="2026-11-24" class="published">24 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-26">26 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-28">28 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1120,7 +1120,7 @@ svg {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1478,7 +1478,7 @@ Two coordination styles for distributed applications. Orchestration refers to co
 <a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-device-update-discovery-and" class="section-name selfRef">Device Update, Discovery, and Management</a>
         </h3>
 <p id="section-10.1-1">The SUIT firmware update architecture <span>[<a href="#RFC9019" class="cite xref">RFC9019</a>]</span> addresses secure firmware updates for IoT devices. It provides lifecycle foundations for device software, while application deployment raises additional questions about compatibility and coordinated transitions across device firmware, edge services, and cloud functions.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
-<p id="section-10.1-2">CoRE work provides complementary mechanisms. The Resource Directory <span>[<a href="#RFC9176" class="cite xref">RFC9176</a>]</span> supports resource registration and lookup, including for endpoints that cannot remain continuously available. The CoAP Management Interface <span>[<a href="#CORE-COMI" class="cite xref">CORE-COMI</a>]</span>, an expired work-in-progress draft, is relevant to accessing management data in constrained environments. Resource discovery and management can provide inputs and operations for deployment, but they do not, by themselves, describe an application's entire dependency graph or determine a safe multi-component transition. Investigating how to compose existing mechanisms is preferable to assuming a new management interface is needed.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
+<p id="section-10.1-2">CoRE work provides complementary mechanisms. The Resource Directory <span>[<a href="#RFC9176" class="cite xref">RFC9176</a>]</span> supports resource registration and lookup, including for endpoints that cannot remain continuously available. The CoAP Management Interface (CORECONF) <span>[<a href="#I-D.ietf-core-comi" class="cite xref">I-D.ietf-core-comi</a>]</span>, a CoRE working group document, is relevant to accessing management data in constrained environments. Resource discovery and management can provide inputs and operations for deployment, but they do not, by themselves, describe an application's entire dependency graph or determine a safe multi-component transition. Investigating how to compose existing mechanisms is preferable to assuming a new management interface is needed.<a href="#section-10.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="computing-in-the-network-and-intent">
@@ -1577,13 +1577,13 @@ Two coordination styles for distributed applications. Orchestration refers to co
       <dd>
 <span class="refAuthor">Bittencourt, L. F.</span>, <span class="refAuthor">Rodrigues-Filho, R.</span>, <span class="refAuthor">Spillner, J.</span>, <span class="refAuthor">De Turck, F.</span>, <span class="refAuthor">Santos, J.</span>, <span class="refAuthor">da Fonseca, N. L. S.</span>, <span class="refAuthor">Rana, O.</span>, <span class="refAuthor">Parashar, M.</span>, and <span class="refAuthor">I. Foster</span>, <span class="refTitle">"The Computing Continuum: Past, Present, and Future"</span>, <span class="seriesInfo">Computer Science Review Vol. 58, Article 100782</span>, <span class="seriesInfo">DOI 10.1016/j.cosrev.2025.100782</span>, <time datetime="2025" class="refDate">2025</time>, <span>&lt;<a href="https://doi.org/10.1016/j.cosrev.2025.100782">https://doi.org/10.1016/j.cosrev.2025.100782</a>&gt;</span>. </dd>
 <dd class="break"></dd>
-<dt id="CORE-COMI">[CORE-COMI]</dt>
-      <dd>
-<span class="refAuthor">IETF CoRE Working Group</span>, <span class="refTitle">"CoAP Management Interface (CORECONF)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-comi-21</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-21">https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-21</a>&gt;</span>. </dd>
-<dd class="break"></dd>
 <dt id="DRONE-DELIVERY">[DRONE-DELIVERY]</dt>
       <dd>
 <span class="refAuthor">de Oliveira, F. M. C.</span>, <span class="refAuthor">Bittencourt, L. F.</span>, <span class="refAuthor">Bianchi, R. A. C.</span>, and <span class="refAuthor">C. A. Kamienski</span>, <span class="refTitle">"Drones in the Big City: Autonomous Collision Avoidance for Aerial Delivery Services"</span>, <span class="seriesInfo">IEEE Transactions on Intelligent Transportation Systems Vol. 25, No. 5, pp. 4657-4674</span>, <span class="seriesInfo">DOI 10.1109/TITS.2023.3329029</span>, <time datetime="2024-05" class="refDate">May 2024</time>, <span>&lt;<a href="https://doi.org/10.1109/TITS.2023.3329029">https://doi.org/10.1109/TITS.2023.3329029</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="I-D.ietf-core-comi">[I-D.ietf-core-comi]</dt>
+      <dd>
+<span class="refAuthor">Veillette, M.</span>, <span class="refAuthor">Van der Stok, P.</span>, <span class="refAuthor">Pelov, A.</span>, <span class="refAuthor">Bierman, A.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"CoAP Management Interface (CORECONF)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-core-comi-22</span>, <time datetime="2026-11-02" class="refDate">2 November 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-22">https://datatracker.ietf.org/doc/html/draft-ietf-core-comi-22</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-iotops-7228bis">[I-D.ietf-iotops-7228bis]</dt>
       <dd>

@@ -5,10 +5,10 @@
 Network Working Group                                    C. A. Kamienski
 Internet-Draft                         Federal University of ABC (UFABC)
 Intended status: Informational                                 M. Santos
-Expires: 26 April 2027            Federal Institute of Sertão (IFSertão)
+Expires: 28 May 2027              Federal Institute of Sertão (IFSertão)
                                                             M. D. Felice
                                                    University of Bologna
-                                                         23 October 2026
+                                                        24 November 2026
 
 
 Application-Centric Considerations for Deployment over the IoT Computing
@@ -61,7 +61,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 April 2027.
+   This Internet-Draft will expire on 28 May 2027.
 
 Copyright Notice
 
@@ -835,14 +835,14 @@ Table of Contents
    CoRE work provides complementary mechanisms.  The Resource Directory
    [RFC9176] supports resource registration and lookup, including for
    endpoints that cannot remain continuously available.  The CoAP
-   Management Interface [CORE-COMI], an expired work-in-progress draft,
-   is relevant to accessing management data in constrained environments.
-   Resource discovery and management can provide inputs and operations
-   for deployment, but they do not, by themselves, describe an
-   application's entire dependency graph or determine a safe multi-
-   component transition.  Investigating how to compose existing
-   mechanisms is preferable to assuming a new management interface is
-   needed.
+   Management Interface (CORECONF) [I-D.ietf-core-comi], a CoRE working
+   group document, is relevant to accessing management data in
+   constrained environments.  Resource discovery and management can
+   provide inputs and operations for deployment, but they do not, by
+   themselves, describe an application's entire dependency graph or
+   determine a safe multi-component transition.  Investigating how to
+   compose existing mechanisms is preferable to assuming a new
+   management interface is needed.
 
 10.2.  Computing in the Network and Intent
 
@@ -1087,13 +1087,6 @@ Table of Contents
               58, Article 100782, DOI 10.1016/j.cosrev.2025.100782,
               2025, <https://doi.org/10.1016/j.cosrev.2025.100782>.
 
-   [CORE-COMI]
-              IETF CoRE Working Group, "CoAP Management Interface
-              (CORECONF)", Work in Progress, Internet-Draft, draft-ietf-
-              core-comi-21, 2 March 2026,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-core-
-              comi-21>.
-
    [DRONE-DELIVERY]
               de Oliveira, F. M. C., Bittencourt, L. F., Bianchi, R. A.
               C., and C. A. Kamienski, "Drones in the Big City:
@@ -1102,6 +1095,13 @@ Table of Contents
               Systems Vol. 25, No. 5, pp. 4657-4674,
               DOI 10.1109/TITS.2023.3329029, May 2024,
               <https://doi.org/10.1109/TITS.2023.3329029>.
+
+   [I-D.ietf-core-comi]
+              Veillette, M., Van der Stok, P., Pelov, A., Bierman, A.,
+              and C. Bormann, "CoAP Management Interface (CORECONF)",
+              Work in Progress, Internet-Draft, draft-ietf-core-comi-22,
+              2 November 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-core-comi-22>.
 
    [I-D.ietf-iotops-7228bis]
               Bormann, C., Ersue, M., Keränen, A., and C. Gomez,
