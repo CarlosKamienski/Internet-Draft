@@ -197,8 +197,9 @@ Table of Contents
    *  The standardization of specific platforms, frameworks, or
       programming models for IoT application deployment.
 
-   *  Detailed performance evaluations or quantitative comparisons
-      between alternative solutions.
+   *  Performance evaluations or quantitative comparisons between
+      alternative solutions.  Where this document mentions quantitative
+      results, it does so only by reference to published work.
 
    By clearly delineating its scope and non-goals, this document
    complements existing and ongoing efforts in the computing continuum,
@@ -562,10 +563,14 @@ Table of Contents
    distribution of components across cloud and farm-side fog resources
    supports the discussion of deployment diversity and reuse across
    farms.  In particular, the MATOPIBA deployment description includes
-   local processing and resilience to Internet disconnections.  The
-   placement and lifecycle considerations below build on that
-   operational motivation; they are not a claim that the paper evaluates
-   every adaptation mechanism discussed here.
+   local processing and resilience to Internet disconnections.
+   [METROAGRIFOR2025] revisits the MATOPIBA irrigation application, maps
+   its functions onto continuum stages from field devices to farm-side
+   fog and cloud, and qualitatively evaluates a continuum-aware
+   development and deployment framework on that use case.  The placement
+   and lifecycle considerations below build on that operational
+   motivation and are not a claim that either paper evaluates every
+   adaptation mechanism discussed here.
 
    Smart irrigation applications collect environmental data, such as
    soil moisture and weather conditions, and use it to determine how
@@ -819,19 +824,19 @@ Table of Contents
    components can be systematically placed and migrated across continuum
    stages while preserving application-level properties [IOTDEPLOY].
    More recent efforts have investigated integrated frameworks for
-   developing and deploying continuum-aware smart applications,
-   providing concrete examples of how application-centric abstractions
-   can be realized in practice.  These efforts are cited here as
-   representative of ongoing work in the area, not as prescriptive
-   references; this document remains agnostic to specific frameworks or
-   implementations.
+   developing and deploying continuum-aware smart applications
+   [WPIETF2025] [METROAGRIFOR2025], providing concrete examples of how
+   application-centric abstractions can be realized in practice.  These
+   efforts are cited here as representative of ongoing work in the area,
+   not as prescriptive references, and this document remains agnostic to
+   specific frameworks or implementations.
 
    Community-driven efforts, including workshops focused on future
    Internet research, have also discussed application deployment over
    the IoT computing continuum in the context of IETF and IRTF
    engagement, as exemplified by [WPIETF2025].  This document
-   complements these efforts by adopting an application-centric
-   perspective on deployment and lifecycle management.
+   complements these efforts by taking an application-centric view of
+   deployment and lifecycle management.
 
 10.1.  Device Update, Discovery, and Management
 
@@ -1161,6 +1166,15 @@ Table of Contents
    [MCP]      Agentic AI Foundation (AAIF), "Model Context Protocol
               (MCP)", 2026,
               <https://aaif.io/projects/model-context-protocol>.
+
+   [METROAGRIFOR2025]
+              Kamienski, C., Zyrianoff, I., Xue, L., and M. Di Felice,
+              "Distributed Smart Agriculture Monitoring over the IoT
+              Computing Continuum", 2025 IEEE International Workshop on
+              Metrology for Agriculture and Forestry (MetroAgriFor) pp.
+              406-411, DOI 10.1109/MetroAgriFor66923.2025.11512449,
+              2025,
+              <https://doi.org/10.1109/MetroAgriFor66923.2025.11512449>.
 
    [RFC7452]  Tschofenig, H., Arkko, J., Thaler, D., and D. McPherson,
               "Architectural Considerations in Smart Object Networking",
