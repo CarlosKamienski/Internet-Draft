@@ -4,9 +4,9 @@
 
 Network Working Group                                    C. A. Kamienski
 Internet-Draft                         Federal University of ABC (UFABC)
-Intended status: Informational                                 M. Santos
+Intended status: Informational                           M. A. B. Santos
 Expires: 28 May 2027              Federal Institute of Sertão (IFSertão)
-                                                            M. D. Felice
+                                                            M. Di Felice
                                                    University of Bologna
                                                         24 November 2026
 
@@ -20,7 +20,7 @@ Abstract
    Smart applications increasingly depend on the Internet of Things
    (IoT) and distributed computing environments spanning constrained
    devices, edge nodes, cloudlets, and cloud infrastructure,
-   collectively known as the edge–cloud, or computing continuum.  This
+   collectively known as the edge-cloud, or computing continuum.  This
    document uses the term IoT computing continuum to highlight the
    importance of IoT-specific constraints and requirements within this
    broader context.  Although prior work has addressed communication
@@ -42,6 +42,11 @@ About This Document
    https://CarlosKamienski.github.io/Internet-Draft/draft-kamienski-iot-
    deployment.html.  Status information for this document may be found
    at https://datatracker.ietf.org/doc/draft-kamienski-iot-deployment/.
+
+   Discussion of this document takes place on the Thing-to-Thing
+   Research Group mailing list (mailto:t2trg@irtf.org), which is
+   archived at https://mailarchive.ietf.org/arch/browse/t2trg/.
+   Subscribe at https://www.ietf.org/mailman/listinfo/t2trg/.
 
    Source for this draft and an issue tracker can be found at
    https://github.com/CarlosKamienski/Internet-Draft.
@@ -685,18 +690,18 @@ Table of Contents
    The previously discussed conceptual deployment model considers
    placement, coordination, and lifecycle management as interconnected
    and inherently dynamic concerns.  As the scale, heterogeneity, and
-   dynamism of the Internet of Things (IoT) computing continuum
-   increase, addressing these concerns through static policies or manual
-   procedures becomes increasingly challenging, especially when
-   application workloads demonstrate heterogeneous and context-sensitive
-   behavior.  AI agents, defined as autonomous software entities capable
-   of perceiving their environment, reasoning about objectives, and
-   acting upon deployment infrastructure, present a promising solution
-   for managing this complexity.  Foundational research on multi-agent
-   systems [WOOLDRIDGE-AGENTS] offers established abstractions for
-   understanding agent behavior.  This section analyzes the role of such
-   agents from an application-centric perspective, without specifying
-   particular agent architectures, frameworks, or protocols.
+   dynamism of IoT computing continuum increase, addressing these
+   concerns through static policies or manual procedures becomes
+   increasingly challenging, especially when application workloads
+   demonstrate heterogeneous and context-sensitive behavior.  AI agents,
+   defined as autonomous software entities capable of perceiving their
+   environment, reasoning about objectives, and acting upon deployment
+   infrastructure, present a promising solution for managing this
+   complexity.  Foundational research on multi-agent systems
+   [WOOLDRIDGE-AGENTS] offers established abstractions for understanding
+   agent behavior.  This section analyzes the role of such agents from
+   an application-centric perspective, without specifying particular
+   agent architectures, frameworks, or protocols.
 
    AI agents are connected to application deployment in two
    complementary ways.  First, agents can facilitate the deployment
@@ -1186,7 +1191,7 @@ Authors' Addresses
    Email: carlos.kamienski@ufabc.edu.br
 
 
-   Marco Santos
+   Marcelo Anderson Batista dos Santos
    Federal Institute of Sertão (IFSertão)
    Email: marcelo.santos@ifsertao-pe.edu.br
 
