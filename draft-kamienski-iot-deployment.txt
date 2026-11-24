@@ -707,11 +707,11 @@ Table of Contents
    complementary ways.  First, agents can facilitate deployment by
    assisting with or automating decisions about the placement,
    coordination, adaptation, and lifecycle management of application
-   functions.  Second, agents themselves are software components that
-   require execution within the continuum.  Therefore, their deployment
-   must also be considered under the same placement criteria as
-   application functions.  The following discussion examines these two
-   roles sequentially.
+   functions.  Second, agents are software components that must run
+   within the continuum.  Therefore, their deployment must also be
+   considered under the same placement criteria as application
+   functions.  The following discussion examines these two roles
+   sequentially.
 
 9.1.  Agents as Enablers of the Deployment Process
 
@@ -727,13 +727,17 @@ Table of Contents
    response to workload variations, mobility, connectivity disruptions,
    or evolving physical contexts.
 
-   A concrete example arises in deploying inference workloads based on
-   large language models, where placement decisions must balance
-   latency, cost, and resilience to connectivity disruptions.
-   Preliminary work by the authors suggests that agent-driven adaptive
-   placement strategies can outperform static configurations,
-   particularly under variable demand or intermittent wide-area
-   connectivity.
+   A fairly concrete example is deploying inference workloads on large
+   language models, where your placement decision must account for
+   response quality, response time, and the availability of each
+   candidate execution environment.  Whether you use an adaptive
+   placement approach (agent-driven or otherwise), it is not clear it
+   will outperform a simple static configuration.  The answer depends
+   heavily on how well the placement logic can estimate each
+   environment's availability; under intermittent connectivity in
+   particular, inaccurate estimates can lead to worse outcomes than
+   simply picking a static environment.  That's something we're
+   currently looking at.
 
    Agent-assisted deployment does not presuppose a particular
    coordination style.  A single agent with global visibility may
@@ -750,8 +754,8 @@ Table of Contents
    The IETF Agent Communication Protocols (agentproto) Working Group
    [AGENTPROTO] addresses a complementary concern: the correlation,
    lifecycle, and continuity of agentic dialogs across participants,
-   intermediaries, and trust boundaries.  Such capabilities are relevant
-   when deployment agents exchange observations and actions across the
+   intermediaries, and trust boundaries.  These capabilities matter when
+   deployment agents exchange observations and actions across the
    continuum, including when an interaction resumes after interruption,
    or a participant changes network attachment.  Dialog management does
    not itself preserve application state or guarantee the completion of
