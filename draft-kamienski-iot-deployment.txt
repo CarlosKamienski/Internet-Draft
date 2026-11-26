@@ -468,14 +468,9 @@ Table of Contents
    different continuum stages.
 
    Managing this lifecycle is particularly challenging in IoT
-   environments due to device heterogeneity, intermittent connectivity,
-   and the coexistence of multiple administrative domains.  An
-   application-centric perspective emphasizes that lifecycle management
-   must be considered holistically, encompassing not only software
-   updates but also the ongoing coordination of distributed application
-   components.  Understanding these lifecycle aspects is essential for
-   identifying common challenges and research questions related to
-   deployment and operation in the IoT computing continuum.
+   environments for the reasons listed in Section 4.2, especially
+   overlapping device and application lifecycles and the presence of
+   multiple administrative domains.
 
 6.  Challenges in Smart Application Development and Deployment
 
@@ -530,12 +525,8 @@ Table of Contents
    However, transferring DevOps concepts to the IoT computing continuum
    is non-trivial.  Conventional DevOps pipelines typically target
    cloud-centric environments and assume homogeneous infrastructure,
-   reliable connectivity, and centralized control.
-
-   In contrast, IoT scenarios involve constrained devices, distributed
-   execution across multiple continuum stages, and, in many cases,
-   multiple administrative domains, which complicates the application of
-   traditional DevOps assumptions.
+   reliable connectivity, and centralized control.  The IoT computing
+   continuum removes each of these assumptions (Section 4.2).
 
    Finally, the lack of shared abstractions and terminology for
    reasoning about development and deployment across the continuum makes
