@@ -470,7 +470,9 @@ Table of Contents
    Managing this lifecycle is particularly challenging in IoT
    environments for the reasons listed in Section 4.2, especially
    overlapping device and application lifecycles and the presence of
-   multiple administrative domains.
+   multiple administrative domains.  Lifecycle management therefore
+   encompasses not only software updates but also the ongoing
+   coordination of distributed application components.
 
 6.  Challenges in Smart Application Development and Deployment
 
