@@ -376,8 +376,7 @@ Importantly, placement is not static. In many scenarios, application components 
 
 In centralized systems, application deployment is often treated as a one-time event followed by relatively infrequent updates. In contrast, the IoT computing continuum introduces a more complex and dynamic application lifecycle. Beyond initial deployment, applications may adapt continuously through updates, reconfiguration, scaling, component migration, and partial redeployment across different continuum stages.
 
-Managing this lifecycle is particularly challenging in IoT environments due to device heterogeneity, intermittent connectivity, and the coexistence of multiple administrative domains. An application-centric perspective emphasizes that lifecycle management must be considered holistically, encompassing not only software updates but also the ongoing coordination of distributed application components. Understanding these lifecycle aspects is essential for identifying common challenges and research questions related to deployment and operation in the IoT computing continuum.
-
+Managing this lifecycle is particularly challenging in IoT environments for the reasons listed in {{iot-specifics}}, especially overlapping device and application lifecycles and the presence of multiple administrative domains.
 
 # Challenges in Smart Application Development and Deployment
 
@@ -395,9 +394,7 @@ Another challenge arises from the dynamic nature of deployment in the IoT comput
 
 Static deployment models and rigid application designs limit responsiveness to these dynamics, underscoring the need for approaches that treat deployment as an ongoing process rather than a one-time event.
 
-These challenges align with principles commonly associated with DevOps practices, which emphasize continuous integration, continuous deployment, and feedback loops between development and operations. However, transferring DevOps concepts to the IoT computing continuum is non-trivial. Conventional DevOps pipelines typically target cloud-centric environments and assume homogeneous infrastructure, reliable connectivity, and centralized control.
-
-In contrast, IoT scenarios involve constrained devices, distributed execution across multiple continuum stages, and, in many cases, multiple administrative domains, which complicates the application of traditional DevOps assumptions.
+These challenges align with principles commonly associated with DevOps practices, which emphasize continuous integration, continuous deployment, and feedback loops between development and operations. However, transferring DevOps concepts to the IoT computing continuum is non-trivial. Conventional DevOps pipelines typically target cloud-centric environments and assume homogeneous infrastructure, reliable connectivity, and centralized control. The IoT computing continuum removes each of these assumptions ({{iot-specifics}}).
 
 Finally, the lack of shared abstractions and terminology for reasoning about development and deployment across the continuum makes it difficult to compare approaches and identify common requirements. When the interplay between development and deployment is not made explicit, solutions often remain ad hoc and platform-specific.
 
