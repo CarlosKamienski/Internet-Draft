@@ -376,7 +376,7 @@ Importantly, placement is not static. In many scenarios, application components 
 
 In centralized systems, application deployment is often treated as a one-time event followed by relatively infrequent updates. In contrast, the IoT computing continuum introduces a more complex and dynamic application lifecycle. Beyond initial deployment, applications may adapt continuously through updates, reconfiguration, scaling, component migration, and partial redeployment across different continuum stages.
 
-Managing this lifecycle is particularly challenging in IoT environments for the reasons listed in {{iot-specifics}}, especially overlapping device and application lifecycles and the presence of multiple administrative domains.
+Managing this lifecycle is particularly challenging in IoT environments for the reasons listed in {{iot-specifics}}, especially overlapping device and application lifecycles and the presence of multiple administrative domains. Lifecycle management therefore encompasses not only software updates but also the ongoing coordination of distributed application components.
 
 # Challenges in Smart Application Development and Deployment
 
