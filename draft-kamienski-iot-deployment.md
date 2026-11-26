@@ -354,67 +354,57 @@ In general computing continuum deployments, execution environments are typically
 
 Traditional IoT architectures often treat applications as tightly coupled to specific execution environments, typically assuming fixed roles for devices, gateways, and cloud services. In the IoT computing continuum, this assumption no longer holds. Smart applications must be understood as distributed entities whose behavior emerges from the coordinated execution of multiple components across heterogeneous computing stages. An application-centric view is therefore essential for reasoning about deployment, adaptation, and lifecycle management in such environments.
 
-## Applications as Distributed Functional Graphs
+## Applications as Distributed Functional Graphs {#graph}
 
 From an application-centric perspective, smart applications can be modeled as collections of interdependent functions rather than as monolithic software artifacts. These functions interact through well-defined data and control dependencies, forming a logical application graph that captures the application's structure independently of where its components execute. This representation enables reasoning about application behavior, dependencies, and composition without prematurely binding functions to specific devices or platforms.
 
 Viewing applications as distributed functional graphs is particularly relevant in IoT environments, where different functions may have distinct requirements for latency, computational resources, sensor or actuator access, and interaction with external services. By separating the application's logical structure from its physical deployment, this model supports more flexible placement and adaptation strategies across the continuum.
 
-## Decoupling Application Logic from Execution Environments
+## Decoupling Application Logic from Execution Environments {#decoupling}
 
 A key implication of the application-centric view is decoupling application logic from execution environments. Application functionality should be expressed independently of specific hardware platforms, operating systems, or runtime environments. This decoupling enables portability across heterogeneous devices and supports dynamic reassignment of application components as execution conditions change.
 
 In the IoT computing continuum, execution environments vary widely in terms of resource availability, connectivity, and operational constraints. Binding application logic too early to a particular environment limits the ability to adapt to failures, load variations, or evolving requirements. An application-centric approach instead treats execution environments as abstract resources onto which application functions can be mapped, allowing deployment decisions to be revisited over time.
 
-## Placement and Distribution Across the Continuum
+## Placement and Distribution Across the Continuum {#placement}
 
 Once application logic is decoupled from execution environments, placing application functions becomes a first-class concern. Placement decisions determine where an application's functions execute within the IoT computing continuum, from constrained devices and gateways to edge nodes and cloud platforms. These decisions directly affect end-to-end application properties, including latency, reliability, energy consumption, and data locality.
 
-Importantly, placement is not static. In many scenarios, application components may need to be redistributed in response to changes in workload, network conditions, or operational context. An application-centric view highlights the need to reason about placement and distribution as dynamic processes intrinsic to how smart applications operate across the continuum.
+## Application Lifecycle Beyond Initial Deployment {#lifecycle}
 
-## Application Lifecycle Beyond Initial Deployment
+In centralized systems, application deployment is often treated as a one-time event followed by relatively infrequent updates. In contrast, the IoT computing continuum introduces a more complex and dynamic application lifecycle. Placement is therefore not static. Beyond initial deployment, applications may adapt continuously through updates, reconfiguration, scaling, component migration, and partial redeployment across different continuum stages, in response to changes in workload, network conditions, or operational context.
 
-In centralized systems, application deployment is often treated as a one-time event followed by relatively infrequent updates. In contrast, the IoT computing continuum introduces a more complex and dynamic application lifecycle. Beyond initial deployment, applications may adapt continuously through updates, reconfiguration, scaling, component migration, and partial redeployment across different continuum stages.
+Managing this lifecycle is particularly challenging in IoT environments for the reasons listed in {{iot-specifics}}, especially overlapping device and application lifecycles and multiple administrative domains. Lifecycle management therefore encompasses not only software updates but also the ongoing coordination of distributed application components.
 
-Managing this lifecycle is particularly challenging in IoT environments for the reasons listed in {{iot-specifics}}, especially overlapping device and application lifecycles and the presence of multiple administrative domains. Lifecycle management therefore encompasses not only software updates but also the ongoing coordination of distributed application components.
-
-# Challenges in Smart Application Development and Deployment
+# Challenges in Smart Application Development and Deployment {#challenges}
 
 The IoT computing continuum introduces challenges that fundamentally affect both the development and deployment of smart applications. Unlike centralized environments, where development and deployment can often be treated as loosely coupled phases, the heterogeneity, distribution, and dynamism of the continuum create strong interdependencies among application design choices, deployment decisions, and runtime behavior. As a result, development and deployment concerns cannot be addressed effectively in isolation.
 
 A primary challenge stems from the bidirectional influence between application development and deployment constraints. Development decisions, such as functional decomposition, communication patterns, and state management, directly affect deployment feasibility across constrained devices, edge nodes, and cloud platforms.
 
-At the same time, deployment realities, such as resource availability, network conditions, latency requirements, and energy constraints, often impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and late-stage deployment decisions.
+At the same time, deployment realities, such as resource availability, network conditions, latency requirements, and energy constraints, often impose limitations that shape or even redefine application design. This mutual influence complicates traditional workflows that assume stable execution environments and defer deployment decisions until later.
 
-Heterogeneity across the continuum further amplifies this challenge. Execution environments vary widely in hardware capabilities, operating systems, runtime support, and management interfaces. Developers must therefore anticipate deployment diversity early in development, while deployment mechanisms must accommodate application abstractions that span multiple platforms.
+Heterogeneity across the continuum further amplifies this challenge. Execution environments vary widely in hardware capabilities, operating systems, runtime support, and management interfaces. Developers must therefore anticipate deployment diversity early in development, while deployment mechanisms must accommodate application abstractions that span multiple platforms. Without integrated development and deployment considerations, solutions tend to become fragile, tightly coupled to specific environments, and difficult to evolve.
 
-Without integrated development and deployment considerations, solutions tend to become fragile, tightly coupled to specific environments, and difficult to evolve.
-
-Another challenge arises from the dynamic nature of deployment in the IoT computing continuum. Smart applications often need to adapt to changing conditions, such as workload variations, mobility, intermittent connectivity, or evolving physical contexts. Supporting such adaptation requires continuous feedback between runtime behavior and development-time assumptions.
-
-Static deployment models and rigid application designs limit responsiveness to these dynamics, underscoring the need for approaches that treat deployment as an ongoing process rather than a one-time event.
+Because deployment is an ongoing process ({{lifecycle}}), runtime behavior must also feed back into development-time assumptions, which static deployment models and rigid application designs do not support.
 
 These challenges align with principles commonly associated with DevOps practices, which emphasize continuous integration, continuous deployment, and feedback loops between development and operations. However, transferring DevOps concepts to the IoT computing continuum is non-trivial. Conventional DevOps pipelines typically target cloud-centric environments and assume homogeneous infrastructure, reliable connectivity, and centralized control. The IoT computing continuum removes each of these assumptions ({{iot-specifics}}).
 
 Finally, the lack of shared abstractions and terminology for reasoning about development and deployment across the continuum makes it difficult to compare approaches and identify common requirements. When the interplay between development and deployment is not made explicit, solutions often remain ad hoc and platform-specific.
 
-Addressing this gap requires an application-centric perspective that explicitly acknowledges development--deployment interdependencies and treats them as first-class concerns. This perspective is essential for advancing research on smart application deployment and informing future standardization efforts for the IoT computing continuum.
-
 # Conceptual Deployment Model
 
 This section outlines a conceptual model for reasoning about the deployment of smart applications across the IoT computing continuum. The model supports analysis and discussion rather than prescribing specific mechanisms, architectures, or workflows. It provides a shared abstraction that captures how application structure, execution environments, and coordination mechanisms interact in heterogeneous, dynamic IoT scenarios.
 
-At the core of the model is the separation between application logic and execution environments. Application logic is represented independently of its execution location, allowing reasoning about functionality, dependencies, and interaction patterns without binding components to specific devices or platforms. Execution environments are treated as abstract resources characterized by capabilities, constraints, and operational context, such as computational power, connectivity, proximity to data sources, and energy availability.
+The model builds on the application graph ({{graph}}) and on the separation between application logic and execution environments ({{decoupling}}). Execution environments are characterized by capabilities, constraints, and operational context, such as computational power, connectivity, proximity to data sources, and energy availability. Deployment maps the functions of the application graph onto execution environments. This mapping determines where functions execute, but it does not, by itself, define how they coordinate during execution, so deployment decisions must be considered together with coordination strategies.
 
 Execution environments can include programmable network elements as well as general-purpose computing nodes. Placement therefore selects both a location and a type of execution environment. A function is eligible for execution within the network only if the element supports its computation, state, data access, and interaction requirements. Constraints on the processing model, memory, persistent state, and management interfaces can make only part of an application suitable for such placement. Network forwarding responsibilities and application processing may also share resources, so deployment feasibility depends on their interaction.
-
-In this model, a smart application is a set of functional components connected through data and control dependencies, forming a logical application graph. Deployment maps these components onto available execution environments across the IoT computing continuum. This mapping determines where components execute, but it does not, by itself, define how they coordinate during execution. As a result, deployment decisions must be considered together with coordination strategies that govern interactions among distributed components.
 
 Application components can coordinate in different ways, most notably through orchestration and choreography. In an orchestration style, explicit control logic drives coordination by managing execution order, data flow, and component interactions. This style provides a global view of application behavior and can simplify reasoning about end-to-end execution, but it may introduce centralization and scalability concerns in highly distributed environments. In contrast, choreography relies on local interactions and shared interaction rules, letting components coordinate in a decentralized way without a single point of control. This style can improve scalability and resilience, but it may complicate global reasoning and debugging.
 
 The choice between orchestration and choreography, or combinations thereof, is closely tied to deployment decisions and to the characteristics of the IoT computing continuum. Resource constraints, network conditions, mobility, and administrative boundaries may favor one coordination style over another at different stages of the continuum. Moreover, coordination strategies may need to evolve over time as applications adapt to changing conditions, reinforcing the dynamic nature of deployment.
 
-The conceptual deployment model, therefore, treats placement, coordination, and lifecycle management as interrelated concerns. Beyond initial placement, deployment includes reconfiguration, scaling, migration, and adapting coordination strategies. Runtime observations, including performance metrics and failure events, provide feedback that can inform both deployment decisions and future iterations of application design. By explicitly incorporating coordination styles into the deployment model, this abstraction provides a more concrete foundation for discussing development--deployment interdependencies in the IoT computing continuum, while remaining agnostic to specific technologies or implementations.
+The model therefore treats placement, coordination, and lifecycle management as interrelated concerns. Adapting the coordination strategy is a lifecycle operation in {{lifecycle}}, and runtime observations, including performance metrics and failure events, feed back into both deployment decisions and application design ({{challenges}}).
 
 # Illustrative Scenarios
 
