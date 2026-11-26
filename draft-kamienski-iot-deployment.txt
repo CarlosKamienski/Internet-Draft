@@ -84,8 +84,8 @@ Table of Contents
    1.  Introduction
    2.  Scope and Non-Goals
    3.  Terminology
-   4.  The IoT Computing Continuum
-     4.1.  Background
+   4.  IoT Devices in the Geographical and Computing Continuum
+     4.1.  The IoT Computing Continuum
      4.2.  What Changes for Application Deployment in IoT
    5.  An Application-Centric View of the Continuum
      5.1.  Applications as Distributed Functional Graphs
@@ -249,42 +249,64 @@ Table of Contents
    decentralized interactions among components without a central
    coordinator.
 
-4.  The IoT Computing Continuum
+4.  IoT Devices in the Geographical and Computing Continuum
 
-4.1.  Background
+   Smart applications draw on data produced by large numbers of IoT
+   sensors, and the infrastructures that support them are inherently
+   distributed, both geographically and in terms of computing resources.
+   Data typically follow an end-to-end path that begins with acquisition
+   by sensors in the field, crosses one or more edge nodes that process,
+   store, and forward them, and reaches cloud data centers that run
+   physical or data-driven models and provide long-term storage.  The
+   resulting knowledge often travels back along that path as commands to
+   actuators that change the physical environment's state.  At the same
+   time, users need to monitor the application, make decisions, and
+   start recovery procedures from anywhere, using whatever terminal they
+   prefer.  IoT devices are therefore only one part of a system that
+   spans the field, the network, and the cloud [IOTINUUM].
+
+   This geographical and computing continuum is the setting in which the
+   applications discussed in this document are deployed.  Section 4.1
+   describes how the continuum has been characterized in existing
+   research and in IETF and IRTF work, and how this document positions
+   itself relative to that work.  Section 4.2 then identifies what
+   changes for application deployment when constrained IoT devices are
+   part of the continuum.
+
+4.1.  The IoT Computing Continuum
 
    The increasing distribution of computation across networked systems
-   has led to the emergence of what is commonly described as a computing
-   continuum, spanning centralized cloud infrastructures, intermediate
-   edge and fog nodes, and highly constrained end devices
-   [CONTINUUM-SURVEY].  This paradigm reflects a shift away from
-   strictly centralized processing models toward more distributed
-   execution, driven by requirements related to latency, bandwidth
-   efficiency, resilience, data locality, and regulatory constraints.
+   has led to what is commonly described as a computing continuum,
+   spanning centralized cloud infrastructures, intermediate edge and fog
+   nodes, and highly constrained end devices [CONTINUUM-SURVEY].  This
+   paradigm reflects a shift away from strictly centralized processing
+   models toward more distributed execution, driven by requirements
+   related to latency, bandwidth efficiency, resilience, data locality,
+   and regulatory constraints.
 
-   Within the context of the Internet of Things (IoT), this continuum
-   acquires additional characteristics that distinguish it from more
-   general edge-cloud computing environments.  IoT deployments involve
-   large numbers of heterogeneous devices with severe resource
-   constraints, intermittent connectivity, and close interaction with
-   the physical world through sensing and actuation [RFC7452].  As a
-   result, computation is often pushed closer to data sources not only
-   for performance reasons, but also to enable timely control actions,
+   In the context of the Internet of Things (IoT), this continuum takes
+   on additional characteristics that distinguish it from more general
+   edge-cloud computing environments.  IoT deployments involve large
+   numbers of heterogeneous devices with severe resource constraints,
+   intermittent connectivity, and close interaction with the physical
+   world through sensing and actuation [RFC7452].  As a result,
+   computation is often pushed closer to data sources not only for
+   performance reasons, but also to enable timely control actions,
    reduce energy consumption, and preserve privacy.
 
    Recent research and standardization activities have explored
    different aspects of this continuum.  In particular, work within the
    IETF and IRTF has highlighted the importance of edge computing and
-   has discussed functional components and challenges associated with
-   operating across distributed environments [RFC9556].  Existing
-   documents have examined edge functions for data processing, storage,
-   and communication, as well as the roles of gateways and intermediate
+   discussed the functional components and challenges of operating
+   across distributed environments [RFC9556].  Existing documents have
+   examined edge functions for data processing, storage, and
+   communication, as well as the roles of gateways and intermediate
    nodes in bridging constrained devices to cloud services.  These
    efforts provide an important foundation for understanding the
-   structural and operational properties of the continuum.
+   continuum's structural and operational properties.
 
-   This document takes a complementary rather than competing
-   perspective.  While [RFC9556] characterizes functional components and
+   This document takes a complementary, not competing, perspective.
+   While [RFC9556] characterizes functional components and
    infrastructure-level challenges, focusing on edge functions and the
    communication fabric that supports them, this document shifts
    attention to the application layer that runs on top of that
@@ -302,24 +324,22 @@ Table of Contents
    devices, edge nodes, cloud platforms, and network elements with
    processing capabilities.  The continuum naturally accommodates
    Computing in the Network (COIN): application processing can include
-   eligible functions executed within the network.  For example,
-   filtering, aggregation, or preprocessing may execute in a
-   programmable network element when its capabilities and the
-   application semantics permit.  This does not imply that every network
-   element is programmable or that every application function is
-   suitable for in-network execution.  Building on existing work, the
-   focus here is on understanding how the properties of the IoT
-   computing continuum influence application deployment, placement, and
-   lifecycle management, rather than on defining specific technologies
-   or architectural solutions.
+   eligible functions executed within the network.  For example, a
+   programmable network element may execute filtering, aggregation, or
+   preprocessing when its capabilities and the application semantics
+   permit.  This does not imply that every network element is
+   programmable or that every application function is suitable for in-
+   network execution.  Building on existing work, this document focuses
+   on how the properties of the IoT computing continuum influence
+   application deployment, placement, and lifecycle management, rather
+   than on defining specific technologies or architectural solutions.
 
 4.2.  What Changes for Application Deployment in IoT
 
    Much of what this document discusses, such as functional
-   decomposition, placement, migration, and coordination, also applies
-   to edge-cloud deployment in general.  This section states in one
-   place what changes when the application includes IoT devices.  Later
-   sections refer back to these points rather than repeating them.
+   decomposition, placement, migration, and coordination, applies to the
+   general edge-cloud deployment process.  This section states what
+   changes when the application includes IoT devices.
 
    Execution targets that cannot host general-purpose runtimes:  Many
       devices at the edge of the continuum are microcontroller-class
@@ -337,7 +357,7 @@ Table of Contents
       action is issued.
 
    Disconnection as a normal condition:  Low-power radio links and rural
-      backhaul make disconnection an expected operating condition rather
+      settings make disconnection an expected operating condition rather
       than a failure.  Functions that must keep working during
       disconnection must run on the device side of the link that may
       fail, and deployment actions must tolerate devices that are
@@ -366,15 +386,15 @@ Table of Contents
    are typically servers that can host any function, connectivity is
    assumed to be stable, and a single operator often controls the
    infrastructure.  Each point above removes one of these assumptions,
-   and together they are the reason this document uses the term IoT
+   and together they explain why this document uses the term IoT
    computing continuum.
 
 5.  An Application-Centric View of the Continuum
 
    Traditional IoT architectures often treat applications as tightly
    coupled to specific execution environments, typically assuming fixed
-   roles for devices, gateways, and cloud services.  In the context of
-   the IoT computing continuum, this assumption no longer holds.  Smart
+   roles for devices, gateways, and cloud services.  In the IoT
+   computing continuum, this assumption no longer holds.  Smart
    applications must be understood as distributed entities whose
    behavior emerges from the coordinated execution of multiple
    components across heterogeneous computing stages.  An application-
@@ -405,11 +425,11 @@ Table of Contents
 
    A key implication of the application-centric view is decoupling
    application logic from execution environments.  Application
-   functionality should be expressed in a way that is independent of
-   specific hardware platforms, operating systems, or runtime
-   environments.  This decoupling enables portability across
-   heterogeneous devices and supports dynamic reassignment of
-   application components as execution conditions change.
+   functionality should be expressed independently of specific hardware
+   platforms, operating systems, or runtime environments.  This
+   decoupling enables portability across heterogeneous devices and
+   supports dynamic reassignment of application components as execution
+   conditions change.
 
    In the IoT computing continuum, execution environments vary widely in
    terms of resource availability, connectivity, and operational
@@ -443,9 +463,9 @@ Table of Contents
    one-time event followed by relatively infrequent updates.  In
    contrast, the IoT computing continuum introduces a more complex and
    dynamic application lifecycle.  Beyond initial deployment,
-   applications may undergo continuous adaptation, including updates,
-   reconfiguration, scaling, component migration, and partial
-   redeployment across different continuum stages.
+   applications may adapt continuously through updates, reconfiguration,
+   scaling, component migration, and partial redeployment across
+   different continuum stages.
 
    Managing this lifecycle is particularly challenging in IoT
    environments due to device heterogeneity, intermittent connectivity,
