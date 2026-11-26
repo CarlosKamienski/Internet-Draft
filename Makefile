@@ -1,4 +1,5 @@
 LIBDIR := lib
+NO_LINT := true
 -include $(LIBDIR)/main.mk
 
 $(LIBDIR)/main.mk:
