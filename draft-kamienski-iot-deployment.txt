@@ -5,10 +5,10 @@
 Network Working Group                                    C. A. Kamienski
 Internet-Draft                         Federal University of ABC (UFABC)
 Intended status: Informational                           M. A. B. Santos
-Expires: 28 May 2027              Federal Institute of Sertão (IFSertão)
+Expires: 30 May 2027              Federal Institute of Sertão (IFSertão)
                                                             M. Di Felice
                                                    University of Bologna
-                                                        24 November 2026
+                                                        26 November 2026
 
 
 Application-Centric Considerations for Deployment over the IoT Computing
@@ -66,7 +66,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 May 2027.
+   This Internet-Draft will expire on 30 May 2027.
 
 Copyright Notice
 
@@ -84,7 +84,9 @@ Table of Contents
    1.  Introduction
    2.  Scope and Non-Goals
    3.  Terminology
-   4.  Background: The IoT Computing Continuum
+   4.  The IoT Computing Continuum
+     4.1.  Background
+     4.2.  What Changes for Application Deployment in IoT
    5.  An Application-Centric View of the Continuum
      5.1.  Applications as Distributed Functional Graphs
      5.2.  Decoupling Application Logic from Execution Environments
@@ -247,7 +249,9 @@ Table of Contents
    decentralized interactions among components without a central
    coordinator.
 
-4.  Background: The IoT Computing Continuum
+4.  The IoT Computing Continuum
+
+4.1.  Background
 
    The increasing distribution of computation across networked systems
    has led to the emergence of what is commonly described as a computing
@@ -308,6 +312,62 @@ Table of Contents
    computing continuum influence application deployment, placement, and
    lifecycle management, rather than on defining specific technologies
    or architectural solutions.
+
+4.2.  What Changes for Application Deployment in IoT
+
+   Much of what this document discusses, such as functional
+   decomposition, placement, migration, and coordination, also applies
+   to edge-cloud deployment in general.  This section states in one
+   place what changes when the application includes IoT devices.  Later
+   sections refer back to these points rather than repeating them.
+
+   Execution targets that cannot host general-purpose runtimes:  Many
+      devices at the edge of the continuum are microcontroller-class
+      constrained devices [I-D.ietf-iotops-7228bis] that cannot run
+      containers or virtual machines.  They can host few functions, and
+      those functions are often fixed when the firmware image is built.
+      Placing or moving a function on such a device can therefore
+      require a firmware update [RFC9019], rather than a runtime
+      operation.
+
+   Energy as a placement constraint:  For battery-powered or energy-
+      harvesting devices, the energy cost of computing and of
+      transmitting data is part of the placement decision.  Sleep cycles
+      also mean that a device may be unreachable when a deployment
+      action is issued.
+
+   Disconnection as a normal condition:  Low-power radio links and rural
+      backhaul make disconnection an expected operating condition rather
+      than a failure.  Functions that must keep working during
+      disconnection must run on the device side of the link that may
+      fail, and deployment actions must tolerate devices that are
+      reachable only occasionally.
+
+   Coupling to the physical world:  Sensing and actuation tie some
+      functions to a specific location and device, so they cannot be
+      migrated freely.  Control loops bound how far from the device a
+      function can execute.  Because actuation has physical
+      consequences, safe behavior during an update or migration has to
+      be defined in advance.
+
+   Overlapping device and application lifecycles:  Device firmware, edge
+      services, and cloud functions evolve on different schedules and
+      are often managed by different parties.  An application update may
+      depend on a firmware version, and the reverse.
+
+   Many administrative domains in a single deployment:  One deployment
+      may combine devices owned by an end user, gateways or edge nodes
+      operated by an integrator or a cooperative, network infrastructure
+      operated by a network operator, and cloud services from a
+      provider.  No single party controls all execution environments,
+      which affects who may place, update, or migrate a function.
+
+   In general computing continuum deployments, execution environments
+   are typically servers that can host any function, connectivity is
+   assumed to be stable, and a single operator often controls the
+   infrastructure.  Each point above removes one of these assumptions,
+   and together they are the reason this document uses the term IoT
+   computing continuum.
 
 5.  An Application-Centric View of the Continuum
 
