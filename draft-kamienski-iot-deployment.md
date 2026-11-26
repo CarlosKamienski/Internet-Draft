@@ -308,7 +308,9 @@ An intermediate computing node between constrained devices and centralized cloud
 **Orchestration and Choreography:**
 Two coordination styles for distributed applications. Orchestration refers to coordination driven by explicit control logic, while choreography relies on decentralized interactions among components without a central coordinator.
 
-# Background: The IoT Computing Continuum
+# The IoT Computing Continuum
+
+## Background
 
 The increasing distribution of computation across networked systems has led to the emergence of what is commonly described as a computing continuum, spanning centralized cloud infrastructures, intermediate edge and fog nodes, and highly constrained end devices {{CONTINUUM-SURVEY}}. This paradigm reflects a shift away from strictly centralized processing models toward more distributed execution, driven by requirements related to latency, bandwidth efficiency, resilience, data locality, and regulatory constraints.
 
@@ -319,6 +321,30 @@ Recent research and standardization activities have explored different aspects o
 This document takes a complementary rather than competing perspective. While {{RFC9556}} characterizes functional components and infrastructure-level challenges, focusing on edge functions and the communication fabric that supports them, this document shifts attention to the application layer that runs on top of that infrastructure. Specifically, it considers how smart applications, composed of multiple interdependent functions, are decomposed, placed, coordinated, and managed across the heterogeneous stages enabled by that infrastructure. Application-centric concerns such as functional decomposition, placement, coordination style, and lifecycle management are largely orthogonal to the infrastructure view and remain comparatively underexplored in current standardization discussions.
 
 This document adopts the term *IoT computing continuum* to refer to this distributed execution environment, encompassing constrained IoT devices, edge nodes, cloud platforms, and network elements with processing capabilities. The continuum naturally accommodates Computing in the Network (COIN): application processing can include eligible functions executed within the network. For example, filtering, aggregation, or preprocessing may execute in a programmable network element when its capabilities and the application semantics permit. This does not imply that every network element is programmable or that every application function is suitable for in-network execution. Building on existing work, the focus here is on understanding how the properties of the IoT computing continuum influence application deployment, placement, and lifecycle management, rather than on defining specific technologies or architectural solutions.
+
+## What Changes for Application Deployment in IoT {#iot-specifics}
+
+Much of what this document discusses, such as functional decomposition, placement, migration, and coordination, also applies to edge-cloud deployment in general. This section states in one place what changes when the application includes IoT devices. Later sections refer back to these points rather than repeating them.
+
+Execution targets that cannot host general-purpose runtimes:
+: Many devices at the edge of the continuum are microcontroller-class constrained devices {{I-D.ietf-iotops-7228bis}} that cannot run containers or virtual machines. They can host few functions, and those functions are often fixed when the firmware image is built. Placing or moving a function on such a device can therefore require a firmware update {{RFC9019}}, rather than a runtime operation.
+
+Energy as a placement constraint:
+: For battery-powered or energy-harvesting devices, the energy cost of computing and of transmitting data is part of the placement decision. Sleep cycles also mean that a device may be unreachable when a deployment action is issued.
+
+Disconnection as a normal condition:
+: Low-power radio links and rural backhaul make disconnection an expected operating condition rather than a failure. Functions that must keep working during disconnection must run on the device side of the link that may fail, and deployment actions must tolerate devices that are reachable only occasionally.
+
+Coupling to the physical world:
+: Sensing and actuation tie some functions to a specific location and device, so they cannot be migrated freely. Control loops bound how far from the device a function can execute. Because actuation has physical consequences, safe behavior during an update or migration has to be defined in advance.
+
+Overlapping device and application lifecycles:
+: Device firmware, edge services, and cloud functions evolve on different schedules and are often managed by different parties. An application update may depend on a firmware version, and the reverse.
+
+Many administrative domains in a single deployment:
+: One deployment may combine devices owned by an end user, gateways or edge nodes operated by an integrator or a cooperative, network infrastructure operated by a network operator, and cloud services from a provider. No single party controls all execution environments, which affects who may place, update, or migrate a function.
+
+In general computing continuum deployments, execution environments are typically servers that can host any function, connectivity is assumed to be stable, and a single operator often controls the infrastructure. Each point above removes one of these assumptions, and together they are the reason this document uses the term IoT computing continuum.
 
 # An Application-Centric View of the Continuum
 
