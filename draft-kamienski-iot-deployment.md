@@ -318,7 +318,7 @@ This geographical and computing continuum is the setting in which the applicatio
 
 The increasing distribution of computation across networked systems has led to what is commonly described as a computing continuum, spanning centralized cloud infrastructures, intermediate edge and fog nodes, and highly constrained end devices {{CONTINUUM-SURVEY}}. This paradigm reflects a shift away from strictly centralized processing models toward more distributed execution, driven by requirements related to latency, bandwidth efficiency, resilience, data locality, and regulatory constraints.
 
-In the context of the Internet of Things (IoT), this continuum takes on additional characteristics that distinguish it from more general edge-cloud computing environments. IoT deployments involve large numbers of heterogeneous devices with severe resource constraints, intermittent connectivity, and close interaction with the physical world through sensing and actuation {{RFC7452}}. As a result, computation is often pushed closer to data sources not only for performance reasons, but also to enable timely control actions, reduce energy consumption, and preserve privacy.
+In the context of IoT, this continuum takes on additional characteristics that distinguish it from more general edge-cloud computing environments. IoT deployments involve large numbers of heterogeneous devices with severe resource constraints, intermittent connectivity, and close interaction with the physical world through sensing and actuation {{RFC7452}}. As a result, computation is often pushed closer to data sources not only for performance reasons, but also to enable timely control actions, reduce energy consumption, and preserve privacy.
 
 Recent research and standardization activities have explored different aspects of this continuum. In particular, work within the IETF and IRTF has highlighted the importance of edge computing and discussed the functional components and challenges of operating across distributed environments {{RFC9556}}. Existing documents have examined edge functions for data processing, storage, and communication, as well as the roles of gateways and intermediate nodes in bridging constrained devices to cloud services. These efforts provide an important foundation for understanding the continuum's structural and operational properties.
 
@@ -348,7 +348,7 @@ Overlapping device and application lifecycles:
 Many administrative domains in a single deployment:
 : One deployment may combine devices owned by an end user, gateways or edge nodes operated by an integrator or a cooperative, network infrastructure operated by a network operator, and cloud services from a provider. No single party controls all execution environments, which affects who may place, update, or migrate a function.
 
-In general computing continuum deployments, execution environments are typically servers that can host any function, connectivity is assumed to be stable, and a single operator often controls the infrastructure. Each point above removes one of these assumptions, and together they explain why this document uses the term IoT computing continuum.
+In general edge-cloud deployments, execution environments are typically servers that can host any function, connectivity is assumed to be stable, and a single operator often controls the infrastructure. Each point above removes one of these assumptions, and together they explain why this document uses the term IoT computing continuum.
 
 # An Application-Centric View of the Continuum
 
@@ -408,7 +408,7 @@ The model therefore treats placement, coordination, and lifecycle management as 
 
 # Illustrative Scenarios
 
-We present two illustrative scenarios that ground the conceptual deployment model discussed earlier. The scenarios demonstrate how application-centric concepts, deployment decisions, and coordination styles manifest in realistic settings, without prescribing specific technologies or architectures. The first scenario describes a smart irrigation application deployed in operational agricultural settings, providing a concrete reference for placement and lifecycle concerns under real-world constraints. The second scenario describes a drone-based delivery application that spans a broader range of continuum stages and exhibits a richer interplay between coordination styles.
+This section presents two illustrative scenarios that ground the conceptual deployment model discussed earlier. The scenarios demonstrate how application-centric concepts, deployment decisions, and coordination styles manifest in realistic settings, without prescribing specific technologies or architectures. The first scenario describes a smart irrigation application deployed in operational agricultural settings, providing a concrete reference for placement and lifecycle concerns under real-world constraints. The second scenario describes a drone-based delivery application that spans a broader range of continuum stages and exhibits a richer interplay between coordination styles.
 
 
 ## Smart Irrigation in Precision Agriculture
